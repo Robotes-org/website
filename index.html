@@ -78,10 +78,20 @@
   .wrap { width: min(1080px, 100% - 2 * var(--rb-space-3)); margin-inline: auto; }
   section { padding: var(--rb-space-8) 0; }
 
+  /* Only the hero and the closing block are Pizarra. Everything in between
+     alternates white and Papel, which is what the 60/30/8/2 rule asks for
+     (manual §3.3): the neutral carries the page and the dark ink punctuates it.
+     Cards sitting on a Papel band flip to white so they keep their edge. */
+  .band { background: var(--rb-fondo-alt); }
+  .band .card { background: var(--rb-fondo); }
+
   /* In dark mode every section lands on Pizarra and the light/dark rhythm that
-     separates the blocks disappears. A hairline brings the rhythm back. */
+     separates the blocks disappears. A hairline brings the rhythm back, and the
+     bands stand down so cards keep their normal elevation. */
   @media (prefers-color-scheme: dark) {
     section { border-top: 1px solid var(--rb-pizarra-alta); }
+    .band { background: var(--rb-fondo); }
+    .band .card { background: var(--rb-fondo-alt); }
   }
 
   .dark { background: var(--rb-pizarra); color: var(--rb-blanco); }
@@ -175,8 +185,6 @@
   .proof {
     display: grid; gap: var(--rb-space-3);
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    border-top: 1px solid var(--rb-pizarra-alta);
-    padding-top: var(--rb-space-4);
   }
   .proof .stat {
     font-family: var(--rb-font-titulo); font-weight: 600;
@@ -184,7 +192,9 @@
     font-variant-numeric: tabular-nums;
     display: block;
   }
-  .proof .stat-label { font-size: var(--rb-text-sm); color: var(--rb-bruma); }
+  .proof .stat-label { font-size: var(--rb-text-sm); color: var(--rb-texto-suave); }
+  /* Tighter than a full section: this band reads as the base of the hero. */
+  #proof { padding: var(--rb-space-6) 0; }
 
   /* ── Grids and cards ────────────────────────────────────────────────── */
 
@@ -358,7 +368,14 @@
         <a class="btn btn-secondary" href="#includes">Ver qué incluye</a>
       </div>
     </div>
+  </div>
+</header>
 
+<main>
+
+<!-- ── Proof ────────────────────────────────────────────────────────── -->
+<section id="proof" class="band">
+  <div class="wrap">
     <div class="proof">
       <div>
         <span class="stat">Desde 2024</span>
@@ -378,9 +395,7 @@
       con las mismas condiciones que tiene su escuela.
     </p>
   </div>
-</header>
-
-<main>
+</section>
 
 <!-- ── Why ──────────────────────────────────────────────────────────── -->
 <section id="why">
@@ -397,7 +412,7 @@
 </section>
 
 <!-- ── The workshop ─────────────────────────────────────────────────── -->
-<section id="workshop" class="dark">
+<section id="workshop" class="band">
   <div class="wrap">
     <p class="eyebrow">El producto</p>
     <h2>Un año escolar, un robot terminado</h2>
@@ -483,7 +498,7 @@
 </section>
 
 <!-- ── Plans ────────────────────────────────────────────────────────── -->
-<section id="plans" class="dark">
+<section id="plans" class="band">
   <div class="wrap">
     <p class="eyebrow">Modalidades</p>
     <h2>Tres formas de partir</h2>
@@ -576,7 +591,7 @@
 </section>
 
 <!-- ── Requirements ─────────────────────────────────────────────────── -->
-<section id="requirements">
+<section id="requirements" class="band">
   <div class="wrap">
     <p class="eyebrow">Qué necesita la escuela</p>
     <h2>Las condiciones mínimas, dichas de frente</h2>
