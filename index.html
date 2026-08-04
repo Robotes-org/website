@@ -21,7 +21,23 @@
 <style>
   /* ── Base ─────────────────────────────────────────────────────────────
      No hand-written hex: every color comes from assets/tokens.css (~/marca).
-     Semantic roles are used, so the page follows prefers-color-scheme. */
+
+     This page pins its own light palette from the raw tokens instead of using
+     the semantic roles (--rb-fondo, --rb-texto, …). Those roles flip with
+     prefers-color-scheme, which would repaint every section in Pizarra for any
+     visitor whose system is in dark mode — and a sales page has to look the
+     same for the school director as it did for whoever sent them the link.
+     Manual §3.6 keeps dark mode for projected screens, not for sites like this.
+     Same reasoning as presentacion-pokemon, which pins itself dark. */
+
+  :root {
+    --page-bg: var(--rb-blanco);
+    --page-bg-alt: var(--rb-papel);
+    --page-text: var(--rb-pizarra);
+    --page-text-soft: var(--rb-grafito);
+    --page-border: var(--rb-niebla);
+    --page-link: var(--rb-azul-taller);
+  }
 
   *, *::before, *::after { box-sizing: border-box; }
 
@@ -33,8 +49,8 @@
     font-family: var(--rb-font-texto);
     font-size: var(--rb-text-base);
     line-height: var(--rb-leading-texto);
-    color: var(--rb-texto);
-    background: var(--rb-fondo);
+    color: var(--page-text);
+    background: var(--page-bg);
     -webkit-text-size-adjust: 100%;
   }
 
@@ -51,7 +67,7 @@
   h3 { font-size: var(--rb-text-lg); }
   p  { margin: 0 0 var(--rb-space-2); max-width: var(--rb-medida); }
 
-  a { color: var(--rb-link); }
+  a { color: var(--page-link); }
   /* Manual §7.2: body-copy links are always underlined, color alone is not enough. */
   .prose a { text-underline-offset: 0.15em; }
 
@@ -82,22 +98,14 @@
      alternates white and Papel, which is what the 60/30/8/2 rule asks for
      (manual §3.3): the neutral carries the page and the dark ink punctuates it.
      Cards sitting on a Papel band flip to white so they keep their edge. */
-  .band { background: var(--rb-fondo-alt); }
-  .band .card { background: var(--rb-fondo); }
+  .band { background: var(--page-bg-alt); }
+  .band .card { background: var(--page-bg); }
 
-  /* In dark mode every section lands on Pizarra and the light/dark rhythm that
-     separates the blocks disappears. A hairline brings the rhythm back, and the
-     bands stand down so cards keep their normal elevation. */
-  @media (prefers-color-scheme: dark) {
-    section { border-top: 1px solid var(--rb-pizarra-alta); }
-    .band { background: var(--rb-fondo); }
-    .band .card { background: var(--rb-fondo-alt); }
-  }
 
   .dark { background: var(--rb-pizarra); color: var(--rb-blanco); }
   .dark h2, .dark h3 { color: var(--rb-blanco); }
   .dark .muted { color: var(--rb-bruma); }
-  .muted { color: var(--rb-texto-suave); }
+  .muted { color: var(--page-text-soft); }
 
   .eyebrow {
     font-size: var(--rb-text-xs);
@@ -105,7 +113,7 @@
     letter-spacing: 0.08em;
     font-weight: 600;
     font-family: var(--rb-font-titulo);
-    color: var(--rb-texto-suave);
+    color: var(--page-text-soft);
     margin: 0 0 var(--rb-space-1);
   }
   .dark .eyebrow { color: var(--rb-bruma); }
@@ -192,7 +200,7 @@
     font-variant-numeric: tabular-nums;
     display: block;
   }
-  .proof .stat-label { font-size: var(--rb-text-sm); color: var(--rb-texto-suave); }
+  .proof .stat-label { font-size: var(--rb-text-sm); color: var(--page-text-soft); }
   /* Tighter than a full section: this band reads as the base of the hero. */
   #proof { padding: var(--rb-space-6) 0; }
 
@@ -204,8 +212,8 @@
     margin-top: var(--rb-space-4);
   }
   .card {
-    background: var(--rb-fondo-alt);
-    border: 1px solid var(--rb-borde);
+    background: var(--page-bg-alt);
+    border: 1px solid var(--page-border);
     border-radius: var(--rb-radio);
     padding: var(--rb-space-3);
   }
@@ -226,9 +234,6 @@
     flex: none;
   }
   .dark .checks li::before { color: var(--rb-blanco); }
-  @media (prefers-color-scheme: dark) {
-    .checks li::before { color: var(--rb-texto); }
-  }
 
   /* ── Steps ──────────────────────────────────────────────────────────── */
 
@@ -241,8 +246,8 @@
   .steps li::before {
     content: counter(step);
     font-family: var(--rb-font-titulo); font-weight: 600;
-    color: var(--rb-texto-suave);
-    border: 1px solid var(--rb-borde);
+    color: var(--page-text-soft);
+    border: 1px solid var(--page-border);
     border-radius: 50%;
     width: 2.2rem; height: 2.2rem;
     display: grid; place-items: center;
@@ -257,20 +262,20 @@
   .plan-note {
     margin-top: var(--rb-space-3);
     padding-top: var(--rb-space-2);
-    border-top: 1px solid var(--rb-borde);
+    border-top: 1px solid var(--page-border);
     font-size: var(--rb-text-sm);
-    color: var(--rb-texto-suave);
+    color: var(--page-text-soft);
   }
   .plan-featured { border-top: 4px solid var(--rb-amarillo-chispa); }
   .badge {
     display: inline-block;
     font-size: var(--rb-text-xs);
     text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
-    border: 1px solid var(--rb-borde);
+    border: 1px solid var(--page-border);
     border-radius: 999px;
     padding: 0.15em 0.7em;
     margin-bottom: var(--rb-space-1);
-    color: var(--rb-texto-suave);
+    color: var(--page-text-soft);
   }
   /* On Pizarra Alta cards the divider goes in Pizarra: a light hairline (Niebla)
      over a dark surface shouts louder than the content it separates. */
@@ -280,7 +285,7 @@
   /* ── FAQ ────────────────────────────────────────────────────────────── */
 
   .faq { max-width: var(--rb-medida); margin-top: var(--rb-space-4); }
-  details { border-bottom: 1px solid var(--rb-borde); padding: var(--rb-space-2) 0; }
+  details { border-bottom: 1px solid var(--page-border); padding: var(--rb-space-2) 0; }
   summary {
     font-family: var(--rb-font-titulo); font-weight: 600;
     font-size: var(--rb-text-base);
@@ -296,8 +301,8 @@
     content: "";
     flex: none;
     width: 0.5em; height: 0.5em;
-    border-right: 2px solid var(--rb-texto-suave);
-    border-bottom: 2px solid var(--rb-texto-suave);
+    border-right: 2px solid var(--page-text-soft);
+    border-bottom: 2px solid var(--page-text-soft);
     transform: rotate(45deg) translate(-0.1em, -0.1em);
     transition: transform 120ms ease;
   }
