@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<title>og card</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  /* Source for assets/og.png — the preview card WhatsApp, Slack and email
+     clients render when someone shares robotes.org. Do not edit og.png by
+     hand: edit this file and re-render it with ./build-og.sh. */
+
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    width: 1200px; height: 630px;
+    background: var(--rb-pizarra);
+    color: var(--rb-blanco);
+    font-family: var(--rb-font-texto);
+    padding: 60px 72px;
+    overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .lockup {
+    display: flex; align-items: center; gap: 14px;
+    font-family: var(--rb-font-titulo); font-weight: 700; font-size: 34px;
+    letter-spacing: -0.02em;
+  }
+  .lockup svg { width: 52px; height: 52px; }
+  .tld { color: var(--rb-amarillo-chispa); }
+
+  h1 {
+    font-family: var(--rb-font-titulo);
+    font-weight: 600;
+    font-size: 60px;
+    line-height: var(--rb-leading-titulo);
+    letter-spacing: -0.02em;
+    max-width: 18ch;
+    margin-bottom: 18px;
+  }
+  .lede { font-size: 26px; line-height: 1.45; color: var(--rb-bruma); max-width: 40ch; }
+
+  .foot {
+    display: flex; gap: 40px;
+    font-size: 21px; line-height: 1.2; color: var(--rb-bruma);
+    border-top: 1px solid var(--rb-pizarra-alta);
+    padding-top: 22px; padding-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+  <div class="lockup">
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <path d="M32 11 V18" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+      <circle cx="32" cy="7" r="4" fill="var(--rb-amarillo-chispa)"/>
+      <path fill="currentColor" fill-rule="evenodd" d="M20 17 H44 A12 12 0 0 1 56 29 V45 A12 12 0 0 1 44 57 H20 A12 12 0 0 1 8 45 V29 A12 12 0 0 1 20 17 Z
+         M28.5 37 A5.5 5.5 0 1 1 17.5 37 A5.5 5.5 0 1 1 28.5 37 Z
+         M46.5 37 A5.5 5.5 0 1 1 35.5 37 A5.5 5.5 0 1 1 46.5 37 Z"/>
+    </svg>
+    <span>robotes<span class="tld">.org</span></span>
+  </div>
+
+  <div>
+    <h1>Taller de robótica para escuelas</h1>
+    <p class="lede">Dos años funcionando en una escuela rural del sur de Chile. Kit, currículum y acompañamiento.</p>
+  </div>
+
+  <div class="foot">
+    <span>Arduino + impresión 3D</span>
+    <span>1 clase por semana</span>
+    <span>Sur de Chile</span>
+  </div>
+</body>
+</html>

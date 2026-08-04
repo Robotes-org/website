@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taller de robótica para escuelas — robotes.org</title>
+<meta name="description" content="Taller de robótica para escuelas del sur de Chile. Una clase por semana durante el año escolar: los estudiantes diseñan en 3D, programan Arduino y terminan con un robot que funciona. Kit, currículum y acompañamiento incluidos.">
+<meta name="theme-color" content="#2c3742">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/tokens.css">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CL">
+<meta property="og:site_name" content="robotes.org">
+<meta property="og:title" content="Taller de robótica para escuelas">
+<meta property="og:description" content="Dos años de taller semanal en una escuela rural del sur de Chile. Ahora lo llevamos a otras escuelas: kit, currículum y acompañamiento.">
+<meta property="og:image" content="assets/og.png">
+<meta property="og:url" content="https://robotes.org/">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  /* ── Base ─────────────────────────────────────────────────────────────
+     No hand-written hex: every color comes from assets/tokens.css (~/marca).
+     Semantic roles are used, so the page follows prefers-color-scheme. */
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    font-family: var(--rb-font-texto);
+    font-size: var(--rb-text-base);
+    line-height: var(--rb-leading-texto);
+    color: var(--rb-texto);
+    background: var(--rb-fondo);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--rb-font-titulo);
+    line-height: var(--rb-leading-titulo);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0 0 var(--rb-space-2);
+    text-wrap: balance;
+  }
+  h1 { font-size: var(--rb-text-3xl); }
+  h2 { font-size: var(--rb-text-2xl); }
+  h3 { font-size: var(--rb-text-lg); }
+  p  { margin: 0 0 var(--rb-space-2); max-width: var(--rb-medida); }
+
+  a { color: var(--rb-link); }
+  /* Manual §7.2: body-copy links are always underlined, color alone is not enough. */
+  .prose a { text-underline-offset: 0.15em; }
+
+  :focus-visible {
+    outline: 2px solid var(--rb-azul-taller);
+    outline-offset: 2px;
+    border-radius: var(--rb-radio-sm);
+  }
+  .dark :focus-visible { outline-color: var(--rb-amarillo-chispa); }
+
+  ul { padding-left: 1.1em; }
+  li { margin-bottom: var(--rb-space-1); }
+  strong { font-weight: 600; }
+
+  .skip-link {
+    position: absolute; left: -9999px;
+    background: var(--rb-blanco); color: var(--rb-pizarra);
+    padding: var(--rb-space-1) var(--rb-space-2); border-radius: var(--rb-radio-sm);
+  }
+  .skip-link:focus { left: var(--rb-space-2); top: var(--rb-space-2); z-index: 10; }
+
+  /* ── Layout ─────────────────────────────────────────────────────────── */
+
+  .wrap { width: min(1080px, 100% - 2 * var(--rb-space-3)); margin-inline: auto; }
+  section { padding: var(--rb-space-8) 0; }
+
+  /* In dark mode every section lands on Pizarra and the light/dark rhythm that
+     separates the blocks disappears. A hairline brings the rhythm back. */
+  @media (prefers-color-scheme: dark) {
+    section { border-top: 1px solid var(--rb-pizarra-alta); }
+  }
+
+  .dark { background: var(--rb-pizarra); color: var(--rb-blanco); }
+  .dark h2, .dark h3 { color: var(--rb-blanco); }
+  .dark .muted { color: var(--rb-bruma); }
+  .muted { color: var(--rb-texto-suave); }
+
+  .eyebrow {
+    font-size: var(--rb-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    font-family: var(--rb-font-titulo);
+    color: var(--rb-texto-suave);
+    margin: 0 0 var(--rb-space-1);
+  }
+  .dark .eyebrow { color: var(--rb-bruma); }
+
+  .lede { font-size: var(--rb-text-lg); max-width: var(--rb-medida); }
+  .footnote { font-size: var(--rb-text-sm); margin-top: var(--rb-space-3); }
+
+  /* ── Lockup ───────────────────────────────────────────────────────────
+     Built in HTML instead of using logo-horizontal.svg on purpose: that file
+     carries live text, so without Space Grotesk installed the fallback face
+     overflows its viewBox and the wordmark gets clipped to "robotes.o".
+     Here the mark is an SVG and the name is real text, so it always fits,
+     inherits the page font stack and stays selectable and searchable. */
+
+  .lockup {
+    display: inline-flex; align-items: center; gap: 0.5em;
+    text-decoration: none;
+    font-family: var(--rb-font-titulo);
+    font-weight: 700;
+    font-size: var(--rb-text-lg);
+    letter-spacing: -0.02em;
+    color: var(--rb-blanco);
+    /* Manual §2.3: clear space around the mark equals the antenna height. */
+    padding: 0.4em 0;
+  }
+  .lockup svg { width: 1.5em; height: 1.5em; flex: none; overflow: visible; }
+  .lockup .tld { color: var(--rb-amarillo-chispa); }
+
+  /* ── Header and hero ────────────────────────────────────────────────── */
+
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--rb-space-2);
+    padding-top: var(--rb-space-2);
+  }
+  .nav { display: flex; gap: var(--rb-space-3); list-style: none; margin: 0; padding: 0; }
+  .nav a {
+    color: var(--rb-bruma); text-decoration: none;
+    font-size: var(--rb-text-sm);
+    display: inline-flex; align-items: center; min-height: 44px;
+  }
+  .nav a:hover { color: var(--rb-blanco); text-decoration: underline; }
+  @media (max-width: 760px) { .nav { display: none; } }
+
+  .hero { padding: var(--rb-space-6) 0 var(--rb-space-8); }
+  .hero h1 { font-size: clamp(2rem, 5.2vw, 3.052rem); max-width: 20ch; margin-bottom: var(--rb-space-3); }
+  .hero .lede { color: var(--rb-bruma); margin-bottom: var(--rb-space-4); }
+
+  /* ── Buttons ────────────────────────────────────────────────────────── */
+
+  .actions { display: flex; flex-wrap: wrap; gap: var(--rb-space-2); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 48px; padding: 0 var(--rb-space-3);
+    border-radius: var(--rb-radio);
+    font-family: var(--rb-font-titulo); font-weight: 600;
+    font-size: var(--rb-text-base);
+    text-decoration: none;
+    border: 2px solid transparent;
+  }
+  /* White on Azul Taller = 6.6:1, AA. */
+  .btn-primary { background: var(--rb-azul-taller); color: var(--rb-blanco); }
+  .btn-primary:hover { background: var(--rb-pizarra); }
+
+  /* On Pizarra, Azul Taller only reaches 1.5:1 against the background, so the
+     button loses its edge (WCAG 1.4.11 asks for 3:1 on UI components). On dark
+     surfaces the call to action goes in Amarillo Chispa with Pizarra text —
+     7.7:1, and it is the only yellow element in that view (manual §3.3). */
+  .dark .btn-primary { background: var(--rb-amarillo-chispa); color: var(--rb-pizarra); }
+  .dark .btn-primary:hover { background: var(--rb-blanco); }
+
+  .btn-secondary { border-color: currentColor; color: inherit; background: transparent; }
+  .dark .btn-secondary:hover { background: var(--rb-pizarra-alta); }
+
+  /* ── Proof strip ────────────────────────────────────────────────────── */
+
+  .proof {
+    display: grid; gap: var(--rb-space-3);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    border-top: 1px solid var(--rb-pizarra-alta);
+    padding-top: var(--rb-space-4);
+  }
+  .proof .stat {
+    font-family: var(--rb-font-titulo); font-weight: 600;
+    font-size: var(--rb-text-xl);
+    font-variant-numeric: tabular-nums;
+    display: block;
+  }
+  .proof .stat-label { font-size: var(--rb-text-sm); color: var(--rb-bruma); }
+
+  /* ── Grids and cards ────────────────────────────────────────────────── */
+
+  .grid {
+    display: grid; gap: var(--rb-space-3);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    margin-top: var(--rb-space-4);
+  }
+  .card {
+    background: var(--rb-fondo-alt);
+    border: 1px solid var(--rb-borde);
+    border-radius: var(--rb-radio);
+    padding: var(--rb-space-3);
+  }
+  .card h3 { margin-bottom: var(--rb-space-1); }
+  .card p:last-child { margin-bottom: 0; }
+  .card ul { margin: 0; }
+  .dark .card { background: var(--rb-pizarra-alta); border-color: var(--rb-pizarra-alta); }
+
+  /* Checklists. Color is never the only carrier (manual §3.4): the glyph is.
+     Verde Bosque only works on light surfaces (4.9:1 on Papel); on Pizarra it
+     drops to 2.3:1, so on dark surfaces the check takes the text color. */
+  .checks { list-style: none; padding: 0; margin: var(--rb-space-2) 0 0; }
+  .checks li { display: flex; gap: 0.6em; align-items: baseline; }
+  .checks li::before {
+    content: "✓";
+    color: var(--rb-verde-bosque);
+    font-weight: 700;
+    flex: none;
+  }
+  .dark .checks li::before { color: var(--rb-blanco); }
+  @media (prefers-color-scheme: dark) {
+    .checks li::before { color: var(--rb-texto); }
+  }
+
+  /* ── Steps ──────────────────────────────────────────────────────────── */
+
+  .steps { list-style: none; counter-reset: step; padding: 0; margin: var(--rb-space-4) 0 0; }
+  .steps li {
+    counter-increment: step;
+    display: grid; grid-template-columns: 2.5rem 1fr; gap: var(--rb-space-2);
+    padding-bottom: var(--rb-space-3);
+  }
+  .steps li::before {
+    content: counter(step);
+    font-family: var(--rb-font-titulo); font-weight: 600;
+    color: var(--rb-texto-suave);
+    border: 1px solid var(--rb-borde);
+    border-radius: 50%;
+    width: 2.2rem; height: 2.2rem;
+    display: grid; place-items: center;
+  }
+  .steps h3 { margin-bottom: 0.2em; }
+  .steps p { margin-bottom: 0; }
+
+  /* ── Plans ──────────────────────────────────────────────────────────── */
+
+  .plan { display: flex; flex-direction: column; }
+  .plan-body { flex: 1; }
+  .plan-note {
+    margin-top: var(--rb-space-3);
+    padding-top: var(--rb-space-2);
+    border-top: 1px solid var(--rb-borde);
+    font-size: var(--rb-text-sm);
+    color: var(--rb-texto-suave);
+  }
+  .plan-featured { border-top: 4px solid var(--rb-amarillo-chispa); }
+  .badge {
+    display: inline-block;
+    font-size: var(--rb-text-xs);
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+    border: 1px solid var(--rb-borde);
+    border-radius: 999px;
+    padding: 0.15em 0.7em;
+    margin-bottom: var(--rb-space-1);
+    color: var(--rb-texto-suave);
+  }
+  /* On Pizarra Alta cards the divider goes in Pizarra: a light hairline (Niebla)
+     over a dark surface shouts louder than the content it separates. */
+  .dark .plan-note { border-top-color: var(--rb-pizarra); color: var(--rb-bruma); }
+  .dark .badge { border-color: var(--rb-pizarra); color: var(--rb-bruma); }
+
+  /* ── FAQ ────────────────────────────────────────────────────────────── */
+
+  .faq { max-width: var(--rb-medida); margin-top: var(--rb-space-4); }
+  details { border-bottom: 1px solid var(--rb-borde); padding: var(--rb-space-2) 0; }
+  summary {
+    font-family: var(--rb-font-titulo); font-weight: 600;
+    font-size: var(--rb-text-base);
+    cursor: pointer;
+    min-height: 44px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--rb-space-2);
+  }
+  /* display:flex drops the native marker, and without it nothing says the row
+     opens. This one is drawn from the text color, so it survives dark mode. */
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "";
+    flex: none;
+    width: 0.5em; height: 0.5em;
+    border-right: 2px solid var(--rb-texto-suave);
+    border-bottom: 2px solid var(--rb-texto-suave);
+    transform: rotate(45deg) translate(-0.1em, -0.1em);
+    transition: transform 120ms ease;
+  }
+  details[open] summary::after { transform: rotate(-135deg) translate(-0.1em, -0.1em); }
+  @media (prefers-reduced-motion: reduce) { summary::after { transition: none; } }
+  details p:last-child { margin-bottom: 0; }
+  details[open] summary { margin-bottom: var(--rb-space-1); }
+
+  /* ── Closing and footer ─────────────────────────────────────────────── */
+
+  /* The yellow of this view belongs to the button; it is not repeated on the
+     border (manual §3.3). */
+  .closing { border-top: 1px solid var(--rb-pizarra-alta); }
+  .closing h2 { max-width: 22ch; }
+  .contact { list-style: none; padding: 0; margin: var(--rb-space-3) 0 0; }
+  .contact a { color: var(--rb-blanco); }
+
+  footer {
+    background: var(--rb-pizarra);
+    color: var(--rb-bruma);
+    padding: var(--rb-space-4) 0;
+    font-size: var(--rb-text-sm);
+    border-top: 1px solid var(--rb-pizarra-alta);
+  }
+  footer a { color: var(--rb-bruma); }
+  footer .lockup { margin-bottom: var(--rb-space-2); }
+  .fine-print { font-size: var(--rb-text-xs); max-width: var(--rb-medida); }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<!-- ── Header + hero ────────────────────────────────────────────────── -->
+<header class="dark">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="lockup" href="#" aria-label="robotes.org — inicio">
+        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M32 11 V18" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <circle cx="32" cy="7" r="4" fill="var(--rb-amarillo-chispa)"/>
+          <path fill="currentColor" fill-rule="evenodd" d="M20 17 H44 A12 12 0 0 1 56 29 V45 A12 12 0 0 1 44 57 H20 A12 12 0 0 1 8 45 V29 A12 12 0 0 1 20 17 Z
+             M28.5 37 A5.5 5.5 0 1 1 17.5 37 A5.5 5.5 0 1 1 28.5 37 Z
+             M46.5 37 A5.5 5.5 0 1 1 35.5 37 A5.5 5.5 0 1 1 46.5 37 Z"/>
+        </svg>
+        <span>robotes<span class="tld">.org</span></span>
+      </a>
+      <nav aria-label="Secciones">
+        <ul class="nav">
+          <li><a href="#workshop">El taller</a></li>
+          <li><a href="#includes">Qué incluye</a></li>
+          <li><a href="#plans">Modalidades</a></li>
+          <li><a href="#faq">Preguntas</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="hero" id="main">
+      <p class="eyebrow">Taller de robótica para escuelas · Sur de Chile</p>
+      <h1>Dos años haciendo robótica en una escuela rural. Ahora lo llevamos a la suya.</h1>
+      <p class="lede">
+        Una clase por semana durante el año escolar. Los estudiantes diseñan en 3D,
+        programan Arduino, sueldan y terminan con un robot que funciona.
+        Nosotros ponemos el kit, el currículum y el acompañamiento.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:rsilva@sultans.co?subject=Taller%20de%20rob%C3%B3tica%20para%20nuestra%20escuela&amp;body=Hola%2C%20me%20interesa%20conocer%20el%20taller.%0A%0AEscuela%3A%20%0AComuna%3A%20%0ACargo%3A%20%0ACursos%20que%20participar%C3%ADan%3A%20%0AN%C3%BAmero%20aproximado%20de%20estudiantes%3A%20%0ATel%C3%A9fono%20de%20contacto%3A%20%0A%0AComentarios%3A%0A">Pedir una propuesta</a>
+        <a class="btn btn-secondary" href="#includes">Ver qué incluye</a>
+      </div>
+    </div>
+
+    <div class="proof">
+      <div>
+        <span class="stat">Desde 2024</span>
+        <span class="stat-label">Taller semanal ininterrumpido en la Escuela Sagrada Familia</span>
+      </div>
+      <div>
+        <span class="stat">1 clase por semana</span>
+        <span class="stat-label">Todo el año escolar, marzo a diciembre</span>
+      </div>
+      <div>
+        <span class="stat">Arduino + impresión 3D</span>
+        <span class="stat-label">Herramientas abiertas, sin licencias que renovar</span>
+      </div>
+    </div>
+    <p class="muted footnote">
+      No es un piloto de un semestre: es un taller que llevamos sosteniendo desde 2024,
+      con las mismas condiciones que tiene su escuela.
+    </p>
+  </div>
+</header>
+
+<main>
+
+<!-- ── Why ──────────────────────────────────────────────────────────── -->
+<section id="why">
+  <div class="wrap prose">
+    <p class="eyebrow">Por qué hacemos esto</p>
+    <h2>El acceso a la robótica no debería depender del código postal de un niño.</h2>
+    <p class="lede muted">
+      En las ciudades grandes hay academias, ferias de ciencia y profesores especializados.
+      En las escuelas rurales del sur, no. Trabajamos desde una escuela rural, no para ella:
+      todo lo que ofrecemos se probó primero en nuestra propia sala de clases,
+      con la misma conexión, los mismos horarios y el mismo presupuesto.
+    </p>
+  </div>
+</section>
+
+<!-- ── The workshop ─────────────────────────────────────────────────── -->
+<section id="workshop" class="dark">
+  <div class="wrap">
+    <p class="eyebrow">El producto</p>
+    <h2>Un año escolar, un robot terminado</h2>
+    <p class="lede muted">
+      El taller está ordenado en cuatro etapas. Cada estudiante pasa por todas:
+      nadie se queda mirando cómo arma el compañero.
+    </p>
+
+    <div class="grid">
+      <article class="card">
+        <p class="eyebrow">Etapa 1</p>
+        <h3>Diseñar</h3>
+        <p class="muted">Modelado 3D en Tinkercad. Cada equipo dibuja el chasis de su robot y aprende a medir antes de cortar.</p>
+      </article>
+      <article class="card">
+        <p class="eyebrow">Etapa 2</p>
+        <h3>Programar</h3>
+        <p class="muted">Arduino desde cero: encender un LED, leer un sensor, mover un motor. Del bloque al código, según el curso.</p>
+      </article>
+      <article class="card">
+        <p class="eyebrow">Etapa 3</p>
+        <h3>Armar</h3>
+        <p class="muted">Impresión 3D de las piezas, soldadura, cableado y las pruebas que no funcionan a la primera. Ahí está el aprendizaje.</p>
+      </article>
+      <article class="card">
+        <p class="eyebrow">Etapa 4</p>
+        <h3>Mostrar</h3>
+        <p class="muted">Muestra abierta a la comunidad escolar y competencia entre equipos. Los estudiantes explican su propio robot.</p>
+      </article>
+    </div>
+
+    <p class="muted footnote">
+      La distribución en el calendario se ajusta al año escolar de cada establecimiento
+      y a las semanas que se pierden por actividades, licencias o clima.
+    </p>
+  </div>
+</section>
+
+<!-- ── What is included ─────────────────────────────────────────────── -->
+<section id="includes">
+  <div class="wrap">
+    <p class="eyebrow">Qué incluye</p>
+    <h2>Lo que llega a la escuela</h2>
+
+    <div class="grid">
+      <article class="card">
+        <h3>Kit por equipo</h3>
+        <ul class="checks">
+          <li>Placa Arduino, sensores, motores y componentes</li>
+          <li>Piezas impresas en 3D o la impresora en comodato</li>
+          <li>Herramientas de trabajo: soldadura, corte, medición</li>
+          <li>Repuestos: en un taller real, algo siempre se quema</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Currículum semana a semana</h3>
+        <ul class="checks">
+          <li>Planificación de cada sesión, con objetivos y materiales</li>
+          <li>Guías para los estudiantes, en español y fotocopiables</li>
+          <li>Rúbricas de evaluación si el taller va con nota</li>
+          <li>Todo funciona sin conexión a internet</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Quien conduce las clases</h3>
+        <ul class="checks">
+          <li>Vamos nosotros, o formamos a un profesor de la escuela</li>
+          <li>Acompañamiento durante todo el año, no sólo al inicio</li>
+          <li>Canal directo para resolver dudas entre clases</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Cierre y evidencia</h3>
+        <ul class="checks">
+          <li>Muestra final abierta a apoderados y comunidad</li>
+          <li>Registro fotográfico del proceso para la escuela</li>
+          <li>Informe con asistencia, avance y aprendizajes</li>
+          <li>Documentación que sirve para justificar el PME</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── Plans ────────────────────────────────────────────────────────── -->
+<section id="plans" class="dark">
+  <div class="wrap">
+    <p class="eyebrow">Modalidades</p>
+    <h2>Tres formas de partir</h2>
+    <p class="lede muted">
+      La diferencia está en quién conduce las clases. El material y el kit son los mismos.
+    </p>
+
+    <div class="grid">
+      <article class="card plan plan-featured">
+        <div class="plan-body">
+          <span class="badge">La más pedida</span>
+          <h3>Taller llave en mano</h3>
+          <p class="muted">Vamos nosotros cada semana. La escuela pone la sala y los estudiantes; nosotros, todo lo demás.</p>
+          <ul class="checks">
+            <li>Relator en la sala, semana a semana</li>
+            <li>Kit, currículum, muestra final e informe</li>
+          </ul>
+        </div>
+        <p class="plan-note">Sujeto a distancia: hoy llegamos hasta donde alcanzamos a volver el mismo día.</p>
+      </article>
+
+      <article class="card plan">
+        <div class="plan-body">
+          <h3>Taller con profesor de la escuela</h3>
+          <p class="muted">Formamos a un profesor suyo y lo acompañamos todo el año. La capacidad queda instalada en la escuela.</p>
+          <ul class="checks">
+            <li>Formación inicial presencial</li>
+            <li>Acompañamiento semanal a distancia</li>
+            <li>Kit, currículum, muestra final e informe</li>
+          </ul>
+        </div>
+        <p class="plan-note">Requiere un profesor con horas asignadas al taller. No hace falta que sepa robótica.</p>
+      </article>
+
+      <article class="card plan">
+        <div class="plan-body">
+          <span class="badge">En preparación</span>
+          <h3>Kit + playbook</h3>
+          <p class="muted">Para escuelas que ya tienen a alguien capaz de conducir el taller y sólo necesitan el material.</p>
+          <ul class="checks">
+            <li>Kit documentado y currículum completo</li>
+            <li>Sin acompañamiento semanal</li>
+          </ul>
+        </div>
+        <p class="plan-note">Todavía no está listo. Escríbanos y avisamos cuando lo esté.</p>
+      </article>
+    </div>
+
+    <p class="muted" style="margin-top: var(--rb-space-4);">
+      <strong>El valor</strong> depende del número de estudiantes, la modalidad y la distancia.
+      Enviamos la propuesta con los costos desglosados, en menos de una semana.
+      Emitimos factura.
+    </p>
+  </div>
+</section>
+
+<!-- ── Process ──────────────────────────────────────────────────────── -->
+<section id="process">
+  <div class="wrap">
+    <p class="eyebrow">Cómo partimos</p>
+    <h2>De la primera conversación a la primera clase</h2>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <h3>Nos escribe</h3>
+          <p class="muted">Con el nombre de la escuela, la comuna y una idea de cuántos estudiantes participarían. Nada más.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Conversamos y vemos la sala</h3>
+          <p class="muted">Videollamada o visita, según la distancia. Necesitamos entender el horario, el espacio y qué espera la escuela del taller.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Enviamos la propuesta</h3>
+          <p class="muted">Alcance, calendario, costos desglosados y qué pone cada parte. En el formato que la escuela necesite para su proceso de compra.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Convenio y primera clase</h3>
+          <p class="muted">Firmamos, coordinamos la entrega del kit y partimos. Lo ideal es cerrar antes de diciembre para arrancar en marzo.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ── Requirements ─────────────────────────────────────────────────── -->
+<section id="requirements">
+  <div class="wrap">
+    <p class="eyebrow">Qué necesita la escuela</p>
+    <h2>Las condiciones mínimas, dichas de frente</h2>
+    <p class="lede muted">
+      Preferimos decir esto antes y no en la tercera reunión. Si algo no se cumple, lo conversamos:
+      casi todo tiene solución, salvo el horario.
+    </p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>Espacio</h3>
+        <ul class="checks">
+          <li>Una sala con mesas de trabajo y al menos cuatro enchufes</li>
+          <li>Un mueble con llave para guardar kits e impresora</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Tiempo</h3>
+        <ul class="checks">
+          <li>Un bloque protegido de 90 minutos a la semana</li>
+          <li>Que no sea el último bloque del viernes</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Estudiantes</h3>
+        <ul class="checks">
+          <li>Entre 8 y 16 por grupo</li>
+          <li>De 5º básico en adelante</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Personas</h3>
+        <ul class="checks">
+          <li>Un profesor de contraparte que esté en las clases</li>
+          <li>Respaldo de la dirección: sin eso, el taller se cae en junio</li>
+        </ul>
+      </article>
+    </div>
+
+    <p class="muted footnote">
+      Internet ayuda, pero no es requisito: todo el material del taller funciona sin conexión.
+    </p>
+  </div>
+</section>
+
+<!-- ── FAQ ──────────────────────────────────────────────────────────── -->
+<section id="faq">
+  <div class="wrap prose">
+    <p class="eyebrow">Preguntas frecuentes</p>
+    <h2>Lo que nos preguntan siempre</h2>
+
+    <div class="faq">
+      <details>
+        <summary>¿Se puede financiar con SEP o con el PME?</summary>
+        <p class="muted">
+          Los talleres extraprogramáticos se financian habitualmente por esa vía, pero el procedimiento
+          lo define cada establecimiento y su sostenedor. Nosotros emitimos factura y entregamos la
+          propuesta con el desglose y la documentación que se necesita para justificar el gasto.
+          Conviene conversarlo entre octubre y diciembre, para alcanzar a dejarlo en el plan del año siguiente.
+        </p>
+      </details>
+      <details>
+        <summary>¿El profesor tiene que saber programar?</summary>
+        <p class="muted">
+          No. En la modalidad con profesor de la escuela partimos desde cero: la formación inicial
+          está pensada para alguien que nunca ha tocado un Arduino. Lo que sí necesitamos es que
+          tenga horas asignadas y esté en la sala cada semana.
+        </p>
+      </details>
+      <details>
+        <summary>¿Qué pasa con los kits y con los robots al terminar el año?</summary>
+        <p class="muted">
+          Los robots que arman los estudiantes quedan en la escuela. Los kits, la impresora 3D y las
+          herramientas se entregan en comodato mientras dure el convenio, o los puede comprar el
+          establecimiento. Queda escrito en el convenio, sin letra chica.
+        </p>
+      </details>
+      <details>
+        <summary>¿Hasta dónde llegan?</summary>
+        <p class="muted">
+          Hoy trabajamos en el sur de Chile, con escuelas a las que podamos llegar y volver el mismo día.
+          Si su escuela queda más lejos, la modalidad con profesor de la escuela sí funciona a distancia:
+          escríbanos igual y lo conversamos.
+        </p>
+      </details>
+      <details>
+        <summary>¿Y si nuestra conexión a internet es mala?</summary>
+        <p class="muted">
+          No es un problema. El material, las guías y el entorno de programación funcionan sin conexión.
+          Lo diseñamos así porque nuestra propia escuela tiene esa limitación.
+        </p>
+      </details>
+      <details>
+        <summary>¿Cuándo conviene partir?</summary>
+        <p class="muted">
+          El taller acompaña el año escolar completo, de marzo a diciembre. Se puede entrar empezado el
+          año, pero se pierde la etapa de diseño, que es donde los estudiantes se enganchan.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ── Closing ──────────────────────────────────────────────────────── -->
+<section id="contact" class="dark closing">
+  <div class="wrap">
+    <p class="eyebrow">Conversemos</p>
+    <h2>Cuéntenos de su escuela y le enviamos una propuesta</h2>
+    <p class="lede muted">
+      No hay presentación de ventas ni compromiso. Una conversación de media hora
+      alcanza para saber si esto tiene sentido en su establecimiento.
+    </p>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="mailto:rsilva@sultans.co?subject=Taller%20de%20rob%C3%B3tica%20para%20nuestra%20escuela&amp;body=Hola%2C%20me%20interesa%20conocer%20el%20taller.%0A%0AEscuela%3A%20%0AComuna%3A%20%0ACargo%3A%20%0ACursos%20que%20participar%C3%ADan%3A%20%0AN%C3%BAmero%20aproximado%20de%20estudiantes%3A%20%0ATel%C3%A9fono%20de%20contacto%3A%20%0A%0AComentarios%3A%0A">Escribir un correo</a>
+    </div>
+
+    <ul class="contact muted">
+      <li>rsilva@sultans.co</li>
+      <li>Sur de Chile</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="lockup">
+      <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <path d="M32 11 V18" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+        <circle cx="32" cy="7" r="4" fill="var(--rb-amarillo-chispa)"/>
+        <path fill="currentColor" fill-rule="evenodd" d="M20 17 H44 A12 12 0 0 1 56 29 V45 A12 12 0 0 1 44 57 H20 A12 12 0 0 1 8 45 V29 A12 12 0 0 1 20 17 Z
+           M28.5 37 A5.5 5.5 0 1 1 17.5 37 A5.5 5.5 0 1 1 28.5 37 Z
+           M46.5 37 A5.5 5.5 0 1 1 35.5 37 A5.5 5.5 0 1 1 46.5 37 Z"/>
+      </svg>
+      <span>robotes<span class="tld">.org</span></span>
+    </span>
+    <p>Robótica educativa en escuelas rurales del sur de Chile.</p>
+    <p class="fine-print">
+      robotes.org es una empresa chilena de tecnología educativa. Reinvertimos nuestros
+      resultados en innovación e impacto educativo.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
