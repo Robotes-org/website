@@ -190,10 +190,29 @@
 
   /* ── Proof strip ────────────────────────────────────────────────────── */
 
-  .proof {
-    display: grid; gap: var(--rb-space-3);
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* The band leads with the claim and the three columns are its evidence.
+     The claim used to hang underneath, small and grey, where it read as a
+     stray caption rather than the strongest sentence on the page. */
+  .claim {
+    font-size: var(--rb-text-lg);
+    max-width: var(--rb-medida);
+    margin: 0 0 var(--rb-space-4);
   }
+
+  .proof {
+    display: grid;
+    gap: var(--rb-space-1) var(--rb-space-4);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: auto auto;
+    border-top: 1px solid var(--page-border);
+    padding-top: var(--rb-space-4);
+  }
+  /* subgrid keeps every label on the same baseline even when one heading wraps
+     to two lines. Without it the columns start at different heights and the
+     whole block looks broken. Browsers without subgrid just fall back to the
+     ragged version, which is what it looked like before. */
+  .proof > div { display: grid; grid-row: span 2; grid-template-rows: subgrid; }
+
   .proof .stat {
     font-family: var(--rb-font-titulo); font-weight: 600;
     font-size: var(--rb-text-xl);
@@ -381,13 +400,17 @@
 <!-- ── Proof ────────────────────────────────────────────────────────── -->
 <section id="proof" class="band">
   <div class="wrap">
+    <p class="claim">
+      No lo diseñamos en una oficina: lo hacemos nosotros, cada semana, en una sala
+      de clases con las mismas condiciones que tiene su escuela.
+    </p>
     <div class="proof">
       <div>
         <span class="stat">Probado en cancha</span>
         <span class="stat-label">Sin especialista, sin laboratorio y con el presupuesto de una escuela pública</span>
       </div>
       <div>
-        <span class="stat">Un año escolar completo</span>
+        <span class="stat">Todo el año escolar</span>
         <span class="stat-label">De marzo a diciembre, con las semanas que se pierden ya descontadas</span>
       </div>
       <div>
@@ -395,10 +418,6 @@
         <span class="stat-label">Herramientas abiertas, sin licencias que renovar</span>
       </div>
     </div>
-    <p class="muted footnote">
-      No lo diseñamos en una oficina: lo hacemos nosotros, cada semana, en una sala
-      de clases con las mismas condiciones que tiene su escuela.
-    </p>
   </div>
 </section>
 
