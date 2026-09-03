@@ -385,6 +385,14 @@
      that describe how the lab works, and this is the premise underneath them,
      not another one of them. Keep it the only centred text on the page — a
      second one turns the exception into a pattern and it stops landing. */
+  /* Heading by markup, label by looks: a full-size «Nuestro manifiesto» would
+     compete with the sentence underneath, which is the thing worth reading. It
+     mirrors the eyebrow → headline pair in the hero. */
+  .credo-label {
+    text-align: center;
+    max-width: none;
+    margin: 0 auto var(--rb-space-2);
+  }
   .credo {
     font-family: var(--rb-font-titulo);
     font-weight: 600;
@@ -732,6 +740,7 @@
 <!-- ── 04 Principles ────────────────────────────────────────────────── -->
 <section id="principles" class="band">
   <div class="wrap">
+    <h2 class="eyebrow credo-label">Nuestro manifiesto</h2>
     <p class="credo">
       Creemos en la tecnología como herramienta para crear oportunidades para todos.
     </p>
@@ -744,10 +753,6 @@
     </div>
     <div>
       <h2>Cómo decidimos</h2>
-      <p class="lede muted">
-        No son decorativos: son los criterios contra los que evaluamos cada decisión
-        importante. Si una oportunidad es rentable y contradice esto, no la tomamos.
-      </p>
 
       <div class="grid">
         <article class="card">
