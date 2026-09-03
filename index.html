@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Taller de robótica para escuelas — robotes.org</title>
-<meta name="description" content="Taller de robótica para escuelas. Una clase por semana durante el año escolar: los estudiantes diseñan en 3D, programan Arduino y terminan con un robot que funciona. Kit, currículum y acompañamiento incluidos.">
+<title>robotes.org — Laboratorio de innovación educativa</title>
+<meta name="description" content="Laboratorio de innovación educativa. Diseñamos y probamos herramientas para enseñar robótica, programación y fabricación digital en un taller semanal, dentro de una escuela rural del sur de Chile.">
 <meta name="theme-color" content="#2c3742">
 <link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/tokens.css">
@@ -12,8 +12,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_CL">
 <meta property="og:site_name" content="robotes.org">
-<meta property="og:title" content="Taller de robótica para escuelas">
-<meta property="og:description" content="Sus estudiantes terminan el año con un robot que funciona. Kit, currículum y acompañamiento, probados en una escuela rural sin especialista ni laboratorio.">
+<meta property="og:title" content="Laboratorio de innovación educativa">
+<meta property="og:description" content="Diseñamos y probamos herramientas para enseñar robótica y programación. Todo se prueba primero en un taller semanal, en una escuela rural del sur de Chile.">
 <meta property="og:image" content="assets/og.png">
 <meta property="og:url" content="https://robotes.org/">
 <meta name="twitter:card" content="summary_large_image">
@@ -25,10 +25,9 @@
      This page pins its own light palette from the raw tokens instead of using
      the semantic roles (--rb-fondo, --rb-texto, …). Those roles flip with
      prefers-color-scheme, which would repaint every section in Pizarra for any
-     visitor whose system is in dark mode — and a sales page has to look the
-     same for the school director as it did for whoever sent them the link.
-     Manual §3.6 keeps dark mode for projected screens, not for sites like this.
-     Same reasoning as presentacion-pokemon, which pins itself dark. */
+     visitor whose system is in dark mode. Manual §3.6 keeps dark mode for
+     projected screens, not for sites like this. Same reasoning as
+     presentacion-pokemon, which pins itself dark for the opposite reason. */
 
   :root {
     --page-bg: var(--rb-blanco);
@@ -63,7 +62,7 @@
     text-wrap: balance;
   }
   h1 { font-size: var(--rb-text-3xl); }
-  h2 { font-size: var(--rb-text-2xl); }
+  h2 { font-size: var(--rb-text-2xl); max-width: 22ch; }
   h3 { font-size: var(--rb-text-lg); }
   p  { margin: 0 0 var(--rb-space-2); max-width: var(--rb-medida); }
 
@@ -95,12 +94,11 @@
   section { padding: var(--rb-space-8) 0; }
 
   /* Only the hero and the closing block are Pizarra. Everything in between
-     alternates white and Papel, which is what the 60/30/8/2 rule asks for
-     (manual §3.3): the neutral carries the page and the dark ink punctuates it.
-     Cards sitting on a Papel band flip to white so they keep their edge. */
+     alternates white and Papel through .band, which is what the 60/30/8/2 rule
+     asks for (manual §3.3): the neutral carries the page and the dark ink
+     punctuates it. Cards on a Papel band flip to white to keep their edge. */
   .band { background: var(--page-bg-alt); }
   .band .card { background: var(--page-bg); }
-
 
   .dark { background: var(--rb-pizarra); color: var(--rb-blanco); }
   .dark h2, .dark h3 { color: var(--rb-blanco); }
@@ -120,6 +118,46 @@
 
   .lede { font-size: var(--rb-text-lg); max-width: var(--rb-medida); }
   .footnote { font-size: var(--rb-text-sm); margin-top: var(--rb-space-3); }
+
+  /* ── Section rail ─────────────────────────────────────────────────────
+     The informative sections are laid out as a lab notebook: a numbered index
+     in the margin, the content beside it. The number is the one place this
+     page uses the mono token, and it is what tells the visitor at a glance
+     that this is a document to read, not a sales page to scroll past. */
+
+  .split {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: var(--rb-space-3) var(--rb-space-6);
+    align-items: start;
+  }
+  .rail {
+    position: sticky; top: var(--rb-space-4);
+    align-self: start;
+    border-top: 2px solid var(--page-text);
+    padding-top: var(--rb-space-1);
+  }
+  .dark .rail { border-top-color: var(--rb-blanco); }
+  .section-no {
+    display: block;
+    font-family: var(--rb-font-mono);
+    font-size: var(--rb-text-sm);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.05em;
+  }
+  .rail-label {
+    display: block;
+    font-family: var(--rb-font-titulo);
+    font-size: var(--rb-text-sm);
+    font-weight: 600;
+    color: var(--page-text-soft);
+  }
+  /* Below the breakpoint the rail stops being a margin and becomes a heading
+     strip, so the number keeps its meaning instead of floating alone. */
+  @media (max-width: 860px) {
+    .split { grid-template-columns: 1fr; }
+    .rail { position: static; display: flex; gap: var(--rb-space-2); align-items: baseline; }
+  }
 
   /* ── Lockup ───────────────────────────────────────────────────────────
      Built in HTML instead of using logo-horizontal.svg on purpose: that file
@@ -156,10 +194,10 @@
     display: inline-flex; align-items: center; min-height: 44px;
   }
   .nav a:hover { color: var(--rb-blanco); text-decoration: underline; }
-  @media (max-width: 760px) { .nav { display: none; } }
+  @media (max-width: 860px) { .nav { display: none; } }
 
   .hero { padding: var(--rb-space-6) 0 var(--rb-space-8); }
-  .hero h1 { font-size: clamp(2rem, 5.2vw, 3.052rem); max-width: 20ch; margin-bottom: var(--rb-space-3); }
+  .hero h1 { font-size: clamp(2rem, 5.2vw, 3.052rem); max-width: 19ch; margin-bottom: var(--rb-space-3); }
   .hero .lede { color: var(--rb-bruma); margin-bottom: var(--rb-space-4); }
 
   /* ── Buttons ────────────────────────────────────────────────────────── */
@@ -188,18 +226,11 @@
   .btn-secondary { border-color: currentColor; color: inherit; background: transparent; }
   .dark .btn-secondary:hover { background: var(--rb-pizarra-alta); }
 
-  /* ── Proof strip ────────────────────────────────────────────────────── */
+  /* ── Opening band ───────────────────────────────────────────────────── */
 
-  /* The band leads with the claim and the three columns are its evidence.
-     The claim used to hang underneath, small and grey, where it read as a
-     stray caption rather than the strongest sentence on the page. */
-  .claim {
-    font-size: var(--rb-text-lg);
-    max-width: var(--rb-medida);
-    margin: 0 0 var(--rb-space-4);
-  }
+  .claim { font-size: var(--rb-text-lg); max-width: var(--rb-medida); margin: 0 0 var(--rb-space-4); }
 
-  .proof {
+  .facts {
     display: grid;
     gap: var(--rb-space-1) var(--rb-space-4);
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -209,19 +240,16 @@
   }
   /* subgrid keeps every label on the same baseline even when one heading wraps
      to two lines. Without it the columns start at different heights and the
-     whole block looks broken. Browsers without subgrid just fall back to the
-     ragged version, which is what it looked like before. */
-  .proof > div { display: grid; grid-row: span 2; grid-template-rows: subgrid; }
-
-  .proof .stat {
+     whole block looks broken. Browsers without subgrid fall back to ragged. */
+  .facts > div { display: grid; grid-row: span 2; grid-template-rows: subgrid; }
+  .facts .stat {
     font-family: var(--rb-font-titulo); font-weight: 600;
     font-size: var(--rb-text-xl);
-    font-variant-numeric: tabular-nums;
     display: block;
   }
-  .proof .stat-label { font-size: var(--rb-text-sm); color: var(--page-text-soft); }
+  .facts .stat-label { font-size: var(--rb-text-sm); color: var(--page-text-soft); }
   /* Tighter than a full section: this band reads as the base of the hero. */
-  #proof { padding: var(--rb-space-6) 0; }
+  #lab { padding: var(--rb-space-6) 0; }
 
   /* ── Grids and cards ────────────────────────────────────────────────── */
 
@@ -230,29 +258,41 @@
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
     margin-top: var(--rb-space-4);
   }
+  /* Inside a .split the content column is narrower than the page, so a group of
+     four cards falls into 3 + 1 and the last one sits alone. Sets of four ask
+     for a wider minimum and land as 2 x 2. */
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
   .card {
     background: var(--page-bg-alt);
     border: 1px solid var(--page-border);
     border-radius: var(--rb-radio);
     padding: var(--rb-space-3);
+    display: flex; flex-direction: column;
   }
   .card h3 { margin-bottom: var(--rb-space-1); }
   .card p:last-child { margin-bottom: 0; }
   .card ul { margin: 0; }
-  .dark .card { background: var(--rb-pizarra-alta); border-color: var(--rb-pizarra-alta); }
+  .card-body { flex: 1; }
 
-  /* Checklists. Color is never the only carrier (manual §3.4): the glyph is.
-     Verde Bosque only works on light surfaces (4.9:1 on Papel); on Pizarra it
-     drops to 2.3:1, so on dark surfaces the check takes the text color. */
-  .checks { list-style: none; padding: 0; margin: var(--rb-space-2) 0 0; }
-  .checks li { display: flex; gap: 0.6em; align-items: baseline; }
-  .checks li::before {
-    content: "✓";
-    color: var(--rb-verde-bosque);
-    font-weight: 700;
-    flex: none;
+  /* ── Status ───────────────────────────────────────────────────────────
+     Every work line says out loud what state it is in. The dot carries the
+     color and the word carries the meaning, so color is never the only
+     signal (manual §3.4). Verde Bosque reaches 4.9:1 on Papel and better on
+     white, which is where these cards sit. */
+  .status {
+    display: inline-flex; align-items: center; gap: 0.55em;
+    font-family: var(--rb-font-mono);
+    font-size: var(--rb-text-xs);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--page-text-soft);
+    margin-bottom: var(--rb-space-1);
   }
-  .dark .checks li::before { color: var(--rb-blanco); }
+  .status::before {
+    content: ""; flex: none;
+    width: 0.55em; height: 0.55em; border-radius: 50%;
+    background: currentColor;
+  }
+  .status-live { color: var(--rb-verde-bosque); }
 
   /* ── Steps ──────────────────────────────────────────────────────────── */
 
@@ -264,7 +304,7 @@
   }
   .steps li::before {
     content: counter(step);
-    font-family: var(--rb-font-titulo); font-weight: 600;
+    font-family: var(--rb-font-mono);
     color: var(--page-text-soft);
     border: 1px solid var(--page-border);
     border-radius: 50%;
@@ -274,32 +314,34 @@
   .steps h3 { margin-bottom: 0.2em; }
   .steps p { margin-bottom: 0; }
 
-  /* ── Plans ──────────────────────────────────────────────────────────── */
+  /* ── Timeline ───────────────────────────────────────────────────────── */
 
-  .plan { display: flex; flex-direction: column; }
-  .plan-body { flex: 1; }
-  .plan-note {
-    margin-top: var(--rb-space-3);
-    padding-top: var(--rb-space-2);
-    border-top: 1px solid var(--page-border);
-    font-size: var(--rb-text-sm);
-    color: var(--page-text-soft);
+  .timeline { list-style: none; padding: 0; margin: var(--rb-space-4) 0 0; }
+  .timeline li {
+    position: relative;
+    padding: 0 0 var(--rb-space-4) var(--rb-space-4);
+    border-left: 2px solid var(--page-border);
   }
-  .plan-featured { border-top: 4px solid var(--rb-amarillo-chispa); }
-  .badge {
-    display: inline-block;
+  .timeline li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  .timeline li::before {
+    content: "";
+    position: absolute; left: -7px; top: 0.45em;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--page-bg);
+    border: 2px solid var(--page-border);
+  }
+  /* The yellow of this view belongs to this dot, and the word «Ahora» carries
+     the same meaning in text so the marker is never color alone. */
+  .timeline .now::before { background: var(--rb-amarillo-chispa); border-color: var(--rb-amarillo-chispa); }
+  .timeline .when {
+    display: block;
+    font-family: var(--rb-font-mono);
     font-size: var(--rb-text-xs);
-    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
-    border: 1px solid var(--page-border);
-    border-radius: 999px;
-    padding: 0.15em 0.7em;
-    margin-bottom: var(--rb-space-1);
+    text-transform: uppercase; letter-spacing: 0.06em;
     color: var(--page-text-soft);
   }
-  /* On Pizarra Alta cards the divider goes in Pizarra: a light hairline (Niebla)
-     over a dark surface shouts louder than the content it separates. */
-  .dark .plan-note { border-top-color: var(--rb-pizarra); color: var(--rb-bruma); }
-  .dark .badge { border-color: var(--rb-pizarra); color: var(--rb-bruma); }
+  .timeline h3 { margin: 0.1em 0 0.2em; }
+  .timeline p { margin-bottom: 0; }
 
   /* ── FAQ ────────────────────────────────────────────────────────────── */
 
@@ -332,10 +374,8 @@
 
   /* ── Closing and footer ─────────────────────────────────────────────── */
 
-  /* The yellow of this view belongs to the button; it is not repeated on the
-     border (manual §3.3). */
   .closing { border-top: 1px solid var(--rb-pizarra-alta); }
-  .closing h2 { max-width: 22ch; }
+  .closing h2 { max-width: 20ch; }
   .contact { list-style: none; padding: 0; margin: var(--rb-space-3) 0 0; }
   .contact a { color: var(--rb-blanco); }
 
@@ -371,25 +411,26 @@
       </a>
       <nav aria-label="Secciones">
         <ul class="nav">
-          <li><a href="#workshop">El taller</a></li>
-          <li><a href="#includes">Qué incluye</a></li>
-          <li><a href="#plans">Modalidades</a></li>
-          <li><a href="#faq">Preguntas</a></li>
+          <li><a href="#method">Método</a></li>
+          <li><a href="#work">Líneas de trabajo</a></li>
+          <li><a href="#principles">Principios</a></li>
+          <li><a href="#collaborate">Colaborar</a></li>
         </ul>
       </nav>
     </div>
 
     <div class="hero" id="main">
-      <p class="eyebrow">Taller de robótica para escuelas</p>
-      <h1>Sus estudiantes van a terminar el año con un robot que funciona.</h1>
+      <p class="eyebrow">Laboratorio de innovación educativa</p>
+      <h1>Desarrollamos tecnología educativa donde es más difícil que funcione.</h1>
       <p class="lede">
-        Una clase por semana durante el año escolar: diseñan en 3D, programan Arduino,
-        sueldan y arman. Su escuela no tiene que comprar equipamiento, armar la
-        planificación ni encontrar a alguien que sepa de robótica.
+        robotes.org es una empresa chilena que diseña y prueba herramientas para enseñar
+        robótica, programación y fabricación digital. Todo lo que hacemos se prueba primero
+        en un taller semanal, dentro de una escuela rural del sur de Chile. Lo que no
+        resiste esa sala de clases no sale de aquí.
       </p>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:ricardo@robotes.org?subject=Taller%20de%20rob%C3%B3tica%20para%20nuestra%20escuela&amp;body=Hola%2C%20me%20interesa%20conocer%20el%20taller.%0A%0AEscuela%3A%20%0AComuna%3A%20%0ACargo%3A%20%0ACursos%20que%20participar%C3%ADan%3A%20%0AN%C3%BAmero%20aproximado%20de%20estudiantes%3A%20%0ATel%C3%A9fono%20de%20contacto%3A%20%0A%0AComentarios%3A%0A">Pedir una propuesta</a>
-        <a class="btn btn-secondary" href="#includes">Ver qué incluye</a>
+        <a class="btn btn-primary" href="#method">Cómo trabajamos</a>
+        <a class="btn btn-secondary" href="#collaborate">Trabajar con nosotros</a>
       </div>
     </div>
   </div>
@@ -397,338 +438,467 @@
 
 <main>
 
-<!-- ── Proof ────────────────────────────────────────────────────────── -->
-<section id="proof" class="band">
+<!-- ── Opening band ─────────────────────────────────────────────────── -->
+<section id="lab" class="band">
   <div class="wrap">
     <p class="claim">
-      No lo diseñamos en una oficina: lo hacemos nosotros, cada semana, en una sala
-      de clases con las mismas condiciones que tiene su escuela.
+      El laboratorio no es un edificio. Es una sala de clases del sur de Chile, con una
+      impresora 3D, herramientas prestadas y una conexión a internet que a veces no está.
     </p>
-    <div class="proof">
+    <div class="facts">
       <div>
-        <span class="stat">Probado en cancha</span>
-        <span class="stat-label">Sin especialista, sin laboratorio y con el presupuesto de una escuela pública</span>
+        <span class="stat">Una escuela colaboradora</span>
+        <span class="stat-label">Trabajamos desde adentro de una escuela rural, no desde una oficina que la visita</span>
       </div>
       <div>
-        <span class="stat">Todo el año escolar</span>
-        <span class="stat-label">De marzo a diciembre, con las semanas que se pierden ya descontadas</span>
+        <span class="stat">Un taller cada semana</span>
+        <span class="stat-label">Funciona desde 2024, durante el año escolar completo. Ahí se prueba todo</span>
       </div>
       <div>
-        <span class="stat">Arduino + impresión 3D</span>
-        <span class="stat-label">Herramientas abiertas, sin licencias que renovar</span>
+        <span class="stat">Herramientas abiertas</span>
+        <span class="stat-label">Arduino, impresión 3D y software que corre sin conexión ni licencias</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── Why ──────────────────────────────────────────────────────────── -->
-<section id="why">
-  <div class="wrap prose">
-    <p class="eyebrow">Por qué hacemos esto</p>
-    <h2>El acceso a la robótica no debería depender del código postal de un niño.</h2>
-    <p class="lede muted">
-      En las ciudades grandes hay academias, ferias de ciencia y profesores especializados.
-      En las escuelas rurales del sur, no. Trabajamos desde una escuela rural, no para ella:
-      todo lo que ofrecemos se probó primero en nuestra propia sala de clases,
-      con la misma conexión, los mismos horarios y el mismo presupuesto.
-      Lo hacemos cada semana desde 2024.
-    </p>
-  </div>
-</section>
-
-<!-- ── The workshop ─────────────────────────────────────────────────── -->
-<section id="workshop" class="band">
-  <div class="wrap">
-    <p class="eyebrow">El producto</p>
-    <h2>Un año escolar, un robot terminado</h2>
-    <p class="lede muted">
-      El taller está ordenado en cuatro etapas. Cada estudiante pasa por todas:
-      nadie se queda mirando cómo arma el compañero.
-    </p>
-
-    <div class="grid">
-      <article class="card">
-        <p class="eyebrow">Etapa 1</p>
-        <h3>Diseñar</h3>
-        <p class="muted">Modelado 3D en Tinkercad. Cada equipo dibuja el chasis de su robot y aprende a medir antes de cortar.</p>
-      </article>
-      <article class="card">
-        <p class="eyebrow">Etapa 2</p>
-        <h3>Programar</h3>
-        <p class="muted">Arduino desde cero: encender un LED, leer un sensor, mover un motor. Del bloque al código, según el curso.</p>
-      </article>
-      <article class="card">
-        <p class="eyebrow">Etapa 3</p>
-        <h3>Armar</h3>
-        <p class="muted">Impresión 3D de las piezas, soldadura, cableado y las pruebas que no funcionan a la primera. Ahí está el aprendizaje.</p>
-      </article>
-      <article class="card">
-        <p class="eyebrow">Etapa 4</p>
-        <h3>Mostrar</h3>
-        <p class="muted">Muestra abierta a la comunidad escolar y competencia entre equipos. Los estudiantes explican su propio robot.</p>
-      </article>
+<!-- ── 01 Method ────────────────────────────────────────────────────── -->
+<section id="method">
+  <div class="wrap split">
+    <div class="rail">
+      <span class="section-no">01</span>
+      <span class="rail-label">Método</span>
     </div>
+    <div>
+      <h2>Cómo trabajamos</h2>
+      <p class="lede muted">
+        No es un proceso de innovación con post-its. Es el orden en que ocurren las cosas
+        cuando el equipo que diseña la herramienta es el mismo que tiene que dar la clase
+        del martes.
+      </p>
 
-    <p class="muted footnote">
-      La distribución en el calendario se ajusta al año escolar de cada establecimiento
-      y a las semanas que se pierden por actividades, licencias o clima.
-    </p>
-  </div>
-</section>
-
-<!-- ── What is included ─────────────────────────────────────────────── -->
-<section id="includes">
-  <div class="wrap">
-    <p class="eyebrow">Qué incluye</p>
-    <h2>Lo que llega a la escuela</h2>
-
-    <div class="grid">
-      <article class="card">
-        <h3>Kit por equipo</h3>
-        <ul class="checks">
-          <li>Placa Arduino, sensores, motores y componentes</li>
-          <li>Piezas impresas en 3D o la impresora en comodato</li>
-          <li>Herramientas de trabajo: soldadura, corte, medición</li>
-          <li>Repuestos: en un taller real, algo siempre se quema</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Currículum semana a semana</h3>
-        <ul class="checks">
-          <li>Alineado con el Plan Nacional de Lenguajes Digitales del Mineduc</li>
-          <li>Planificación de cada sesión, con objetivos y materiales</li>
-          <li>Guías para los estudiantes, en español y fotocopiables</li>
-          <li>Rúbricas de evaluación si el taller va con nota</li>
-          <li>Todo funciona sin conexión a internet</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Quien conduce las clases</h3>
-        <ul class="checks">
-          <li>Vamos nosotros, o formamos a un profesor de la escuela</li>
-          <li>Acompañamiento durante todo el año, no sólo al inicio</li>
-          <li>WhatsApp directo para las dudas entre clases</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Cierre y evidencia</h3>
-        <ul class="checks">
-          <li>Muestra final abierta a apoderados y comunidad</li>
-          <li>Certificado de participación para cada estudiante</li>
-          <li>Registro fotográfico del proceso para la escuela</li>
-          <li>Informe con asistencia, avance y aprendizajes</li>
-          <li>Justificación SEP/PME editable, lista para su plan</li>
-        </ul>
-      </article>
+      <ol class="steps">
+        <li>
+          <div>
+            <h3>Miramos la sala, no el mercado</h3>
+            <p class="muted">
+              Los problemas que resolvemos aparecen dando clases: una guía que nadie
+              entendió, un sensor que se quema, un software que pide internet donde no hay.
+              Ninguno se nos habría ocurrido leyendo un informe.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Construimos lo mínimo que se pueda probar</h3>
+            <p class="muted">
+              Nada se diseña completo antes de tocar una sala. La primera versión no existe
+              para lucirse: existe para descubrir rápido en qué estábamos equivocados.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Lo probamos con niños, no con adultos</h3>
+            <p class="muted">
+              Un material funciona cuando un niño de nueve años lo usa sin que nadie le
+              explique. Esa es toda la prueba, y es más dura que cualquier revisión entre
+              colegas.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Publicamos lo que funciona, y también lo que no</h3>
+            <p class="muted">
+              Cuando algo falla, decirlo le ahorra el mismo error a la escuela siguiente.
+              Es la parte que casi nadie publica y es, probablemente, la más útil.
+            </p>
+          </div>
+        </li>
+      </ol>
     </div>
   </div>
 </section>
 
-<!-- ── Plans ────────────────────────────────────────────────────────── -->
-<section id="plans" class="band">
-  <div class="wrap">
-    <p class="eyebrow">Modalidades</p>
-    <h2>Tres formas de partir</h2>
-    <p class="lede muted">
-      La diferencia está en quién conduce las clases. El material y el kit son los mismos.
-    </p>
-
-    <div class="grid">
-      <article class="card plan plan-featured">
-        <div class="plan-body">
-          <span class="badge">La más pedida</span>
-          <h3>Taller llave en mano</h3>
-          <p class="muted">Vamos nosotros cada semana. La escuela pone la sala y los estudiantes; nosotros, todo lo demás.</p>
-          <ul class="checks">
-            <li>Relator en la sala, semana a semana</li>
-            <li>Kit, currículum, muestra final e informe</li>
-          </ul>
-        </div>
-        <p class="plan-note">Sujeto a distancia: hoy llegamos hasta donde alcanzamos a volver el mismo día.</p>
-      </article>
-
-      <article class="card plan">
-        <div class="plan-body">
-          <h3>Taller con profesor de la escuela</h3>
-          <p class="muted">Formamos a un profesor suyo y lo acompañamos todo el año. La capacidad queda instalada en la escuela.</p>
-          <ul class="checks">
-            <li>Formación inicial presencial</li>
-            <li>Acompañamiento semanal a distancia</li>
-            <li>Kit, currículum, muestra final e informe</li>
-          </ul>
-        </div>
-        <p class="plan-note">Requiere un profesor con horas asignadas al taller. No hace falta que sepa robótica.</p>
-      </article>
-
-      <article class="card plan">
-        <div class="plan-body">
-          <span class="badge">En preparación</span>
-          <h3>Kit + playbook</h3>
-          <p class="muted">Para escuelas que ya tienen a alguien capaz de conducir el taller y sólo necesitan el material.</p>
-          <ul class="checks">
-            <li>Kit documentado y currículum completo</li>
-            <li>Sin acompañamiento semanal</li>
-          </ul>
-        </div>
-        <p class="plan-note">Todavía no está listo. Escríbanos y avisamos cuando lo esté.</p>
-      </article>
+<!-- ── 02 Work ──────────────────────────────────────────────────────── -->
+<section id="work" class="band">
+  <div class="wrap split">
+    <div class="rail">
+      <span class="section-no">02</span>
+      <span class="rail-label">Trabajo</span>
     </div>
+    <div>
+      <h2>Líneas de trabajo</h2>
+      <p class="lede muted">
+        Cada línea dice en qué estado está. Preferimos mostrar lo que falta antes que
+        anunciar algo terminado que después no llega.
+      </p>
 
-    <p class="muted" style="margin-top: var(--rb-space-4);">
-      <strong>El valor</strong> depende del número de estudiantes, la modalidad y la distancia.
-      Enviamos la propuesta con los costos desglosados, en menos de una semana.
-      Emitimos factura.
-    </p>
+      <div class="grid grid-2">
+        <article class="card">
+          <div class="card-body">
+            <span class="status status-live">En uso</span>
+            <h3>Taller de robótica</h3>
+            <p class="muted">
+              El programa completo: un año escolar, cuatro etapas —diseñar, programar,
+              armar y mostrar— y un robot terminado por equipo. Es la línea que hoy se
+              implementa en escuelas.
+            </p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <span class="status status-live">En uso</span>
+            <h3>Ruta Robot</h3>
+            <p class="muted">
+              Juego de programación por bloques para 3º y 4º básico: el niño mueve un robot
+              por un tablero armando instrucciones. Se abre con doble clic, sin instalación,
+              sin servidor y sin internet.
+            </p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <span class="status">En documentación</span>
+            <h3>Kit abierto</h3>
+            <p class="muted">
+              El kit del taller, basado en Arduino e impresión 3D, con su lista de
+              materiales y sus costos reales. Documentamos el que ya usamos; no inventamos
+              uno nuevo para tener algo que mostrar.
+            </p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <span class="status">En preparación</span>
+            <h3>Playbook y materiales</h3>
+            <p class="muted">
+              El currículum semana a semana, con guías fotocopiables, rúbricas y qué hacer
+              cuando una clase se cae. Pensado para que otra persona pueda conducir el
+              taller sin nosotros al lado.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <p class="muted footnote">
+        El orden lo decide la sala de clases: primero el kit, después el playbook, y
+        herramientas propias sólo si de verdad hacen falta. Lo que llegue a estado
+        publicable sale con licencia libre.
+      </p>
+    </div>
   </div>
 </section>
 
-<!-- ── Process ──────────────────────────────────────────────────────── -->
-<section id="process">
-  <div class="wrap">
-    <p class="eyebrow">Cómo partimos</p>
-    <h2>De la primera conversación a la primera clase</h2>
+<!-- ── 03 The collaborating school ──────────────────────────────────── -->
+<section id="school">
+  <div class="wrap split">
+    <div class="rail">
+      <span class="section-no">03</span>
+      <span class="rail-label">El modelo</span>
+    </div>
+    <div class="prose">
+      <h2>La escuela no es beneficiaria: es colaboradora</h2>
+      <p class="lede muted">
+        Un establecimiento colaborador es un nodo del laboratorio. El valor va en las dos
+        direcciones y está escrito, no acordado de palabra.
+      </p>
 
-    <ol class="steps">
-      <li>
-        <div>
-          <h3>Nos escribe</h3>
-          <p class="muted">Con el nombre de la escuela, la comuna y una idea de cuántos estudiantes participarían. Nada más.</p>
-        </div>
-      </li>
-      <li>
-        <div>
-          <h3>Conversamos y vemos la sala</h3>
-          <p class="muted">Videollamada o visita, según la distancia. Necesitamos entender el horario, el espacio y qué espera la escuela del taller.</p>
-        </div>
-      </li>
-      <li>
-        <div>
-          <h3>Enviamos la propuesta</h3>
-          <p class="muted">Alcance, calendario, costos desglosados y qué pone cada parte. Va con ficha técnica y con la justificación SEP/PME ya redactada y editable, para que no tenga que escribirla usted.</p>
-        </div>
-      </li>
-      <li>
-        <div>
-          <h3>Convenio y primera clase</h3>
-          <p class="muted">Firmamos, coordinamos la entrega del kit y partimos. Lo ideal es cerrar antes de diciembre para arrancar en marzo.</p>
-        </div>
-      </li>
-    </ol>
+      <div class="grid">
+        <article class="card">
+          <div class="card-body">
+            <h3>Lo que recibe la escuela</h3>
+            <ul class="muted">
+              <li>Equipamiento en comodato: kits, impresora 3D, herramientas</li>
+              <li>Licencias de uso gratuitas del software que desarrollamos</li>
+              <li>Formación y acompañamiento para sus docentes</li>
+              <li>Acceso anticipado a todo lo que probamos</li>
+            </ul>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Lo que recibe el laboratorio</h3>
+            <ul class="muted">
+              <li>Lo único que no se puede comprar: una sala de clases real</li>
+              <li>Profesores y estudiantes que dicen cuándo algo no funciona</li>
+              <li>Evidencia de si una herramienta sirve, antes de ofrecerla</li>
+              <li>Los límites reales: presupuesto, horario, conexión</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <p class="muted footnote">
+        La relación se formaliza en un convenio marco de colaboración, un contrato de
+        comodato por los bienes y licencias de uso escritas. Y una regla que preferimos
+        decir de frente: <strong>la colaboración nunca condiciona una decisión de compra</strong>.
+        Una escuela puede ser laboratorio sin contratarnos nada, y puede contratarnos sin
+        ser laboratorio.
+      </p>
+    </div>
   </div>
 </section>
 
-<!-- ── Requirements ─────────────────────────────────────────────────── -->
-<section id="requirements" class="band">
-  <div class="wrap">
-    <p class="eyebrow">Qué necesita la escuela</p>
-    <h2>Las condiciones mínimas, dichas de frente</h2>
-    <p class="lede muted">
-      Preferimos decir esto antes y no en la tercera reunión. Si algo no se cumple, lo conversamos:
-      casi todo tiene solución, salvo el horario.
-    </p>
-
-    <div class="grid">
-      <article class="card">
-        <h3>Espacio</h3>
-        <ul class="checks">
-          <li>Una sala con mesas de trabajo y al menos cuatro enchufes</li>
-          <li>Un mueble con llave para guardar kits e impresora</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Tiempo</h3>
-        <ul class="checks">
-          <li>Un bloque protegido de 90 minutos a la semana</li>
-          <li>Que no sea el último bloque del viernes</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Estudiantes</h3>
-        <ul class="checks">
-          <li>Entre 8 y 16 por grupo</li>
-          <li>De 5º básico en adelante</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Personas</h3>
-        <ul class="checks">
-          <li>Un profesor de contraparte que esté en las clases</li>
-          <li>Respaldo de la dirección: sin eso, el taller se cae en junio</li>
-        </ul>
-      </article>
+<!-- ── 04 Principles ────────────────────────────────────────────────── -->
+<section id="principles" class="band">
+  <div class="wrap split">
+    <div class="rail">
+      <span class="section-no">04</span>
+      <span class="rail-label">Principios</span>
     </div>
+    <div>
+      <h2>Cómo decidimos</h2>
+      <p class="lede muted">
+        No son decorativos: son los criterios contra los que evaluamos cada decisión
+        importante. Si una oportunidad es rentable y contradice esto, no la tomamos.
+      </p>
 
-    <p class="muted footnote">
-      Internet ayuda, pero no es requisito: todo el material del taller funciona sin conexión.
-    </p>
+      <div class="grid">
+        <article class="card">
+          <div class="card-body">
+            <h3>Innovación con propósito</h3>
+            <p class="muted">
+              No construimos tecnología porque sea posible, sino porque resuelve un problema
+              concreto en una sala de clases real.
+            </p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Construcción conjunta</h3>
+            <p class="muted">
+              Las soluciones se diseñan y se corrigen junto a las escuelas. Los profesores y
+              los estudiantes no son usuarios pasivos: son parte del equipo que las hace.
+            </p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Accesibilidad como diseño</h3>
+            <p class="muted">
+              Si una escuela rural con recursos limitados no puede implementarlo, no cumple
+              su propósito. Vale para el costo, para el idioma y para la complejidad técnica.
+            </p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Reinversión</h3>
+            <p class="muted">
+              Somos una empresa y facturamos. Los resultados se reinvierten en desarrollo,
+              laboratorio e impacto educativo: no existimos para repartir dividendos.
+            </p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Transparencia operativa</h3>
+            <p class="muted">
+              Transparencia no es publicar un informe anual. Es que se entienda cómo se
+              decide y en qué se gasta. Preferimos ser una empresa chica y honesta que una
+              grande con maquillaje.
+            </p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Crecimiento sostenible</h3>
+            <p class="muted">
+              Cada escuela, producto y socio nuevo tiene que sumar sin diluir lo que ya
+              funciona. Se crece sobre evidencia, no sobre promesas.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 05 Roadmap ───────────────────────────────────────────────────── -->
+<section id="roadmap">
+  <div class="wrap split">
+    <div class="rail">
+      <span class="section-no">05</span>
+      <span class="rail-label">Recorrido</span>
+    </div>
+    <div>
+      <h2>En qué estamos</h2>
+      <p class="lede muted">
+        No perseguimos una etapa hasta tener evidencia real de la anterior. Es lento a
+        propósito, y es la razón por la que preferimos publicar esto antes que una promesa.
+      </p>
+
+      <ol class="timeline">
+        <li class="now">
+          <span class="when">Ahora</span>
+          <h3>Consolidar el caso</h3>
+          <p class="muted">
+            Cerrar el ciclo completo en la escuela colaboradora: diseño, armado, muestra
+            abierta a la comunidad y competencia local. Documentar el proceso entero
+            —pedagógico, técnico y humano—, porque es la materia prima de todo lo demás.
+          </p>
+        </li>
+        <li>
+          <span class="when">Siguiente</span>
+          <h3>Empaquetar lo que funciona</h3>
+          <p class="muted">
+            Kit documentado y playbook del taller: todo lo necesario para que otra escuela
+            pueda ejecutarlo sin que nosotros estemos en la sala cada semana.
+          </p>
+        </li>
+        <li>
+          <span class="when">Después</span>
+          <h3>Una segunda escuela</h3>
+          <p class="muted">
+            Con un profesor local formado por nosotros. Ahí nace de verdad la línea de
+            formación docente, y con dos escuelas se puede organizar el primer torneo
+            entre establecimientos.
+          </p>
+        </li>
+        <li>
+          <span class="when">El horizonte</span>
+          <h3>Una red del sur</h3>
+          <p class="muted">
+            Escuelas del sur de Chile trabajando con las mismas herramientas, con torneos
+            regionales propios y alianzas con universidades, municipios y empresas de la
+            zona. La aspiración mayor: que estos niños compitan afuera representando a Chile.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ── 06 Collaborate ───────────────────────────────────────────────── -->
+<section id="collaborate" class="band">
+  <div class="wrap split">
+    <div class="rail">
+      <span class="section-no">06</span>
+      <span class="rail-label">Colaborar</span>
+    </div>
+    <div>
+      <h2>Trabajar con nosotros</h2>
+      <p class="lede muted">
+        No buscamos un solo tipo de aliado. Estas son las formas que hoy sabemos sostener.
+      </p>
+
+      <div class="grid grid-2">
+        <article class="card">
+          <div class="card-body">
+            <h3>Escuelas y sostenedores</h3>
+            <p class="muted">
+              Implementar el taller en su establecimiento, con nosotros en la sala o
+              formando a un profesor suyo. Enviamos una propuesta con el alcance, el
+              calendario y los costos desglosados. Emitimos factura.
+            </p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Municipios y DAEM</h3>
+            <p class="muted">
+              Llevar el taller a una red de escuelas de la comuna en vez de a una sola.
+              Compartir el equipamiento y la formación entre establecimientos baja el costo
+              por estudiante.
+            </p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Universidades</h3>
+            <p class="muted">
+              Investigación conjunta sobre el impacto de estas herramientas en el
+              aprendizaje. Tenemos la sala de clases, los datos y la continuidad; nos falta
+              la mirada académica.
+            </p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Empresas</h3>
+            <p class="muted">
+              Financiar la implementación completa en una escuela de su zona de operación.
+              Es un programa de responsabilidad social concreto, medible y con nombre y
+              apellido: una escuela, un año, unos niños.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <p class="muted footnote">
+        ¿Sabe de electrónica, de pedagogía, de diseño o de gestión y quiere sumarse de otra
+        forma? También sirve. Escríbanos y lo conversamos.
+      </p>
+    </div>
   </div>
 </section>
 
 <!-- ── FAQ ──────────────────────────────────────────────────────────── -->
 <section id="faq">
-  <div class="wrap prose">
-    <p class="eyebrow">Preguntas frecuentes</p>
-    <h2>Lo que nos preguntan siempre</h2>
+  <div class="wrap split">
+    <div class="rail">
+      <span class="section-no">07</span>
+      <span class="rail-label">Preguntas</span>
+    </div>
+    <div class="prose">
+      <h2>Lo que nos preguntan</h2>
 
-    <div class="faq">
-      <details>
-        <summary>¿Se puede financiar con SEP o con el PME?</summary>
-        <p class="muted">
-          Los talleres extraprogramáticos se financian habitualmente por esa vía, pero el procedimiento
-          lo define cada establecimiento y su sostenedor. Nosotros emitimos factura y entregamos la
-          propuesta con el desglose y la documentación que se necesita para justificar el gasto.
-          Conviene conversarlo entre octubre y diciembre, para alcanzar a dejarlo en el plan del año siguiente.
-        </p>
-      </details>
-      <details>
-        <summary>¿Por qué pagar, si hay talleres de robótica gratuitos?</summary>
-        <p class="muted">
-          Porque son cosas distintas y conviven bien. Los programas gratuitos de fundaciones
-          y universidades son buenos, pero suelen ser semestrales, los sábados y desde 7º básico:
-          dependen de que la familia pueda mover al estudiante. Este taller ocurre dentro del
-          horario de clases, en la sala de su escuela, todas las semanas de marzo a diciembre
-          y desde 5º básico. Si su escuela ya participa en uno de esos programas, mejor:
-          esos estudiantes llegan con ventaja.
-        </p>
-      </details>
-      <details>
-        <summary>¿El profesor tiene que saber programar?</summary>
-        <p class="muted">
-          No. En la modalidad con profesor de la escuela partimos desde cero: la formación inicial
-          está pensada para alguien que nunca ha tocado un Arduino. Lo que sí necesitamos es que
-          tenga horas asignadas y esté en la sala cada semana.
-        </p>
-      </details>
-      <details>
-        <summary>¿Qué pasa con los kits y con los robots al terminar el año?</summary>
-        <p class="muted">
-          Los robots que arman los estudiantes quedan en la escuela. Los kits, la impresora 3D y las
-          herramientas se entregan en comodato mientras dure el convenio, o los puede comprar el
-          establecimiento. Queda escrito en el convenio, sin letra chica.
-        </p>
-      </details>
-      <details>
-        <summary>¿Hasta dónde llegan?</summary>
-        <p class="muted">
-          Hoy trabajamos en el sur de Chile, con escuelas a las que podamos llegar y volver el mismo día.
-          Si su escuela queda más lejos, la modalidad con profesor de la escuela sí funciona a distancia:
-          escríbanos igual y lo conversamos.
-        </p>
-      </details>
-      <details>
-        <summary>¿Y si nuestra conexión a internet es mala?</summary>
-        <p class="muted">
-          No es un problema. El material, las guías y el entorno de programación funcionan sin conexión.
-          Lo diseñamos así porque nuestra propia escuela tiene esa limitación.
-        </p>
-      </details>
-      <details>
-        <summary>¿Cuándo conviene partir?</summary>
-        <p class="muted">
-          El taller acompaña el año escolar completo, de marzo a diciembre. Se puede entrar empezado el
-          año, pero se pierde la etapa de diseño, que es donde los estudiantes se enganchan.
-        </p>
-      </details>
+      <div class="faq">
+        <details>
+          <summary>¿Son una fundación?</summary>
+          <p class="muted">
+            No. Somos una SpA chilena, una empresa. Facturamos por los servicios y
+            reinvertimos los resultados en desarrollo e impacto educativo, sin repartir
+            dividendos. Lo decimos de frente porque cambia cómo se nos puede contratar:
+            una escuela nos compra un servicio, no recibe una donación. Cuando el proyecto
+            madure evaluaremos crear una fundación vinculada; hacerlo hoy sería
+            administración sin beneficio.
+          </p>
+        </details>
+        <details>
+          <summary>¿Cómo se financian?</summary>
+          <p class="muted">
+            Con lo que facturamos por implementar el taller y por los servicios asociados.
+            No dependemos de donaciones ni de un fondo que se pueda acabar. Es más lento,
+            y es la razón por la que seguimos aquí.
+          </p>
+        </details>
+        <details>
+          <summary>¿El material y el código son abiertos?</summary>
+          <p class="muted">
+            Esa es la intención y el orden ya está decidido: primero el kit, después el
+            playbook del taller. Todavía no está publicado. Preferimos decir que falta antes
+            que enlazar un repositorio vacío para parecer abiertos.
+          </p>
+        </details>
+        <details>
+          <summary>¿Cómo puede mi escuela ser laboratorio?</summary>
+          <p class="muted">
+            Escribiéndonos. Ser establecimiento colaborador no es lo mismo que contratar el
+            taller: significa probar cosas antes de que existan, con lo bueno y lo incómodo
+            que eso tiene, y a cambio recibir equipamiento en comodato, licencias y
+            formación. Se firma un convenio, y esa colaboración nunca condiciona una compra.
+          </p>
+        </details>
+        <details>
+          <summary>¿Trabajan sólo en el sur de Chile?</summary>
+          <p class="muted">
+            El taller presencial llega hasta donde alcanzamos a ir y volver el mismo día.
+            La formación de profesores, el material y el software no tienen esa limitación:
+            si su escuela queda lejos, escríbanos igual y vemos qué modalidad se sostiene.
+          </p>
+        </details>
+        <details>
+          <summary>¿Y si nuestra conexión a internet es mala?</summary>
+          <p class="muted">
+            Todo lo que hacemos funciona sin conexión. No es una virtud que nos pusimos:
+            es la condición en la que trabajamos todas las semanas, así que el material
+            nace así.
+          </p>
+        </details>
+      </div>
     </div>
   </div>
 </section>
@@ -737,14 +907,14 @@
 <section id="contact" class="dark closing">
   <div class="wrap">
     <p class="eyebrow">Conversemos</p>
-    <h2>Cuéntenos de su escuela y le enviamos una propuesta</h2>
+    <h2>Si le hace sentido lo que hacemos, escríbanos</h2>
     <p class="lede muted">
-      No hay presentación de ventas ni compromiso. Una conversación de media hora
-      alcanza para saber si esto tiene sentido en su establecimiento.
+      Da lo mismo si es para llevar el taller a su escuela, para investigar juntos o para
+      preguntar algo antes de decidir nada. Contestamos todos los correos.
     </p>
 
     <div class="actions">
-      <a class="btn btn-primary" href="mailto:ricardo@robotes.org?subject=Taller%20de%20rob%C3%B3tica%20para%20nuestra%20escuela&amp;body=Hola%2C%20me%20interesa%20conocer%20el%20taller.%0A%0AEscuela%3A%20%0AComuna%3A%20%0ACargo%3A%20%0ACursos%20que%20participar%C3%ADan%3A%20%0AN%C3%BAmero%20aproximado%20de%20estudiantes%3A%20%0ATel%C3%A9fono%20de%20contacto%3A%20%0A%0AComentarios%3A%0A">Escribir un correo</a>
+      <a class="btn btn-primary" href="mailto:ricardo@robotes.org?subject=Hola%2C%20quiero%20conversar%20con%20robotes.org&amp;body=Hola%2C%0A%0AInstituci%C3%B3n%3A%20%0AComuna%3A%20%0ACargo%3A%20%0A%0AEn%20qu%C3%A9%20estamos%20pensando%3A%0A">Escribir un correo</a>
     </div>
 
     <ul class="contact muted">
@@ -768,7 +938,7 @@
       </svg>
       <span>robotes<span class="tld">.org</span></span>
     </span>
-    <p>Robótica educativa en escuelas rurales del sur de Chile.</p>
+    <p>Laboratorio de innovación educativa. Escuelas rurales del sur de Chile.</p>
     <p class="fine-print">
       robotes.org es una empresa chilena de tecnología educativa. Reinvertimos nuestros
       resultados en innovación e impacto educativo.
