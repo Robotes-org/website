@@ -196,9 +196,54 @@
   .nav a:hover { color: var(--rb-blanco); text-decoration: underline; }
   @media (max-width: 860px) { .nav { display: none; } }
 
-  .hero { padding: var(--rb-space-6) 0 var(--rb-space-8); }
-  .hero h1 { font-size: clamp(2rem, 5.2vw, 3.052rem); max-width: 22ch; margin-bottom: var(--rb-space-3); }
-  .hero .lede { color: var(--rb-bruma); margin-bottom: var(--rb-space-4); }
+  /* ── Hero background ──────────────────────────────────────────────────
+     The photo is light, so white text needs a heavy Pizarra veil over it,
+     not a decorative tint: the overlay stays above 90% across the whole
+     column where text sits and only opens up on the right, where nothing is
+     written. The tint is built with color-mix so no hex is hand-written; if a
+     browser does not support color-mix the whole background-image declaration
+     is dropped — image included — and the header falls back to solid Pizarra,
+     which is the design this page had before. That is the safe failure. */
+  .hero-bg {
+    background-image:
+      /* The nav sits top right, exactly where the side veil opens up to let the
+         photo through: measured at 2.93:1 against Bruma there, under the 4.5:1
+         AA floor. This band darkens that strip only, and fades out before it
+         reaches the headline so it does not read as a toolbar. */
+      linear-gradient(to bottom,
+        color-mix(in srgb, var(--rb-pizarra) 82%, transparent) 0,
+        color-mix(in srgb, var(--rb-pizarra) 78%, transparent) 64px,
+        transparent 150px),
+      linear-gradient(to right,
+        color-mix(in srgb, var(--rb-pizarra) 97%, transparent) 0%,
+        color-mix(in srgb, var(--rb-pizarra) 93%, transparent) 55%,
+        color-mix(in srgb, var(--rb-pizarra) 78%, transparent) 78%,
+        color-mix(in srgb, var(--rb-pizarra) 45%, transparent) 100%),
+      url("assets/hero.jpg");
+    background-size: auto, auto, cover;
+    background-position: center, center, right center;
+    background-repeat: no-repeat;
+  }
+  /* Below the split point the text runs the full width, so there is no clear
+     side left for the photo: the veil goes uniform and the image survives only
+     as texture. */
+  @media (max-width: 860px) {
+    .hero-bg {
+      background-image:
+        linear-gradient(to bottom,
+          color-mix(in srgb, var(--rb-pizarra) 96%, transparent) 0%,
+          color-mix(in srgb, var(--rb-pizarra) 88%, transparent) 100%),
+        url("assets/hero.jpg");
+    }
+  }
+
+  /* Headline and lede share one measure so their right edges line up. It has to
+     be an absolute unit: `ch` resolves against each element's own font size, so
+     the same `22ch` would be two different widths on a 48px headline and a 20px
+     lede, and the two blocks would drift apart. */
+  .hero { --hero-measure: 43rem; padding: var(--rb-space-6) 0 var(--rb-space-8); }
+  .hero h1 { font-size: clamp(2rem, 5.2vw, 3.052rem); max-width: var(--hero-measure); margin-bottom: var(--rb-space-3); }
+  .hero .lede { color: var(--rb-bruma); max-width: var(--hero-measure); margin-bottom: var(--rb-space-4); }
 
   /* ── Buttons ────────────────────────────────────────────────────────── */
 
@@ -396,7 +441,7 @@
 <a class="skip-link" href="#main">Saltar al contenido</a>
 
 <!-- ── Header + hero ────────────────────────────────────────────────── -->
-<header class="dark">
+<header class="dark hero-bg">
   <div class="wrap">
     <div class="topbar">
       <a class="lockup" href="#" aria-label="robotes.org — inicio">
