@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>robotes.org — Laboratorio de innovación educativa</title>
-<meta name="description" content="Creamos productos tecnológicos para aplicar en el aula. Laboratorio de innovación educativa en el sur de Chile: robótica, tecnología y ciencias.">
+<meta name="description" content="Creamos productos tecnológicos para aplicar en el aula: robots, software y material de clases. Laboratorio de innovación educativa en el sur de Chile.">
 <meta name="theme-color" content="#2c3742">
 <link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/tokens.css">
@@ -13,7 +13,7 @@
 <meta property="og:locale" content="es_CL">
 <meta property="og:site_name" content="robotes.org">
 <meta property="og:title" content="Robótica, tecnología y ciencias en tu escuela">
-<meta property="og:description" content="Creamos productos tecnológicos para aplicar en el aula.">
+<meta property="og:description" content="Creamos productos tecnológicos para aplicar en el aula: robots, software y material de clases.">
 <meta property="og:image" content="assets/og.png">
 <meta property="og:url" content="https://robotes.org/">
 <meta name="twitter:card" content="summary_large_image">
@@ -258,7 +258,10 @@
      be an absolute unit: `ch` resolves against each element's own font size, so
      the same `22ch` would be two different widths on a 48px headline and a 20px
      lede, and the two blocks would drift apart. */
-  .hero { --hero-measure: 43rem; padding: var(--rb-space-6) 0 var(--rb-space-8); }
+  /* 39rem = 624px, just past the longest headline line (609px at the capped
+     font size). Wider than that and the lede runs past the headline's right
+     edge, which is what the box was doing at 43rem. */
+  .hero { --hero-measure: 39rem; padding: var(--rb-space-6) 0 var(--rb-space-8); }
   .hero h1 { font-size: clamp(2rem, 5.2vw, 3.052rem); max-width: var(--hero-measure); margin-bottom: var(--rb-space-3); }
   .hero .lede { color: var(--rb-bruma); max-width: var(--hero-measure); margin-bottom: var(--rb-space-4); }
 
@@ -485,7 +488,8 @@
       <p class="eyebrow">Laboratorio de innovación educativa</p>
       <h1>Robótica, tecnología y ciencias en tu escuela.</h1>
       <p class="lede">
-        Creamos productos tecnológicos para aplicar en el aula.
+        Creamos productos tecnológicos para aplicar en el aula: robots, software y material
+        de clases.
       </p>
       <!-- The call to action is always the conversation, never a scroll. The second
            button is a way into the page, not a competing action. -->
