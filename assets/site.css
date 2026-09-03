@@ -197,6 +197,25 @@ section { padding: var(--rb-space-8) 0; }
   }
 }
 
+/* ── Hero art ───────────────────────────────────────────────────────────
+   Line art on the empty right half of the hero. Monochrome on purpose: the
+   yellow of this view already belongs to the primary button (manual §3.3), and
+   a second yellow here would split the eye between the drawing and the call to
+   action. Decorative, so aria-hidden and hidden outright on narrow screens
+   rather than squeezed under the text. */
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+  gap: var(--rb-space-6);
+  align-items: center;
+}
+.hero-art { color: var(--rb-bruma); justify-self: end; width: 100%; max-width: 360px; }
+.hero-art svg { display: block; width: 100%; height: auto; }
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-art { display: none; }
+}
+
 /* Headline and lede share one measure so their right edges line up. It has to
    be an absolute unit: `ch` resolves against each element's own font size, so
    the same `22ch` would be two different widths on a 48px headline and a 20px
