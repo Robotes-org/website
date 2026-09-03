@@ -304,7 +304,10 @@
   /* subgrid keeps every label on the same baseline even when one heading wraps
      to two lines. Without it the columns start at different heights and the
      whole block looks broken. Browsers without subgrid fall back to ragged. */
-  .facts > div { display: grid; grid-row: span 2; grid-template-rows: subgrid; }
+  /* Centred to sit under the centred manifesto: the three read as its three
+     clauses, so they line up with it instead of starting a new left edge. */
+  .facts > div { display: grid; grid-row: span 2; grid-template-rows: subgrid; text-align: center; }
+  .facts .stat-label { max-width: 32ch; margin-inline: auto; }
   .facts .stat {
     font-family: var(--rb-font-titulo); font-weight: 600;
     font-size: var(--rb-text-xl);
