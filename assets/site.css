@@ -1,0 +1,501 @@
+/* robotes.org — estilos del sitio
+   Compartido por index.html y por cada página de producto.
+   Los colores salen siempre de assets/tokens.css: acá no se escribe un hex. */
+
+/* ── Base ─────────────────────────────────────────────────────────────
+   No hand-written hex: every color comes from assets/tokens.css (~/marca).
+
+   This page pins its own light palette from the raw tokens instead of using
+   the semantic roles (--rb-fondo, --rb-texto, …). Those roles flip with
+   prefers-color-scheme, which would repaint every section in Pizarra for any
+   visitor whose system is in dark mode. Manual §3.6 keeps dark mode for
+   projected screens, not for sites like this. Same reasoning as
+   presentacion-pokemon, which pins itself dark for the opposite reason. */
+
+:root {
+  --page-bg: var(--rb-blanco);
+  --page-bg-alt: var(--rb-papel);
+  --page-text: var(--rb-pizarra);
+  --page-text-soft: var(--rb-grafito);
+  --page-border: var(--rb-niebla);
+  --page-link: var(--rb-azul-taller);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  font-family: var(--rb-font-texto);
+  font-size: var(--rb-text-base);
+  line-height: var(--rb-leading-texto);
+  color: var(--page-text);
+  background: var(--page-bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3 {
+  font-family: var(--rb-font-titulo);
+  line-height: var(--rb-leading-titulo);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--rb-space-2);
+  text-wrap: balance;
+}
+h1 { font-size: var(--rb-text-3xl); }
+h2 { font-size: var(--rb-text-2xl); max-width: 22ch; }
+h3 { font-size: var(--rb-text-lg); }
+p  { margin: 0 0 var(--rb-space-2); max-width: var(--rb-medida); }
+
+a { color: var(--page-link); }
+/* Manual §7.2: body-copy links are always underlined, color alone is not enough. */
+.prose a { text-underline-offset: 0.15em; }
+
+:focus-visible {
+  outline: 2px solid var(--rb-azul-taller);
+  outline-offset: 2px;
+  border-radius: var(--rb-radio-sm);
+}
+.dark :focus-visible { outline-color: var(--rb-amarillo-chispa); }
+
+ul { padding-left: 1.1em; }
+li { margin-bottom: var(--rb-space-1); }
+strong { font-weight: 600; }
+
+.skip-link {
+  position: absolute; left: -9999px;
+  background: var(--rb-blanco); color: var(--rb-pizarra);
+  padding: var(--rb-space-1) var(--rb-space-2); border-radius: var(--rb-radio-sm);
+}
+.skip-link:focus { left: var(--rb-space-2); top: var(--rb-space-2); z-index: 10; }
+
+/* ── Layout ─────────────────────────────────────────────────────────── */
+
+.wrap { width: min(1080px, 100% - 2 * var(--rb-space-3)); margin-inline: auto; }
+section { padding: var(--rb-space-8) 0; }
+
+/* Only the hero and the closing block are Pizarra. Everything in between
+   alternates white and Papel through .band, which is what the 60/30/8/2 rule
+   asks for (manual §3.3): the neutral carries the page and the dark ink
+   punctuates it. Cards on a Papel band flip to white to keep their edge. */
+.band { background: var(--page-bg-alt); }
+.band .card { background: var(--page-bg); }
+
+.dark { background: var(--rb-pizarra); color: var(--rb-blanco); }
+.dark h2, .dark h3 { color: var(--rb-blanco); }
+.dark .muted { color: var(--rb-bruma); }
+.muted { color: var(--page-text-soft); }
+
+.eyebrow {
+  font-size: var(--rb-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-family: var(--rb-font-titulo);
+  color: var(--page-text-soft);
+  margin: 0 0 var(--rb-space-1);
+}
+.dark .eyebrow { color: var(--rb-bruma); }
+
+.lede { font-size: var(--rb-text-lg); max-width: var(--rb-medida); }
+.footnote { font-size: var(--rb-text-sm); margin-top: var(--rb-space-3); }
+
+/* ── Lockup ───────────────────────────────────────────────────────────
+   Built in HTML instead of using logo-horizontal.svg on purpose: that file
+   carries live text, so without Space Grotesk installed the fallback face
+   overflows its viewBox and the wordmark gets clipped to "robotes.o".
+   Here the mark is an SVG and the name is real text, so it always fits,
+   inherits the page font stack and stays selectable and searchable. */
+
+.lockup {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  text-decoration: none;
+  font-family: var(--rb-font-titulo);
+  font-weight: 700;
+  font-size: var(--rb-text-lg);
+  letter-spacing: -0.02em;
+  color: var(--rb-blanco);
+  /* Manual §2.3: clear space around the mark equals the antenna height. */
+  padding: 0.4em 0;
+}
+.lockup svg { width: 1.5em; height: 1.5em; flex: none; overflow: visible; }
+.lockup .tld { color: var(--rb-amarillo-chispa); }
+
+/* ── Header and hero ────────────────────────────────────────────────── */
+
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--rb-space-2);
+  padding-top: var(--rb-space-2);
+}
+.nav { display: flex; gap: var(--rb-space-3); list-style: none; margin: 0; padding: 0; }
+.nav a {
+  color: var(--rb-bruma); text-decoration: none;
+  font-size: var(--rb-text-sm);
+  display: inline-flex; align-items: center; min-height: 44px;
+}
+.nav a:hover { color: var(--rb-blanco); text-decoration: underline; }
+@media (max-width: 860px) { .nav { display: none; } }
+
+/* ── Hero background — OFF ────────────────────────────────────────────
+   Nothing uses .hero-bg right now: the <header> carries only .dark, so the
+   hero is solid Pizarra. The placeholder photo was removed in September 2026
+   and this block is kept, measured and ready, for the real one.
+
+   To turn it back on: drop the photo at assets/hero.jpg and add hero-bg to
+   the <header> class list. Then re-measure the contrast per text region — a
+   lighter or busier photo will break the numbers recorded in CLAUDE.md.
+
+   The photo is light, so white text needs a heavy Pizarra veil over it,
+   not a decorative tint: the overlay stays above 90% across the whole
+   column where text sits and only opens up on the right, where nothing is
+   written. The tint is built with color-mix so no hex is hand-written; if a
+   browser does not support color-mix the whole background-image declaration
+   is dropped — image included — and the header falls back to solid Pizarra,
+   which is the design this page had before. That is the safe failure. */
+.hero-bg {
+  background-image:
+    /* The nav sits top right, exactly where the side veil opens up to let the
+       photo through: measured at 2.93:1 against Bruma there, under the 4.5:1
+       AA floor. This band darkens that strip only, and fades out before it
+       reaches the headline so it does not read as a toolbar. */
+    linear-gradient(to bottom,
+      color-mix(in srgb, var(--rb-pizarra) 82%, transparent) 0,
+      color-mix(in srgb, var(--rb-pizarra) 78%, transparent) 64px,
+      transparent 150px),
+    /* Solid Pizarra across the whole text column, not a 97% tint: at 97% the
+       robot still ghosted through behind the headline. The photo only starts
+       where the writing stops. */
+    linear-gradient(to right,
+      var(--rb-pizarra) 0%,
+      var(--rb-pizarra) 54%,
+      color-mix(in srgb, var(--rb-pizarra) 86%, transparent) 68%,
+      color-mix(in srgb, var(--rb-pizarra) 42%, transparent) 100%),
+    url("assets/hero.jpg");
+  /* `auto 100%` instead of `cover`: cover scaled the photo to the full header
+     width, so it ran under the text and background-position-x had nothing to
+     move. Sized to the header height it is ~820px wide, anchored right, and
+     the left half of the header is untouched Pizarra. */
+  background-size: auto, auto, auto 100%;
+  background-position: center, center, right center;
+  background-repeat: no-repeat;
+}
+/* Below the split point the text runs the full width, so there is no clear
+   side left for the photo: the veil goes uniform and the image survives only
+   as texture. */
+@media (max-width: 860px) {
+  .hero-bg {
+    background-image:
+      linear-gradient(to bottom,
+        color-mix(in srgb, var(--rb-pizarra) 96%, transparent) 0%,
+        color-mix(in srgb, var(--rb-pizarra) 88%, transparent) 100%),
+      url("assets/hero.jpg");
+    background-size: auto, cover;
+    background-position: center, center center;
+  }
+}
+
+/* Headline and lede share one measure so their right edges line up. It has to
+   be an absolute unit: `ch` resolves against each element's own font size, so
+   the same `22ch` would be two different widths on a 48px headline and a 20px
+   lede, and the two blocks would drift apart. */
+/* 39rem = 624px, just past the longest headline line (609px at the capped
+   font size). Wider than that and the lede runs past the headline's right
+   edge, which is what the box was doing at 43rem. */
+.hero { --hero-measure: 39rem; padding: var(--rb-space-6) 0 var(--rb-space-8); }
+.hero h1 { font-size: clamp(2rem, 5.2vw, 3.052rem); max-width: var(--hero-measure); margin-bottom: var(--rb-space-3); }
+.hero .lede { color: var(--rb-bruma); max-width: var(--hero-measure); margin-bottom: var(--rb-space-4); }
+
+/* ── Buttons ────────────────────────────────────────────────────────── */
+
+.actions { display: flex; flex-wrap: wrap; gap: var(--rb-space-2); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 0 var(--rb-space-3);
+  border-radius: var(--rb-radio);
+  font-family: var(--rb-font-titulo); font-weight: 600;
+  font-size: var(--rb-text-base);
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+/* White on Azul Taller = 6.6:1, AA. */
+.btn-primary { background: var(--rb-azul-taller); color: var(--rb-blanco); }
+.btn-primary:hover { background: var(--rb-pizarra); }
+
+/* On Pizarra, Azul Taller only reaches 1.5:1 against the background, so the
+   button loses its edge (WCAG 1.4.11 asks for 3:1 on UI components). On dark
+   surfaces the call to action goes in Amarillo Chispa with Pizarra text —
+   7.7:1, and it is the only yellow element in that view (manual §3.3). */
+.dark .btn-primary { background: var(--rb-amarillo-chispa); color: var(--rb-pizarra); }
+.dark .btn-primary:hover { background: var(--rb-blanco); }
+
+.btn-secondary { border-color: currentColor; color: inherit; background: transparent; }
+.dark .btn-secondary:hover { background: var(--rb-pizarra-alta); }
+
+/* ── Opening band ───────────────────────────────────────────────────── */
+
+.facts {
+  display: grid;
+  gap: var(--rb-space-1) var(--rb-space-4);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-rows: auto auto;
+  border-top: 1px solid var(--page-border);
+  padding-top: var(--rb-space-4);
+}
+/* subgrid keeps every label on the same baseline even when one heading wraps
+   to two lines. Without it the columns start at different heights and the
+   whole block looks broken. Browsers without subgrid fall back to ragged. */
+/* Centred to sit under the centred manifesto: the three read as its three
+   clauses, so they line up with it instead of starting a new left edge. */
+.facts > div { display: grid; grid-row: span 2; grid-template-rows: subgrid; text-align: center; }
+.facts .stat-label { max-width: 32ch; margin-inline: auto; }
+.facts .stat {
+  font-family: var(--rb-font-titulo); font-weight: 600;
+  font-size: var(--rb-text-xl);
+  display: block;
+}
+.facts .stat-label { font-size: var(--rb-text-sm); color: var(--page-text-soft); }
+/* Tighter than a full section: this band reads as the base of the hero. */
+#lab { padding: var(--rb-space-6) 0; }
+
+/* ── Grids and cards ────────────────────────────────────────────────── */
+
+/* The minimums are picked against the 1080px wrap so a group never breaks into
+   an orphan row: .grid-2 gives two columns to the sets of four cards, which
+   land as 2 x 2. */
+.grid {
+  display: grid; gap: var(--rb-space-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  margin-top: var(--rb-space-4);
+}
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+.card {
+  background: var(--page-bg-alt);
+  border: 1px solid var(--page-border);
+  border-radius: var(--rb-radio);
+  padding: var(--rb-space-3);
+  display: flex; flex-direction: column;
+}
+.card h3 { margin-bottom: var(--rb-space-1); }
+.card p:last-child { margin-bottom: 0; }
+.card ul { margin: 0; }
+.card-body { flex: 1; }
+
+/* ── Product cards ─────────────────────────────────────────────────────
+   A product card needs something to look at before it is read. There are no
+   photos yet (see the Photos rules), so each one gets a drawn mark instead:
+   one flat ink, no yellow — four yellow icons in one view would spend the
+   single yellow the manual allows per screen, and spend it on decoration. */
+.card.product { padding: 0; overflow: hidden; }
+.product-art {
+  min-height: 152px;
+  display: grid; place-items: center;
+  background: var(--page-bg-alt);
+  border-bottom: 1px solid var(--page-border);
+  color: var(--page-text);
+}
+/* On a Papel band the card is white, so the art panel takes the band colour
+   back to stay distinguishable from the body underneath it. */
+.band .card.product .product-art { background: var(--page-bg-alt); }
+.product-art svg { width: 96px; height: 96px; display: block; }
+.product-body { padding: var(--rb-space-3); }
+.product-body p:last-child { margin-bottom: 0; }
+.product-meta {
+  margin-top: var(--rb-space-3);
+  padding-top: var(--rb-space-2);
+  border-top: 1px solid var(--page-border);
+  font-family: var(--rb-font-mono);
+  font-size: var(--rb-text-xs);
+  letter-spacing: 0.03em;
+  color: var(--page-text-soft);
+}
+/* Not yet shipping: the mark steps back so the two live products read first. */
+.product-soon .product-art { color: var(--page-text-soft); opacity: 0.55; }
+
+/* ── Status ───────────────────────────────────────────────────────────
+   Every work line says out loud what state it is in. The dot carries the
+   color and the word carries the meaning, so color is never the only
+   signal (manual §3.4). Verde Bosque reaches 4.9:1 on Papel and better on
+   white, which is where these cards sit. */
+.status {
+  display: inline-flex; align-items: center; gap: 0.55em;
+  font-family: var(--rb-font-mono);
+  font-size: var(--rb-text-xs);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--page-text-soft);
+  margin-bottom: var(--rb-space-1);
+}
+.status::before {
+  content: ""; flex: none;
+  width: 0.55em; height: 0.55em; border-radius: 50%;
+  background: currentColor;
+}
+.status-live { color: var(--rb-verde-bosque); }
+
+/* ── Flywheel ─────────────────────────────────────────────────────────
+   Four turns of the same wheel, not four tasks in a queue. The numbers give
+   the order and the closing line closes the loop — an <ol> says «sequence» to
+   a screen reader, and the last step feeding the first is said in words, not
+   drawn, so it survives every width without a diagram to maintain. */
+.flywheel {
+  list-style: none;
+  counter-reset: turn;
+  display: grid;
+  gap: var(--rb-space-4) var(--rb-space-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  padding: 0;
+  margin: var(--rb-space-4) 0 0;
+}
+.flywheel > li {
+  counter-increment: turn;
+  margin: 0;
+  padding-top: var(--rb-space-2);
+  border-top: 2px solid var(--page-text);
+}
+.flywheel > li::before {
+  content: counter(turn);
+  display: block;
+  font-family: var(--rb-font-mono);
+  font-size: var(--rb-text-sm);
+  color: var(--page-text-soft);
+  margin-bottom: var(--rb-space-1);
+}
+.flywheel h3 { margin-bottom: var(--rb-space-1); }
+.flywheel p { margin-bottom: 0; }
+
+/* The turn that makes it a wheel and not a list: says out loud that step 4
+   feeds step 2, which is the only reason the shape matters. */
+.loop {
+  margin-top: var(--rb-space-4);
+  padding-top: var(--rb-space-3);
+  border-top: 1px solid var(--page-border);
+  max-width: var(--rb-medida);
+}
+.loop-mark {
+  font-family: var(--rb-font-mono);
+  color: var(--page-text-soft);
+  margin-right: 0.4em;
+}
+
+/* ── Credo ────────────────────────────────────────────────────────────
+   The one centred line on a page that is otherwise left-aligned end to end.
+   Keep it the only centred text on the page — a second one turns the
+   exception into a pattern and it stops landing. */
+/* Heading by markup, label by looks: a full-size «Nuestro manifiesto» would
+   compete with the sentence underneath, which is the thing worth reading. It
+   mirrors the eyebrow → headline pair in the hero. */
+.credo-label {
+  text-align: center;
+  max-width: none;
+  margin: 0 auto var(--rb-space-2);
+}
+.credo {
+  font-family: var(--rb-font-titulo);
+  font-weight: 600;
+  font-size: clamp(1.563rem, 3.4vw, 1.953rem);
+  line-height: var(--rb-leading-titulo);
+  letter-spacing: -0.015em;
+  text-align: center;
+  text-wrap: balance;
+  max-width: 26ch;
+  margin: 0 auto var(--rb-space-6);
+}
+
+/* ── FAQ ────────────────────────────────────────────────────────────── */
+
+.faq { max-width: var(--rb-medida); margin-top: var(--rb-space-4); }
+details { border-bottom: 1px solid var(--page-border); padding: var(--rb-space-2) 0; }
+summary {
+  font-family: var(--rb-font-titulo); font-weight: 600;
+  font-size: var(--rb-text-base);
+  cursor: pointer;
+  min-height: 44px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--rb-space-2);
+}
+/* display:flex drops the native marker, and without it nothing says the row
+   opens. This one is drawn from the text color, so it survives dark mode. */
+summary::-webkit-details-marker { display: none; }
+summary::after {
+  content: "";
+  flex: none;
+  width: 0.5em; height: 0.5em;
+  border-right: 2px solid var(--page-text-soft);
+  border-bottom: 2px solid var(--page-text-soft);
+  transform: rotate(45deg) translate(-0.1em, -0.1em);
+  transition: transform 120ms ease;
+}
+details[open] summary::after { transform: rotate(-135deg) translate(-0.1em, -0.1em); }
+@media (prefers-reduced-motion: reduce) { summary::after { transition: none; } }
+details p:last-child { margin-bottom: 0; }
+details[open] summary { margin-bottom: var(--rb-space-1); }
+
+/* ── Closing and footer ─────────────────────────────────────────────── */
+
+.closing { border-top: 1px solid var(--rb-pizarra-alta); }
+.closing h2 { max-width: 20ch; }
+.contact { list-style: none; padding: 0; margin: var(--rb-space-3) 0 0; }
+.contact a { color: var(--rb-blanco); }
+
+footer {
+  background: var(--rb-pizarra);
+  color: var(--rb-bruma);
+  padding: var(--rb-space-4) 0;
+  font-size: var(--rb-text-sm);
+  border-top: 1px solid var(--rb-pizarra-alta);
+}
+footer a { color: var(--rb-bruma); }
+footer .lockup { margin-bottom: var(--rb-space-2); }
+.fine-print { font-size: var(--rb-text-xs); max-width: var(--rb-medida); }
+
+/* ── Steps ──────────────────────────────────────────────────────────────
+   Numbered vertical list. Used by the product pages for «cómo partimos». */
+.steps { list-style: none; counter-reset: step; padding: 0; margin: var(--rb-space-4) 0 0; }
+.steps li {
+  counter-increment: step;
+  display: grid; grid-template-columns: 2.5rem 1fr; gap: var(--rb-space-2);
+  padding-bottom: var(--rb-space-3);
+}
+.steps li::before {
+  content: counter(step);
+  font-family: var(--rb-font-mono);
+  color: var(--page-text-soft);
+  border: 1px solid var(--page-border);
+  border-radius: 50%;
+  width: 2.2rem; height: 2.2rem;
+  display: grid; place-items: center;
+}
+.steps h3 { margin-bottom: 0.2em; }
+.steps p { margin-bottom: 0; }
+
+/* ── Checklists ─────────────────────────────────────────────────────────
+   Color is never the only carrier (manual §3.4): the glyph is. Verde Bosque
+   only works on light surfaces — 4.9:1 on Papel, 2.3:1 on Pizarra — so on dark
+   surfaces the check takes the text colour. */
+.checks { list-style: none; padding: 0; margin: var(--rb-space-2) 0 0; }
+.checks li { display: flex; gap: 0.6em; align-items: baseline; }
+.checks li::before {
+  content: "\2713";
+  color: var(--rb-verde-bosque);
+  font-weight: 700;
+  flex: none;
+}
+.dark .checks li::before { color: var(--rb-blanco); }
+
+/* ── Product card link ──────────────────────────────────────────────────
+   A text link, never a button: the buttons on this site are always the
+   conversation, and a second button would compete with it. */
+.product-link {
+  display: inline-block;
+  margin-top: var(--rb-space-2);
+  font-family: var(--rb-font-titulo);
+  font-weight: 600;
+  font-size: var(--rb-text-sm);
+  text-underline-offset: 0.15em;
+}
+
+/* ── Back link on a product page ────────────────────────────────────── */
+.back { color: var(--rb-bruma); text-decoration: none; font-size: var(--rb-text-sm); }
+.back:hover { color: var(--rb-blanco); text-decoration: underline; }
