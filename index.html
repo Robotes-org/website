@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>robotes.org — Laboratorio de innovación educativa</title>
-<meta name="description" content="Creamos productos tecnológicos para aplicar en el aula: robots, software y material de clases. Laboratorio de innovación educativa en el sur de Chile.">
+<meta name="description" content="Creamos productos tecnológicos para aplicar en el aula. Laboratorio de innovación educativa en el sur de Chile: robótica, tecnología y ciencias.">
 <meta name="theme-color" content="#2c3742">
 <link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/tokens.css">
@@ -13,7 +13,7 @@
 <meta property="og:locale" content="es_CL">
 <meta property="og:site_name" content="robotes.org">
 <meta property="og:title" content="Robótica, tecnología y ciencias en tu escuela">
-<meta property="og:description" content="Creamos productos tecnológicos para aplicar en el aula: robots, software y material de clases.">
+<meta property="og:description" content="Creamos productos tecnológicos para aplicar en el aula.">
 <meta property="og:image" content="assets/og.png">
 <meta property="og:url" content="https://robotes.org/">
 <meta name="twitter:card" content="summary_large_image">
@@ -196,7 +196,15 @@
   .nav a:hover { color: var(--rb-blanco); text-decoration: underline; }
   @media (max-width: 860px) { .nav { display: none; } }
 
-  /* ── Hero background ──────────────────────────────────────────────────
+  /* ── Hero background — OFF ────────────────────────────────────────────
+     Nothing uses .hero-bg right now: the <header> carries only .dark, so the
+     hero is solid Pizarra. The placeholder photo was removed in September 2026
+     and this block is kept, measured and ready, for the real one.
+
+     To turn it back on: drop the photo at assets/hero.jpg and add hero-bg to
+     the <header> class list. Then re-measure the contrast per text region — a
+     lighter or busier photo will break the numbers recorded in CLAUDE.md.
+
      The photo is light, so white text needs a heavy Pizarra veil over it,
      not a decorative tint: the overlay stays above 90% across the whole
      column where text sits and only opens up on the right, where nothing is
@@ -450,7 +458,7 @@
 <a class="skip-link" href="#main">Saltar al contenido</a>
 
 <!-- ── Header + hero ────────────────────────────────────────────────── -->
-<header class="dark hero-bg">
+<header class="dark">
   <div class="wrap">
     <div class="topbar">
       <a class="lockup" href="#" aria-label="robotes.org — inicio">
@@ -477,8 +485,7 @@
       <p class="eyebrow">Laboratorio de innovación educativa</p>
       <h1>Robótica, tecnología y ciencias en tu escuela.</h1>
       <p class="lede">
-        Creamos productos tecnológicos para aplicar en el aula: robots, software y material
-        de clases.
+        Creamos productos tecnológicos para aplicar en el aula.
       </p>
       <!-- The call to action is always the conversation, never a scroll. The second
            button is a way into the page, not a competing action. -->
