@@ -379,6 +379,24 @@
   .steps h3 { margin-bottom: 0.2em; }
   .steps p { margin-bottom: 0; }
 
+  /* ── Credo ────────────────────────────────────────────────────────────
+     The one centred line on a page that is otherwise left-aligned end to end.
+     It breaks out of the .split grid on purpose: the rail numbers the sections
+     that describe how the lab works, and this is the premise underneath them,
+     not another one of them. Keep it the only centred text on the page — a
+     second one turns the exception into a pattern and it stops landing. */
+  .credo {
+    font-family: var(--rb-font-titulo);
+    font-weight: 600;
+    font-size: clamp(1.563rem, 3.4vw, 1.953rem);
+    line-height: var(--rb-leading-titulo);
+    letter-spacing: -0.015em;
+    text-align: center;
+    text-wrap: balance;
+    max-width: 26ch;
+    margin: 0 auto var(--rb-space-8);
+  }
+
   /* ── Timeline ───────────────────────────────────────────────────────── */
 
   .timeline { list-style: none; padding: 0; margin: var(--rb-space-4) 0 0; }
@@ -513,17 +531,20 @@
       impresora 3D, herramientas prestadas y una conexión a internet que a veces no está.
     </p>
     <div class="facts">
+      <!-- One clause of the credo each, in its order: la tecnología, como
+           herramienta para crear, con oportunidades para todos. Every heading is
+           the belief and every label is the evidence for it. -->
       <div>
-        <span class="stat">Una escuela colaboradora</span>
-        <span class="stat-label">Trabajamos desde adentro de una escuela rural, no desde una oficina que la visita</span>
+        <span class="stat">Tecnología que funciona</span>
+        <span class="stat-label">Arduino, impresión 3D y software propio, sin conexión ni licencias que renovar</span>
       </div>
       <div>
-        <span class="stat">Un taller cada semana</span>
-        <span class="stat-label">Funciona desde 2024, durante el año escolar completo. Ahí se prueba todo</span>
+        <span class="stat">Para crear, no para consumir</span>
+        <span class="stat-label">Los niños diseñan, programan y arman: no usan una app que hizo otro</span>
       </div>
       <div>
-        <span class="stat">Herramientas abiertas</span>
-        <span class="stat-label">Arduino, impresión 3D y software que corre sin conexión ni licencias</span>
+        <span class="stat">Para cualquier escuela</span>
+        <span class="stat-label">Probada cada semana desde 2024 en una escuela rural, con su presupuesto y su conexión</span>
       </div>
     </div>
   </div>
@@ -710,6 +731,12 @@
 
 <!-- ── 04 Principles ────────────────────────────────────────────────── -->
 <section id="principles" class="band">
+  <div class="wrap">
+    <p class="credo">
+      Creemos en la tecnología como herramienta para crear oportunidades para todos.
+    </p>
+  </div>
+
   <div class="wrap split">
     <div class="rail">
       <span class="section-no">04</span>
