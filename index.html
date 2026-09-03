@@ -320,25 +320,50 @@
   }
   .status-live { color: var(--rb-verde-bosque); }
 
-  /* ── Steps ──────────────────────────────────────────────────────────── */
-
-  .steps { list-style: none; counter-reset: step; padding: 0; margin: var(--rb-space-4) 0 0; }
-  .steps li {
-    counter-increment: step;
-    display: grid; grid-template-columns: 2.5rem 1fr; gap: var(--rb-space-2);
-    padding-bottom: var(--rb-space-3);
+  /* ── Flywheel ─────────────────────────────────────────────────────────
+     Four turns of the same wheel, not four tasks in a queue. The numbers give
+     the order and the closing line closes the loop — an <ol> says «sequence» to
+     a screen reader, and the last step feeding the first is said in words, not
+     drawn, so it survives every width without a diagram to maintain. */
+  .flywheel {
+    list-style: none;
+    counter-reset: turn;
+    display: grid;
+    gap: var(--rb-space-4) var(--rb-space-3);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+    padding: 0;
+    margin: var(--rb-space-4) 0 0;
   }
-  .steps li::before {
-    content: counter(step);
+  .flywheel > li {
+    counter-increment: turn;
+    margin: 0;
+    padding-top: var(--rb-space-2);
+    border-top: 2px solid var(--page-text);
+  }
+  .flywheel > li::before {
+    content: counter(turn);
+    display: block;
+    font-family: var(--rb-font-mono);
+    font-size: var(--rb-text-sm);
+    color: var(--page-text-soft);
+    margin-bottom: var(--rb-space-1);
+  }
+  .flywheel h3 { margin-bottom: var(--rb-space-1); }
+  .flywheel p { margin-bottom: 0; }
+
+  /* The turn that makes it a wheel and not a list: says out loud that step 4
+     feeds step 2, which is the only reason the shape matters. */
+  .loop {
+    margin-top: var(--rb-space-4);
+    padding-top: var(--rb-space-3);
+    border-top: 1px solid var(--page-border);
+    max-width: var(--rb-medida);
+  }
+  .loop-mark {
     font-family: var(--rb-font-mono);
     color: var(--page-text-soft);
-    border: 1px solid var(--page-border);
-    border-radius: 50%;
-    width: 2.2rem; height: 2.2rem;
-    display: grid; place-items: center;
+    margin-right: 0.4em;
   }
-  .steps h3 { margin-bottom: 0.2em; }
-  .steps p { margin-bottom: 0; }
 
   /* ── Credo ────────────────────────────────────────────────────────────
      The one centred line on a page that is otherwise left-aligned end to end.
@@ -523,51 +548,50 @@
     <div>
       <h2>Cómo trabajamos</h2>
       <p class="lede muted">
-        No es un proceso de innovación con post-its. Es el orden en que ocurren las cosas
-        cuando el equipo que diseña la herramienta es el mismo que tiene que dar la clase
-        del martes.
+        No somos una empresa que vende talleres y que además desarrolla productos. Son la
+        misma rueda girando: cada producto se prueba en nuestra propia sala de clases, y
+        cada venta paga la siguiente sala donde probar el que viene.
       </p>
 
-      <ol class="steps">
+      <ol class="flywheel">
         <li>
-          <div>
-            <h3>Miramos la sala, no el mercado</h3>
-            <p class="muted">
-              Los problemas que resolvemos aparecen dando clases: una guía que nadie
-              entendió, un sensor que se quema, un software que pide internet donde no hay.
-              Ninguno se nos habría ocurrido leyendo un informe.
-            </p>
-          </div>
+          <h3>Creamos</h3>
+          <p class="muted">
+            Un kit, un currículum, una pieza de software. Nace de un problema que apareció
+            dando clases —una guía que nadie entendió, un sensor que se quema—, no de una
+            idea de escritorio.
+          </p>
         </li>
         <li>
-          <div>
-            <h3>Construimos lo mínimo que se pueda probar</h3>
-            <p class="muted">
-              Nada se diseña completo antes de tocar una sala. La primera versión no existe
-              para lucirse: existe para descubrir rápido en qué estábamos equivocados.
-            </p>
-          </div>
+          <h3>Probamos</h3>
+          <p class="muted">
+            Va a nuestro laboratorio de innovación: una sala de clases real, con niños
+            reales, durante un año escolar completo. Ahí se cae lo que no sirve, y lo
+            decimos aunque sea nuestro.
+          </p>
         </li>
         <li>
-          <div>
-            <h3>Lo probamos con niños, no con adultos</h3>
-            <p class="muted">
-              Un material funciona cuando un niño de nueve años lo usa sin que nadie le
-              explique. Esa es toda la prueba, y es más dura que cualquier revisión entre
-              colegas.
-            </p>
-          </div>
+          <h3>Vendemos</h3>
+          <p class="muted">
+            Lo que sobrevive se ofrece a otras escuelas. No vendemos prototipos: vendemos
+            lo que ya funcionó con niños durante un año, con sus errores conocidos.
+          </p>
         </li>
         <li>
-          <div>
-            <h3>Publicamos lo que funciona, y también lo que no</h3>
-            <p class="muted">
-              Cuando algo falla, decirlo le ahorra el mismo error a la escuela siguiente.
-              Es la parte que casi nadie publica y es, probablemente, la más útil.
-            </p>
-          </div>
+          <h3>Expandimos</h3>
+          <p class="muted">
+            Cada escuela nueva es un laboratorio más. Más salas donde probar, más profesores
+            corrigiéndonos, más rápido mejora todo lo demás.
+          </p>
         </li>
       </ol>
+
+      <p class="loop muted">
+        <span class="loop-mark" aria-hidden="true">&#8635;</span>
+        Y vuelve a empezar. Cada vuelta suma una sala de clases, así que la versión
+        siguiente se prueba en más lugares y con más niños que la anterior. Por eso
+        crecer nos hace mejores y no sólo más grandes.
+      </p>
     </div>
   </div>
 </section>
