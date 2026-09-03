@@ -279,9 +279,9 @@
 
   /* ── Grids and cards ────────────────────────────────────────────────── */
 
-  /* The minimums are picked against the 1080px wrap so the groups never break
-     into an orphan row: 300px gives three columns to the six principles, and
-     .grid-2 gives two to the sets of four, which land as 2 x 2. */
+  /* The minimums are picked against the 1080px wrap so a group never breaks into
+     an orphan row: .grid-2 gives two columns to the sets of four cards, which
+     land as 2 x 2. */
   .grid {
     display: grid; gap: var(--rb-space-3);
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
@@ -389,35 +389,6 @@
     margin: 0 auto var(--rb-space-6);
   }
 
-  /* ── Timeline ───────────────────────────────────────────────────────── */
-
-  .timeline { list-style: none; padding: 0; margin: var(--rb-space-4) 0 0; }
-  .timeline li {
-    position: relative;
-    padding: 0 0 var(--rb-space-4) var(--rb-space-4);
-    border-left: 2px solid var(--page-border);
-  }
-  .timeline li:last-child { border-left-color: transparent; padding-bottom: 0; }
-  .timeline li::before {
-    content: "";
-    position: absolute; left: -7px; top: 0.45em;
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--page-bg);
-    border: 2px solid var(--page-border);
-  }
-  /* The yellow of this view belongs to this dot, and the word «Ahora» carries
-     the same meaning in text so the marker is never color alone. */
-  .timeline .now::before { background: var(--rb-amarillo-chispa); border-color: var(--rb-amarillo-chispa); }
-  .timeline .when {
-    display: block;
-    font-family: var(--rb-font-mono);
-    font-size: var(--rb-text-xs);
-    text-transform: uppercase; letter-spacing: 0.06em;
-    color: var(--page-text-soft);
-  }
-  .timeline h3 { margin: 0.1em 0 0.2em; }
-  .timeline p { margin-bottom: 0; }
-
   /* ── FAQ ────────────────────────────────────────────────────────────── */
 
   .faq { max-width: var(--rb-medida); margin-top: var(--rb-space-4); }
@@ -488,7 +459,6 @@
         <ul class="nav">
           <li><a href="#method">Método</a></li>
           <li><a href="#work">Qué hacemos</a></li>
-          <li><a href="#principles">Principios</a></li>
           <li><a href="#collaborate">Colaborar</a></li>
         </ul>
       </nav>
@@ -661,176 +631,8 @@
   </div>
 </section>
 
-<!-- ── 03 The collaborating school ──────────────────────────────────── -->
-<section id="school">
-  <div class="wrap">
-    <div class="prose">
-      <h2>La escuela no es beneficiaria: es colaboradora</h2>
-      <p class="lede muted">
-        Un establecimiento colaborador es un nodo del laboratorio. El valor va en las dos
-        direcciones y está escrito, no acordado de palabra.
-      </p>
-
-      <div class="grid">
-        <article class="card">
-          <div class="card-body">
-            <h3>Lo que recibe la escuela</h3>
-            <ul class="muted">
-              <li>Equipamiento en comodato: kits, impresora 3D, herramientas</li>
-              <li>Licencias de uso gratuitas del software que desarrollamos</li>
-              <li>Formación y acompañamiento para sus docentes</li>
-              <li>Acceso anticipado a todo lo que probamos</li>
-            </ul>
-          </div>
-        </article>
-        <article class="card">
-          <div class="card-body">
-            <h3>Lo que recibe el laboratorio</h3>
-            <ul class="muted">
-              <li>Lo único que no se puede comprar: una sala de clases real</li>
-              <li>Profesores y estudiantes que dicen cuándo algo no funciona</li>
-              <li>Evidencia de si una herramienta sirve, antes de ofrecerla</li>
-              <li>Los límites reales: presupuesto, horario, conexión</li>
-            </ul>
-          </div>
-        </article>
-      </div>
-
-      <p class="muted footnote">
-        La relación se formaliza en un convenio marco de colaboración, un contrato de
-        comodato por los bienes y licencias de uso escritas. Y una regla que preferimos
-        decir de frente: <strong>la colaboración nunca condiciona una decisión de compra</strong>.
-        Una escuela puede ser laboratorio sin contratarnos nada, y puede contratarnos sin
-        ser laboratorio.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ── 04 Principles ────────────────────────────────────────────────── -->
-<section id="principles" class="band">
-  <div class="wrap">
-    <div>
-      <h2>Cómo decidimos</h2>
-      <p class="lede muted">
-        No son decorativos: son los criterios contra los que evaluamos cada decisión
-        importante. Si una oportunidad es rentable y contradice esto, no la tomamos.
-      </p>
-
-      <div class="grid">
-        <article class="card">
-          <div class="card-body">
-            <h3>Innovación con propósito</h3>
-            <p class="muted">
-              No construimos tecnología porque sea posible, sino porque resuelve un problema
-              concreto en una sala de clases real.
-            </p>
-          </div>
-        </article>
-        <article class="card">
-          <div class="card-body">
-            <h3>Construcción conjunta</h3>
-            <p class="muted">
-              Las soluciones se diseñan y se corrigen junto a las escuelas. Los profesores y
-              los estudiantes no son usuarios pasivos: son parte del equipo que las hace.
-            </p>
-          </div>
-        </article>
-        <article class="card">
-          <div class="card-body">
-            <h3>Accesibilidad como diseño</h3>
-            <p class="muted">
-              Si una escuela rural con recursos limitados no puede implementarlo, no cumple
-              su propósito. Vale para el costo, para el idioma y para la complejidad técnica.
-            </p>
-          </div>
-        </article>
-        <article class="card">
-          <div class="card-body">
-            <h3>Reinversión</h3>
-            <p class="muted">
-              Somos una empresa y facturamos. Los resultados se reinvierten en desarrollo,
-              laboratorio e impacto educativo: no existimos para repartir dividendos.
-            </p>
-          </div>
-        </article>
-        <article class="card">
-          <div class="card-body">
-            <h3>Transparencia operativa</h3>
-            <p class="muted">
-              Transparencia no es publicar un informe anual. Es que se entienda cómo se
-              decide y en qué se gasta. Preferimos ser una empresa chica y honesta que una
-              grande con maquillaje.
-            </p>
-          </div>
-        </article>
-        <article class="card">
-          <div class="card-body">
-            <h3>Crecimiento sostenible</h3>
-            <p class="muted">
-              Cada escuela, producto y socio nuevo tiene que sumar sin diluir lo que ya
-              funciona. Se crece sobre evidencia, no sobre promesas.
-            </p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── 05 Roadmap ───────────────────────────────────────────────────── -->
-<section id="roadmap">
-  <div class="wrap">
-    <div>
-      <h2>En qué estamos</h2>
-      <p class="lede muted">
-        No perseguimos una etapa hasta tener evidencia real de la anterior. Es lento a
-        propósito, y es la razón por la que preferimos publicar esto antes que una promesa.
-      </p>
-
-      <ol class="timeline">
-        <li class="now">
-          <span class="when">Ahora</span>
-          <h3>Consolidar el caso</h3>
-          <p class="muted">
-            Cerrar el ciclo completo en la escuela colaboradora: diseño, armado, muestra
-            abierta a la comunidad y competencia local. Documentar el proceso entero
-            —pedagógico, técnico y humano—, porque es la materia prima de todo lo demás.
-          </p>
-        </li>
-        <li>
-          <span class="when">Siguiente</span>
-          <h3>Empaquetar lo que funciona</h3>
-          <p class="muted">
-            Kit documentado y playbook del taller: todo lo necesario para que otra escuela
-            pueda ejecutarlo sin que nosotros estemos en la sala cada semana.
-          </p>
-        </li>
-        <li>
-          <span class="when">Después</span>
-          <h3>Una segunda escuela</h3>
-          <p class="muted">
-            Con un profesor local formado por nosotros. Ahí nace de verdad la línea de
-            formación docente, y con dos escuelas se puede organizar el primer torneo
-            entre establecimientos.
-          </p>
-        </li>
-        <li>
-          <span class="when">El horizonte</span>
-          <h3>Una red del sur</h3>
-          <p class="muted">
-            Escuelas del sur de Chile trabajando con las mismas herramientas, con torneos
-            regionales propios y alianzas con universidades, municipios y empresas de la
-            zona. La aspiración mayor: que estos niños compitan afuera representando a Chile.
-          </p>
-        </li>
-      </ol>
-    </div>
-  </div>
-</section>
-
 <!-- ── 06 Collaborate ───────────────────────────────────────────────── -->
-<section id="collaborate" class="band">
+<section id="collaborate">
   <div class="wrap">
     <div>
       <h2>Trabajar con nosotros</h2>
@@ -890,7 +692,7 @@
 </section>
 
 <!-- ── FAQ ──────────────────────────────────────────────────────────── -->
-<section id="faq">
+<section id="faq" class="band">
   <div class="wrap">
     <div class="prose">
       <h2>Lo que nos preguntan</h2>
