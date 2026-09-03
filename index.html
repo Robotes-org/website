@@ -300,6 +300,37 @@
   .card ul { margin: 0; }
   .card-body { flex: 1; }
 
+  /* ── Product cards ─────────────────────────────────────────────────────
+     A product card needs something to look at before it is read. There are no
+     photos yet (see the Photos rules), so each one gets a drawn mark instead:
+     one flat ink, no yellow — four yellow icons in one view would spend the
+     single yellow the manual allows per screen, and spend it on decoration. */
+  .card.product { padding: 0; overflow: hidden; }
+  .product-art {
+    min-height: 152px;
+    display: grid; place-items: center;
+    background: var(--page-bg-alt);
+    border-bottom: 1px solid var(--page-border);
+    color: var(--page-text);
+  }
+  /* On a Papel band the card is white, so the art panel takes the band colour
+     back to stay distinguishable from the body underneath it. */
+  .band .card.product .product-art { background: var(--page-bg-alt); }
+  .product-art svg { width: 96px; height: 96px; display: block; }
+  .product-body { padding: var(--rb-space-3); }
+  .product-body p:last-child { margin-bottom: 0; }
+  .product-meta {
+    margin-top: var(--rb-space-3);
+    padding-top: var(--rb-space-2);
+    border-top: 1px solid var(--page-border);
+    font-family: var(--rb-font-mono);
+    font-size: var(--rb-text-xs);
+    letter-spacing: 0.03em;
+    color: var(--page-text-soft);
+  }
+  /* Not yet shipping: the mark steps back so the two live products read first. */
+  .product-soon .product-art { color: var(--page-text-soft); opacity: 0.55; }
+
   /* ── Status ───────────────────────────────────────────────────────────
      Every work line says out loud what state it is in. The dot carries the
      color and the word carries the meaning, so color is never the only
@@ -577,8 +608,21 @@
       </p>
 
       <div class="grid grid-2">
-        <article class="card">
-          <div class="card-body">
+        <article class="card product">
+          <!-- Placa: chip al centro y pistas hacia los bordes. -->
+          <div class="product-art">
+            <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false" fill="none"
+                 stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <rect x="7" y="11" width="50" height="42" rx="6"/>
+              <rect x="25" y="26" width="14" height="12" rx="2.5" fill="currentColor" stroke="none"/>
+              <path d="M25 30 H15 M25 34 H15 M39 30 H49 M39 34 H49 M29 26 V17 M35 26 V17 M29 38 V47 M35 38 V47"/>
+              <circle cx="15" cy="30" r="2" fill="currentColor" stroke="none"/>
+              <circle cx="15" cy="34" r="2" fill="currentColor" stroke="none"/>
+              <circle cx="49" cy="30" r="2" fill="currentColor" stroke="none"/>
+              <circle cx="49" cy="34" r="2" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="product-body">
             <span class="status status-live">En uso</span>
             <h3>Taller de robótica</h3>
             <p class="muted">
@@ -586,10 +630,23 @@
               programan Arduino, sueldan y arman. Terminan con un robot que funciona y una
               muestra abierta a la comunidad escolar.
             </p>
+            <p class="product-meta">Un año escolar · Una clase por semana · Presencial</p>
           </div>
         </article>
-        <article class="card">
-          <div class="card-body">
+
+        <article class="card product">
+          <!-- Tablero: la ruta del robot y la bandera de llegada. -->
+          <div class="product-art">
+            <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false" fill="none"
+                 stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="7" y="13" width="50" height="38" rx="4"/>
+              <path d="M23.5 13 V51 M40.5 13 V51 M7 25.7 H57 M7 38.3 H57" stroke-width="1.2"/>
+              <path d="M15 45 V32 H32 V19.5" stroke-width="3"/>
+              <circle cx="15" cy="45" r="3.2" fill="currentColor" stroke="none"/>
+              <path d="M32 19.5 L42 22.5 L32 25.5 Z" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="product-body">
             <span class="status status-live">En uso</span>
             <h3>Ruta Robot</h3>
             <p class="muted">
@@ -597,10 +654,24 @@
               por un tablero armando instrucciones. Se abre con doble clic, sin instalación,
               sin servidor y sin internet.
             </p>
+            <p class="product-meta">3º y 4º básico · Sin instalación · Sin internet</p>
           </div>
         </article>
-        <article class="card">
-          <div class="card-body">
+
+        <article class="card product product-soon">
+          <!-- Ventana con una lista: la herramienta que usa el profesor. -->
+          <div class="product-art">
+            <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false" fill="none"
+                 stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <rect x="7" y="12" width="50" height="40" rx="5"/>
+              <path d="M7 22 H57"/>
+              <circle cx="14" cy="17" r="1.6" fill="currentColor" stroke="none"/>
+              <circle cx="20" cy="17" r="1.6" fill="currentColor" stroke="none"/>
+              <path d="M15 31 H30 M15 39 H26" stroke-width="3"/>
+              <path d="M37 29.5 L40.5 33 L47 26.5 M37 41.5 L40.5 45 L47 38.5"/>
+            </svg>
+          </div>
+          <div class="product-body">
             <span class="status">Pronto</span>
             <h3>Software de apoyo</h3>
             <p class="muted">
@@ -608,10 +679,22 @@
               seguimiento de cada estudiante y la evidencia que la escuela necesita al
               cierre, en un solo lugar.
             </p>
+            <p class="product-meta">En desarrollo</p>
           </div>
         </article>
-        <article class="card">
-          <div class="card-body">
+
+        <article class="card product product-soon">
+          <!-- Caja abierta con una pieza asomando. -->
+          <div class="product-art">
+            <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false" fill="none"
+                 stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 27 L32 19 L54 27 L32 35 Z"/>
+              <path d="M10 27 V44 L32 52 L54 44 V27"/>
+              <path d="M32 35 V52" stroke-width="1.6"/>
+              <path d="M32 19 V11 M26 14 L32 11 L38 14" stroke-width="2.4"/>
+            </svg>
+          </div>
+          <div class="product-body">
             <span class="status">Pronto</span>
             <h3>Kit de robótica</h3>
             <p class="muted">
@@ -619,6 +702,7 @@
               sensores, motores, piezas impresas en 3D y los repuestos que un taller real
               termina necesitando.
             </p>
+            <p class="product-meta">Arduino + impresión 3D · Por equipo</p>
           </div>
         </article>
       </div>
