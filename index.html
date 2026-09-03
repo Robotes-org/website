@@ -214,13 +214,20 @@
         color-mix(in srgb, var(--rb-pizarra) 82%, transparent) 0,
         color-mix(in srgb, var(--rb-pizarra) 78%, transparent) 64px,
         transparent 150px),
+      /* Solid Pizarra across the whole text column, not a 97% tint: at 97% the
+         robot still ghosted through behind the headline. The photo only starts
+         where the writing stops. */
       linear-gradient(to right,
-        color-mix(in srgb, var(--rb-pizarra) 97%, transparent) 0%,
-        color-mix(in srgb, var(--rb-pizarra) 93%, transparent) 55%,
-        color-mix(in srgb, var(--rb-pizarra) 78%, transparent) 78%,
-        color-mix(in srgb, var(--rb-pizarra) 45%, transparent) 100%),
+        var(--rb-pizarra) 0%,
+        var(--rb-pizarra) 54%,
+        color-mix(in srgb, var(--rb-pizarra) 86%, transparent) 68%,
+        color-mix(in srgb, var(--rb-pizarra) 42%, transparent) 100%),
       url("assets/hero.jpg");
-    background-size: auto, auto, cover;
+    /* `auto 100%` instead of `cover`: cover scaled the photo to the full header
+       width, so it ran under the text and background-position-x had nothing to
+       move. Sized to the header height it is ~820px wide, anchored right, and
+       the left half of the header is untouched Pizarra. */
+    background-size: auto, auto, auto 100%;
     background-position: center, center, right center;
     background-repeat: no-repeat;
   }
@@ -234,6 +241,8 @@
           color-mix(in srgb, var(--rb-pizarra) 96%, transparent) 0%,
           color-mix(in srgb, var(--rb-pizarra) 88%, transparent) 100%),
         url("assets/hero.jpg");
+      background-size: auto, cover;
+      background-position: center, center center;
     }
   }
 
