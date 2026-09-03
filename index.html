@@ -119,46 +119,6 @@
   .lede { font-size: var(--rb-text-lg); max-width: var(--rb-medida); }
   .footnote { font-size: var(--rb-text-sm); margin-top: var(--rb-space-3); }
 
-  /* ── Section rail ─────────────────────────────────────────────────────
-     The informative sections are laid out as a lab notebook: a numbered index
-     in the margin, the content beside it. The number is the one place this
-     page uses the mono token, and it is what tells the visitor at a glance
-     that this is a document to read, not a sales page to scroll past. */
-
-  .split {
-    display: grid;
-    grid-template-columns: 8rem minmax(0, 1fr);
-    gap: var(--rb-space-3) var(--rb-space-6);
-    align-items: start;
-  }
-  .rail {
-    position: sticky; top: var(--rb-space-4);
-    align-self: start;
-    border-top: 2px solid var(--page-text);
-    padding-top: var(--rb-space-1);
-  }
-  .dark .rail { border-top-color: var(--rb-blanco); }
-  .section-no {
-    display: block;
-    font-family: var(--rb-font-mono);
-    font-size: var(--rb-text-sm);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.05em;
-  }
-  .rail-label {
-    display: block;
-    font-family: var(--rb-font-titulo);
-    font-size: var(--rb-text-sm);
-    font-weight: 600;
-    color: var(--page-text-soft);
-  }
-  /* Below the breakpoint the rail stops being a margin and becomes a heading
-     strip, so the number keeps its meaning instead of floating alone. */
-  @media (max-width: 860px) {
-    .split { grid-template-columns: 1fr; }
-    .rail { position: static; display: flex; gap: var(--rb-space-2); align-items: baseline; }
-  }
-
   /* ── Lockup ───────────────────────────────────────────────────────────
      Built in HTML instead of using logo-horizontal.svg on purpose: that file
      carries live text, so without Space Grotesk installed the fallback face
@@ -319,15 +279,15 @@
 
   /* ── Grids and cards ────────────────────────────────────────────────── */
 
+  /* The minimums are picked against the 1080px wrap so the groups never break
+     into an orphan row: 300px gives three columns to the six principles, and
+     .grid-2 gives two to the sets of four, which land as 2 x 2. */
   .grid {
     display: grid; gap: var(--rb-space-3);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     margin-top: var(--rb-space-4);
   }
-  /* Inside a .split the content column is narrower than the page, so a group of
-     four cards falls into 3 + 1 and the last one sits alone. Sets of four ask
-     for a wider minimum and land as 2 x 2. */
-  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
   .card {
     background: var(--page-bg-alt);
     border: 1px solid var(--page-border);
@@ -382,10 +342,8 @@
 
   /* ── Credo ────────────────────────────────────────────────────────────
      The one centred line on a page that is otherwise left-aligned end to end.
-     It breaks out of the .split grid on purpose: the rail numbers the sections
-     that describe how the lab works, and this is the premise underneath them,
-     not another one of them. Keep it the only centred text on the page — a
-     second one turns the exception into a pattern and it stops landing. */
+     Keep it the only centred text on the page — a second one turns the
+     exception into a pattern and it stops landing. */
   /* Heading by markup, label by looks: a full-size «Nuestro manifiesto» would
      compete with the sentence underneath, which is the thing worth reading. It
      mirrors the eyebrow → headline pair in the hero. */
@@ -561,11 +519,7 @@
 
 <!-- ── 01 Method ────────────────────────────────────────────────────── -->
 <section id="method">
-  <div class="wrap split">
-    <div class="rail">
-      <span class="section-no">01</span>
-      <span class="rail-label">Método</span>
-    </div>
+  <div class="wrap">
     <div>
       <h2>Cómo trabajamos</h2>
       <p class="lede muted">
@@ -620,11 +574,7 @@
 
 <!-- ── 02 Work ──────────────────────────────────────────────────────── -->
 <section id="work" class="band">
-  <div class="wrap split">
-    <div class="rail">
-      <span class="section-no">02</span>
-      <span class="rail-label">Trabajo</span>
-    </div>
+  <div class="wrap">
     <div>
       <h2>Líneas de trabajo</h2>
       <p class="lede muted">
@@ -690,11 +640,7 @@
 
 <!-- ── 03 The collaborating school ──────────────────────────────────── -->
 <section id="school">
-  <div class="wrap split">
-    <div class="rail">
-      <span class="section-no">03</span>
-      <span class="rail-label">El modelo</span>
-    </div>
+  <div class="wrap">
     <div class="prose">
       <h2>La escuela no es beneficiaria: es colaboradora</h2>
       <p class="lede muted">
@@ -740,11 +686,7 @@
 
 <!-- ── 04 Principles ────────────────────────────────────────────────── -->
 <section id="principles" class="band">
-  <div class="wrap split">
-    <div class="rail">
-      <span class="section-no">04</span>
-      <span class="rail-label">Principios</span>
-    </div>
+  <div class="wrap">
     <div>
       <h2>Cómo decidimos</h2>
       <p class="lede muted">
@@ -815,11 +757,7 @@
 
 <!-- ── 05 Roadmap ───────────────────────────────────────────────────── -->
 <section id="roadmap">
-  <div class="wrap split">
-    <div class="rail">
-      <span class="section-no">05</span>
-      <span class="rail-label">Recorrido</span>
-    </div>
+  <div class="wrap">
     <div>
       <h2>En qué estamos</h2>
       <p class="lede muted">
@@ -870,11 +808,7 @@
 
 <!-- ── 06 Collaborate ───────────────────────────────────────────────── -->
 <section id="collaborate" class="band">
-  <div class="wrap split">
-    <div class="rail">
-      <span class="section-no">06</span>
-      <span class="rail-label">Colaborar</span>
-    </div>
+  <div class="wrap">
     <div>
       <h2>Trabajar con nosotros</h2>
       <p class="lede muted">
@@ -934,11 +868,7 @@
 
 <!-- ── FAQ ──────────────────────────────────────────────────────────── -->
 <section id="faq">
-  <div class="wrap split">
-    <div class="rail">
-      <span class="section-no">07</span>
-      <span class="rail-label">Preguntas</span>
-    </div>
+  <div class="wrap">
     <div class="prose">
       <h2>Lo que nos preguntan</h2>
 
