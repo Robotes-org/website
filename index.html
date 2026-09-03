@@ -73,31 +73,316 @@
       <div class="hero-art" aria-hidden="true">
         <svg viewBox="0 0 380 320" role="presentation" focusable="false"
              fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-          <g opacity="0.3" stroke-width="1.4">
-            <path d="M36 184 A100 100 0 0 1 136 284"/>
-            <path d="M36 114 A170 170 0 0 1 206 284"/>
-            <path d="M36 44 A240 240 0 0 1 276 284"/>
-            <path d="M36 -16 A300 300 0 0 1 336 284"/>
+
+          <!-- Arcos de alcance, centrados en la escuela. -->
+          <g opacity="0.28" stroke-width="1.4">
+            <path d="M54 166 A120 120 0 0 1 174 286"/>
+            <path d="M54 96 A190 190 0 0 1 244 286"/>
+            <path d="M54 26 A260 260 0 0 1 314 286"/>
+            <path d="M54 -44 A330 330 0 0 1 384 286"/>
           </g>
 
+          <!-- Tres pistas que salen de la escuela hacia una tecnología cada una,
+               con codos de placa a 45°. Se abren en abanico para ocupar el alto
+               del cuadro y para que cada nodo caiga sobre un arco distinto: la
+               tecnología llega más lejos en cada vuelta. -->
           <g opacity="0.75" stroke-width="2">
-            <path d="M36 284 H92 L122 254 H184"/>
-            <path d="M36 284 V228 L66 198 V132"/>
-            <path d="M36 284 H72 L112 244 V168 L142 138 H232"/>
-            <path d="M36 284 H60 L110 234 H168 L214 188 H298"/>
+            <path d="M82 254 H96 L120 230 V170 H140"/>
+            <path d="M82 266 H120 L182 204 H206"/>
+            <path d="M82 280 H200 L246 234 H272"/>
+          </g>
+
+          <!-- La escuela de origen: cuerpo, techo, puerta, ventana y bandera. -->
+          <g stroke-width="2.2">
+            <path d="M26 286 V252 H82 V286"/>
+            <path d="M16 252 L54 226 L92 252"/>
+            <path d="M48 286 V268 H62 V286"/>
+            <path d="M33 262 H43 V272 H33 Z" stroke-width="1.8"/>
+            <path d="M54 226 V204"/>
+            <path d="M54 206 L68 210 L54 214 Z" fill="currentColor"/>
+          </g>
+
+          <!-- Chip: electrónica y Arduino. -->
+          <g stroke-width="1.8">
+            <path d="M146 158 H170 V182 H146 Z"/>
+            <path d="M146 164 H140 M146 176 H140 M170 164 H176 M170 176 H176"/>
+            <path d="M154 166 H162 V174 H154 Z" stroke-width="1.4"/>
+          </g>
+
+          <!-- Cubo isométrico: la pieza impresa en 3D. -->
+          <g stroke-width="1.8">
+            <path d="M222 188 L238 196 L222 204 L206 196 Z"/>
+            <path d="M206 196 V212 L222 220 V204"/>
+            <path d="M238 196 V212 L222 220"/>
+          </g>
+
+          <!-- Chevrones: el código. -->
+          <g stroke-width="2">
+            <path d="M284 224 L276 234 L284 244"/>
+            <path d="M300 224 L308 234 L300 244"/>
+          </g>
+
+          <g fill="currentColor" stroke="none" opacity="0.45">
+            <circle cx="330" cy="90"  r="2.6"/>
+            <circle cx="270" cy="58"  r="2.6"/>
+            <circle cx="352" cy="140" r="2.6"/>
+            <circle cx="200" cy="70"  r="2.6"/>
+          </g>
+        </svg>
+        <span>robotes<span class="tld">.org</span></span>
+      </a>
+      <nav aria-label="Secciones">
+        <ul class="nav">
+          <li><a href="#method">Método</a></li>
+          <li><a href="#work">Qué hacemos</a></li>
+          <li><a href="#collaborate">Colaborar</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="hero hero-grid" id="main">
+      <div>
+      <p class="eyebrow">Laboratorio de innovación educativa</p>
+      <h1>Robótica, tecnología y ciencias en tu escuela.</h1>
+      <p class="lede">
+        Creamos productos tecnológicos para aplicar en el aula: robots, software y material
+        de clases.
+      </p>
+      <!-- The call to action is always the conversation, never a scroll. The second
+           button is a way into the page, not a competing action. -->
+      <div class="actions">
+        <a class="btn btn-primary" href="https://calendar.app.google/1uUaTF4TMnLypb5dA"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Conversemos: agendar una hora (se abre en una pestaña nueva)">Conversemos</a>
+        <a class="btn btn-secondary" href="#method">Cómo trabajamos</a>
+        </div>
+      </div>
+
+      <!-- Line art of the manifesto: one origin, arcs of widening reach, and
+           traces that leave it in every direction. Educación es el punto de
+           partida, Horizonte son los arcos que se abren, Acceso son las líneas
+           que salen sin encontrar una puerta. Abstracto a propósito: no hay
+           foto propia todavía y no queríamos una de archivo. -->
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 380 320" role="presentation" focusable="false"
+             fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+
+          <!-- Arcos de alcance, centrados en la escuela. -->
+          <g opacity="0.28" stroke-width="1.4">
+            <path d="M54 166 A120 120 0 0 1 174 286"/>
+            <path d="M54 96 A190 190 0 0 1 244 286"/>
+            <path d="M54 26 A260 260 0 0 1 314 286"/>
+            <path d="M54 -44 A330 330 0 0 1 384 286"/>
+          </g>
+
+          <!-- Tres pistas que salen de la escuela hacia una tecnología cada una,
+               con codos de placa a 45°. La escuela es el origen; al otro extremo
+               están el Arduino, la impresión 3D y el código. -->
+          <g opacity="0.75" stroke-width="2">
+            <path d="M80 256 H96 L116 236 H140"/>
+            <path d="M80 268 H120 L160 228 H188"/>
+            <path d="M80 278 H170 L230 218 H252"/>
+          </g>
+
+          <!-- La escuela de origen: cuerpo, techo, puerta, ventana y bandera. -->
+          <g stroke-width="2.2">
+            <path d="M26 286 V252 H82 V286"/>
+            <path d="M16 252 L54 226 L92 252"/>
+            <path d="M48 286 V268 H62 V286"/>
+            <path d="M33 262 H43 V272 H33 Z" stroke-width="1.8"/>
+            <path d="M54 226 V204"/>
+            <path d="M54 206 L68 210 L54 214 Z" fill="currentColor"/>
+          </g>
+
+          <!-- Chip: electrónica y Arduino. -->
+          <g stroke-width="1.8">
+            <path d="M146 224 H170 V248 H146 Z"/>
+            <path d="M146 230 H140 M146 242 H140 M170 230 H176 M170 242 H176"/>
+            <path d="M154 232 H162 V240 H154 Z" stroke-width="1.4"/>
+          </g>
+
+          <!-- Cubo isométrico: la pieza impresa en 3D. -->
+          <g stroke-width="1.8">
+            <path d="M204 212 L220 220 L204 228 L188 220 Z"/>
+            <path d="M188 220 V236 L204 244 V228"/>
+            <path d="M220 220 V236 L204 244"/>
+          </g>
+
+          <!-- Chevrones: el código. -->
+          <g stroke-width="2">
+            <path d="M264 208 L256 218 L264 228"/>
+            <path d="M280 208 L288 218 L280 228"/>
+          </g>
+
+          <g fill="currentColor" stroke="none" opacity="0.45">
+            <circle cx="320" cy="120" r="2.6"/>
+            <circle cx="274" cy="74"  r="2.6"/>
+            <circle cx="348" cy="166" r="2.6"/>
+            <circle cx="216" cy="86"  r="2.6"/>
+          </g>
+        </svg>
+        <span>robotes<span class="tld">.org</span></span>
+      </a>
+      <nav aria-label="Secciones">
+        <ul class="nav">
+          <li><a href="#method">Método</a></li>
+          <li><a href="#work">Qué hacemos</a></li>
+          <li><a href="#collaborate">Colaborar</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="hero hero-grid" id="main">
+      <div>
+      <p class="eyebrow">Laboratorio de innovación educativa</p>
+      <h1>Robótica, tecnología y ciencias en tu escuela.</h1>
+      <p class="lede">
+        Creamos productos tecnológicos para aplicar en el aula: robots, software y material
+        de clases.
+      </p>
+      <!-- The call to action is always the conversation, never a scroll. The second
+           button is a way into the page, not a competing action. -->
+      <div class="actions">
+        <a class="btn btn-primary" href="https://calendar.app.google/1uUaTF4TMnLypb5dA"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Conversemos: agendar una hora (se abre en una pestaña nueva)">Conversemos</a>
+        <a class="btn btn-secondary" href="#method">Cómo trabajamos</a>
+        </div>
+      </div>
+
+      <!-- Line art of the manifesto: one origin, arcs of widening reach, and
+           traces that leave it in every direction. Educación es el punto de
+           partida, Horizonte son los arcos que se abren, Acceso son las líneas
+           que salen sin encontrar una puerta. Abstracto a propósito: no hay
+           foto propia todavía y no queríamos una de archivo. -->
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 380 320" role="presentation" focusable="false"
+             fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+
+          <!-- Arcos de alcance, centrados en la escuela. -->
+          <g opacity="0.28" stroke-width="1.4">
+            <path d="M54 166 A120 120 0 0 1 174 286"/>
+            <path d="M54 96 A190 190 0 0 1 244 286"/>
+            <path d="M54 26 A260 260 0 0 1 314 286"/>
+            <path d="M54 -44 A330 330 0 0 1 384 286"/>
+          </g>
+
+          <!-- Tres pistas que salen de la escuela, con codos de placa a 45°.
+               Se separan al salir para que no corran en paralelo. -->
+          <g opacity="0.75" stroke-width="2">
+            <path d="M80 256 H96 L116 236 H146"/>
+            <path d="M80 268 H120 L160 228 H200"/>
+            <path d="M80 278 H170 L230 218 H262"/>
+          </g>
+
+          <!-- La escuela de origen: cuerpo, techo, puerta, ventana y bandera. -->
+          <g stroke-width="2.2">
+            <path d="M26 286 V252 H82 V286"/>
+            <path d="M16 252 L54 226 L92 252"/>
+            <path d="M48 286 V268 H62 V286"/>
+            <path d="M33 262 H43 V272 H33 Z" stroke-width="1.8"/>
+            <path d="M54 226 V204"/>
+            <path d="M54 206 L68 210 L54 214 Z" fill="currentColor"/>
+          </g>
+
+          <!-- Dos escuelas más, al final de dos pistas. -->
+          <g opacity="0.8" stroke-width="1.8">
+            <path d="M146 236 V220 H168 V236"/>
+            <path d="M140 220 L157 209 L174 220"/>
+            <path d="M262 218 V202 H284 V218"/>
+            <path d="M256 202 L273 191 L290 202"/>
           </g>
 
           <g fill="currentColor" stroke="none">
-            <circle cx="184" cy="254" r="4.5"/>
-            <circle cx="66"  cy="132" r="4.5"/>
-            <circle cx="232" cy="138" r="4.5"/>
-            <circle cx="298" cy="188" r="4.5"/>
-            <circle cx="36"  cy="284" r="7"/>
+            <circle cx="200" cy="228" r="4"/>
             <g opacity="0.45">
-              <circle cx="322" cy="96"  r="2.6"/>
-              <circle cx="268" cy="52"  r="2.6"/>
-              <circle cx="348" cy="146" r="2.6"/>
-              <circle cx="204" cy="72"  r="2.6"/>
+              <circle cx="320" cy="120" r="2.6"/>
+              <circle cx="274" cy="74"  r="2.6"/>
+              <circle cx="348" cy="166" r="2.6"/>
+              <circle cx="216" cy="86"  r="2.6"/>
+            </g>
+          </g>
+        </svg>
+        <span>robotes<span class="tld">.org</span></span>
+      </a>
+      <nav aria-label="Secciones">
+        <ul class="nav">
+          <li><a href="#method">Método</a></li>
+          <li><a href="#work">Qué hacemos</a></li>
+          <li><a href="#collaborate">Colaborar</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="hero hero-grid" id="main">
+      <div>
+      <p class="eyebrow">Laboratorio de innovación educativa</p>
+      <h1>Robótica, tecnología y ciencias en tu escuela.</h1>
+      <p class="lede">
+        Creamos productos tecnológicos para aplicar en el aula: robots, software y material
+        de clases.
+      </p>
+      <!-- The call to action is always the conversation, never a scroll. The second
+           button is a way into the page, not a competing action. -->
+      <div class="actions">
+        <a class="btn btn-primary" href="https://calendar.app.google/1uUaTF4TMnLypb5dA"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Conversemos: agendar una hora (se abre en una pestaña nueva)">Conversemos</a>
+        <a class="btn btn-secondary" href="#method">Cómo trabajamos</a>
+        </div>
+      </div>
+
+      <!-- Line art of the manifesto: one origin, arcs of widening reach, and
+           traces that leave it in every direction. Educación es el punto de
+           partida, Horizonte son los arcos que se abren, Acceso son las líneas
+           que salen sin encontrar una puerta. Abstracto a propósito: no hay
+           foto propia todavía y no queríamos una de archivo. -->
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 380 320" role="presentation" focusable="false"
+             fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+
+          <!-- Arcos de alcance, centrados en la escuela. -->
+          <g opacity="0.28" stroke-width="1.4">
+            <path d="M54 166 A120 120 0 0 1 174 286"/>
+            <path d="M54 96 A190 190 0 0 1 244 286"/>
+            <path d="M54 26 A260 260 0 0 1 314 286"/>
+            <path d="M54 -44 A330 330 0 0 1 384 286"/>
+          </g>
+
+          <!-- Pistas que salen de la escuela, con codos de placa. -->
+          <g opacity="0.75" stroke-width="2">
+            <path d="M80 258 H104 L124 238 H148"/>
+            <path d="M80 266 H140 L178 228 H206"/>
+            <path d="M80 274 H176 L226 224 H262"/>
+            <path d="M80 282 H216 L272 226 H322"/>
+          </g>
+
+          <!-- La escuela de origen: cuerpo, techo, puerta, ventana y bandera. -->
+          <g stroke-width="2.2">
+            <path d="M26 286 V252 H82 V286"/>
+            <path d="M16 252 L54 226 L92 252"/>
+            <path d="M48 286 V268 H62 V286"/>
+            <path d="M33 262 H43 V272 H33 Z" stroke-width="1.8"/>
+            <path d="M54 226 V204"/>
+            <path d="M54 206 L68 210 L54 214 Z" fill="currentColor"/>
+          </g>
+
+          <!-- Dos escuelas más, al final de dos pistas. -->
+          <g opacity="0.8" stroke-width="1.8">
+            <path d="M150 238 V222 H172 V238"/>
+            <path d="M144 222 L161 212 L178 222"/>
+            <path d="M264 224 V208 H286 V224"/>
+            <path d="M258 208 L275 198 L292 208"/>
+          </g>
+
+          <g fill="currentColor" stroke="none">
+            <circle cx="206" cy="228" r="4"/>
+            <circle cx="322" cy="226" r="4"/>
+            <g opacity="0.45">
+              <circle cx="330" cy="110" r="2.6"/>
+              <circle cx="280" cy="66"  r="2.6"/>
+              <circle cx="356" cy="158" r="2.6"/>
+              <circle cx="222" cy="80"  r="2.6"/>
             </g>
           </g>
         </svg>
