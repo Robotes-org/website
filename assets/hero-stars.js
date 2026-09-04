@@ -16,9 +16,12 @@
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var VB_W = 380, VB_H = 320;
-  var MAX = 70;             // techo de partículas vivas a la vez
+  var MAX = 32;             // techo de partículas vivas a la vez
   var NEAR = 0.7;           // proporción que cae cerca del puntero
   var SIGMA = 46;           // dispersión de esa gaussiana, en unidades del viewBox
+  var ORIG_X = 54, ORIG_Y = 286;   // el mismo centro que los arcos
+  var R_LLENO = 200, R_BORDE = 330; // el campo se apaga entre estos dos radios
+  var MARGEN = 44;          // franja muerta contra cada borde del viewBox
   var SVG_NS = 'http://www.w3.org/2000/svg';
 
   var layer = document.createElementNS(SVG_NS, 'g');
@@ -50,6 +53,28 @@
     return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
   }
 
+  /* Densidad, no recorte: una partícula se acepta con una probabilidad que baja
+     hacia los bordes del cuadro y hacia el borde exterior del abanico. Sin esto
+     el campo cubre el viewBox entero y se ve el rectángulo. */
+  function cabe(x, y) {
+    if (x < 2 || x > VB_W - 2 || y < 2 || y > VB_H - 2) return false;
+    // La esquina de la escuela se deja libre: ahí el dibujo ya está cargado.
+    if (x < 100 && y > 200) return false;
+
+    var d = Math.sqrt((x - ORIG_X) * (x - ORIG_X) + (y - ORIG_Y) * (y - ORIG_Y));
+    var p = 1 - suave(R_LLENO, R_BORDE, d);
+
+    var borde = Math.min(x, VB_W - x, y, VB_H - y);
+    if (borde < MARGEN) p *= borde / MARGEN;
+
+    return Math.random() < p;
+  }
+
+  function suave(a, b, t) {
+    t = Math.max(0, Math.min(1, (t - a) / (b - a)));
+    return t * t * (3 - 2 * t);
+  }
+
   function spawn() {
     if (layer.childNodes.length >= MAX) return;
     var x, y;
@@ -60,9 +85,7 @@
       x = Math.random() * VB_W;
       y = Math.random() * VB_H;
     }
-    if (x < 2 || x > VB_W - 2 || y < 2 || y > VB_H - 2) return;
-    // La esquina de la escuela se deja libre: ahí el dibujo ya está cargado.
-    if (x < 100 && y > 200) return;
+    if (!cabe(x, y)) return;
 
     var c = document.createElementNS(SVG_NS, 'circle');
     c.setAttribute('cx', x.toFixed(1));
@@ -79,8 +102,7 @@
     // Más denso mientras el puntero se mueve; un goteo lento cuando no.
     var activo = pointer && (performance.now() - lastMove < 1200);
     spawn();
-    if (activo) spawn();
-    timer = setTimeout(tick, activo ? 90 : 420);
+    timer = setTimeout(tick, activo ? 140 : 620);
   }
 
   // Sin trabajo mientras la pestaña está oculta.
