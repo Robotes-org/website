@@ -70,7 +70,7 @@
              fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
 
           <!-- Arcos de alcance, centrados en la escuela. -->
-          <g opacity="0.28" stroke-width="1.4">
+          <g class="art-arcs" stroke-width="1.4">
             <path d="M54 166 A120 120 0 0 1 174 286"/>
             <path d="M54 96 A190 190 0 0 1 244 286"/>
             <path d="M54 26 A260 260 0 0 1 314 286"/>
@@ -87,6 +87,15 @@
             <path d="M82 280 H200 L246 234 H272"/>
           </g>
 
+          <!-- Los mismos tres trazados, recorridos por un pulso. pathLength="100"
+               normaliza el guion para que las tres pistas tarden lo mismo aunque
+               midan distinto. -->
+          <g stroke-width="2.6" stroke-linecap="round">
+            <path class="trace-pulse pulse-1" pathLength="100" d="M82 254 H96 L120 230 V170 H140"/>
+            <path class="trace-pulse pulse-2" pathLength="100" d="M82 266 H120 L182 204 H206"/>
+            <path class="trace-pulse pulse-3" pathLength="100" d="M82 280 H200 L246 234 H272"/>
+          </g>
+
           <!-- La escuela de origen: cuerpo, techo, puerta, ventana y bandera. -->
           <g stroke-width="2.2">
             <path d="M26 286 V252 H82 V286"/>
@@ -98,26 +107,26 @@
           </g>
 
           <!-- Chip: electrónica y Arduino. -->
-          <g stroke-width="1.8">
+          <g class="tech tech-1" stroke-width="1.8">
             <path d="M146 158 H170 V182 H146 Z"/>
             <path d="M146 164 H140 M146 176 H140 M170 164 H176 M170 176 H176"/>
             <path d="M154 166 H162 V174 H154 Z" stroke-width="1.4"/>
           </g>
 
           <!-- Cubo isométrico: la pieza impresa en 3D. -->
-          <g stroke-width="1.8">
+          <g class="tech tech-2" stroke-width="1.8">
             <path d="M222 188 L238 196 L222 204 L206 196 Z"/>
             <path d="M206 196 V212 L222 220 V204"/>
             <path d="M238 196 V212 L222 220"/>
           </g>
 
           <!-- Chevrones: el código. -->
-          <g stroke-width="2">
+          <g class="tech tech-3" stroke-width="2">
             <path d="M284 224 L276 234 L284 244"/>
             <path d="M300 224 L308 234 L300 244"/>
           </g>
 
-          <g fill="currentColor" stroke="none" opacity="0.45">
+          <g class="art-dots" fill="currentColor" stroke="none">
             <circle cx="330" cy="90"  r="2.6"/>
             <circle cx="270" cy="58"  r="2.6"/>
             <circle cx="352" cy="140" r="2.6"/>
