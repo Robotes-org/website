@@ -1,8 +1,12 @@
 /* Campo de estrellas de la portada.
  *
- * Dibuja partículas sobre todo el fondo de la portada, no sólo sobre la caja
- * de la ilustración. Las 13 estrellas del marcado siguen siendo el respaldo:
- * con el JavaScript desactivado la portada conserva un cielo, sólo que quieto.
+ * Dibuja partículas sobre todo el fondo de la portada. Es la única fuente de
+ * estrellas: el marcado ya no trae ninguna fija, así que con el JavaScript
+ * desactivado la portada queda con la ilustración y sin cielo.
+ *
+ * Al cargar se precalienta con una tanda de partículas repartidas por todo el
+ * ciclo de vida, para que la portada aparezca con estrellas encendidas en vez
+ * de irse poblando de a poco durante los primeros segundos.
  *
  * La posición se sesga, no se pega al puntero: cerca de siete de cada diez
  * caen en una gaussiana alrededor del mouse y el resto en cualquier parte, así
@@ -62,7 +66,9 @@
     return !!z && x > z.x1 && x < z.x2 && y > z.y1 && y < z.y2;
   }
 
-  function spawn() {
+  /* `avance` adelanta la animación de la partícula: se usa sólo al precalentar,
+     para que las primeras no nazcan todas juntas en el instante cero. */
+  function spawn(avance) {
     if (!W || capa.childNodes.length >= MAX) return;
     var x, y;
     if (pointer && Math.random() < NEAR) {
@@ -89,8 +95,15 @@
     if (tenue) c.setAttribute('class', 'dim');
     var vida = 1600 + Math.random() * 1500;
     c.style.animationDuration = vida + 'ms';
+    var corrido = avance ? Math.random() * vida * 0.85 : 0;
+    if (corrido) c.style.animationDelay = '-' + Math.round(corrido) + 'ms';
     capa.appendChild(c);
-    setTimeout(function () { if (c.parentNode) c.parentNode.removeChild(c); }, vida + 60);
+    setTimeout(function () { if (c.parentNode) c.parentNode.removeChild(c); },
+               vida - corrido + 60);
+  }
+
+  function precalentar() {
+    for (var i = 0; i < 26; i++) spawn(true);
   }
 
   var timer = null;
@@ -100,7 +113,13 @@
     if (activo) spawn();
     timer = setTimeout(tick, activo ? 120 : 480);
   }
-  function arrancar() { if (!timer) { medir(); tick(); } }
+  var listo = false;
+  function arrancar() {
+    if (timer) return;
+    medir();
+    if (!listo) { precalentar(); listo = true; }
+    tick();
+  }
   function parar() { clearTimeout(timer); timer = null; }
 
   document.addEventListener('visibilitychange', function () {
