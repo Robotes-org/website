@@ -217,10 +217,9 @@ section { padding: var(--rb-space-8) 0; }
 .hero-art svg { display: block; width: 100%; height: auto; }
 
 /* ── Hero art: movimiento ───────────────────────────────────────────────
-   Idle it barely moves: a signal leaves the school along each trace and the
-   arcs breathe. Hovering anywhere in the hero
-   speeds both up and pushes the three technologies a few pixels outward,
-   so the drawing answers the mouse without ever asking to be clicked. Every
+   The drawing does not react to the mouse: a signal leaves the school along each
+   trace and the arcs breathe, and that is all. Answering the pointer is the
+   particle field's job — the drawing jumping as well read as a glitch. Every
    animation is off under prefers-reduced-motion. */
 
 .trace-pulse {
@@ -276,23 +275,10 @@ header > .wrap { position: relative; z-index: 1; }
 
 }
 
-/* Las tecnologías se separan un poco de la escuela al pasar el mouse. */
-.tech { transition: transform 700ms cubic-bezier(0.2, 0.7, 0.3, 1); }
-
-header:hover .trace-pulse    { animation-duration: 2.6s; }
-header:hover .art-arcs       { animation-duration: 3.6s; }
-header:hover .tech-1 { transform: translate(3px, -3px); }
-header:hover .tech-2 { transform: translate(4px, -4px); }
-header:hover .tech-3 { transform: translate(5px, -2px); }
-
 @media (prefers-reduced-motion: reduce) {
   .trace-pulse { animation: none; opacity: 0; }
   .art-arcs { animation: none; }
   .art-arcs { opacity: 0.28; }
-  .tech { transition: none; }
-  header:hover .tech-1,
-  header:hover .tech-2,
-  header:hover .tech-3 { transform: none; }
 }
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; }
