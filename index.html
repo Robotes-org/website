@@ -126,11 +126,65 @@
             <path d="M300 224 L308 234 L300 244"/>
           </g>
 
+          <!-- Zonas de hover invisibles, en rejilla de 5 x 4. Van antes de las
+               estrellas porque el selector es de hermano posterior: pasar el
+               puntero por una zona enciende las estrellas de esa zona. Sin
+               JavaScript, que este sitio no usa. -->
+          <g class="hot">
+            <rect class="z1" x="0" y="0" width="76" height="80"/>
+            <rect class="z2" x="76" y="0" width="76" height="80"/>
+            <rect class="z3" x="152" y="0" width="76" height="80"/>
+            <rect class="z4" x="228" y="0" width="76" height="80"/>
+            <rect class="z5" x="304" y="0" width="76" height="80"/>
+            <rect class="z6" x="0" y="80" width="76" height="80"/>
+            <rect class="z7" x="76" y="80" width="76" height="80"/>
+            <rect class="z8" x="152" y="80" width="76" height="80"/>
+            <rect class="z9" x="228" y="80" width="76" height="80"/>
+            <rect class="z10" x="304" y="80" width="76" height="80"/>
+            <rect class="z11" x="0" y="160" width="76" height="80"/>
+            <rect class="z12" x="76" y="160" width="76" height="80"/>
+            <rect class="z13" x="152" y="160" width="76" height="80"/>
+            <rect class="z14" x="228" y="160" width="76" height="80"/>
+            <rect class="z15" x="304" y="160" width="76" height="80"/>
+            <rect class="z16" x="0" y="240" width="76" height="80"/>
+            <rect class="z17" x="76" y="240" width="76" height="80"/>
+            <rect class="z18" x="152" y="240" width="76" height="80"/>
+            <rect class="z19" x="228" y="240" width="76" height="80"/>
+            <rect class="z20" x="304" y="240" width="76" height="80"/>
+          </g>
+
+          <!-- Campo de estrellas. Todas caen fuera del dibujo: la mitad
+               superior y el borde derecho, que es donde no hay ni escuela ni
+               pistas ni tecnologías. -->
           <g class="art-dots" fill="currentColor" stroke="none">
-            <circle cx="330" cy="90"  r="2.6"/>
-            <circle cx="270" cy="58"  r="2.6"/>
-            <circle cx="352" cy="140" r="2.6"/>
-            <circle cx="200" cy="70"  r="2.6"/>
+            <circle class="s1 z4" cx="270" cy="58"  r="2.7"/>
+            <circle class="s3 z10" cx="330" cy="90"  r="2.6"/>
+            <circle class="s5 z10" cx="352" cy="140" r="2.5"/>
+            <circle class="s2 z3" cx="200" cy="70"  r="2.6"/>
+            <circle class="s4 z15" cx="306" cy="178" r="2.4"/>
+
+            <circle class="s6 z4" cx="238" cy="34"  r="2"/>
+            <circle class="s2 z5" cx="356" cy="52"  r="1.9"/>
+            <circle class="s4 z8" cx="168" cy="96"  r="2.1"/>
+            <circle class="s1 z9" cx="296" cy="124" r="2"/>
+            <circle class="s3 z15" cx="344" cy="206" r="1.9"/>
+            <circle class="s5 z2" cx="128" cy="52"  r="2"/>
+            <circle class="s6 z8" cx="222" cy="116" r="1.9"/>
+            <circle class="s1 z10" cx="368" cy="102" r="2"/>
+
+            <circle class="s3 soft z3" cx="152" cy="30"  r="1.4"/>
+            <circle class="s5 soft z8" cx="188" cy="142" r="1.3"/>
+            <circle class="s1 soft z9" cx="256" cy="90"  r="1.5"/>
+            <circle class="s4 soft z5" cx="312" cy="44"  r="1.3"/>
+            <circle class="s2 soft z7" cx="94" cy="88"  r="1.4"/>
+            <circle class="s6 soft z15" cx="372" cy="168" r="1.3"/>
+            <circle class="s3 soft z9" cx="284" cy="148" r="1.4"/>
+            <circle class="s2 soft z13" cx="210" cy="178" r="1.3"/>
+            <circle class="s6 soft z7" cx="140" cy="124" r="1.4"/>
+            <circle class="s4 soft z20" cx="362" cy="242" r="1.3"/>
+            <circle class="s5 soft z20" cx="326" cy="272" r="1.4"/>
+            <circle class="s1 soft z2" cx="110" cy="26"  r="1.3"/>
+            <circle class="s2 soft z9" cx="248" cy="152" r="1.4"/>
           </g>
         </svg>
       </div>
