@@ -260,39 +260,14 @@ section { padding: var(--rb-space-8) 0; }
   0%, 100% { opacity: 0.28; }
   50%      { opacity: 0.72; }
 }
-/* Las estrellas se encienden donde está el puntero. La rejilla invisible del
-   SVG divide el cuadro en veinte zonas; pasar por una acelera y sube el brillo
-   de las estrellas que caen dentro. Es la forma de seguir al mouse sin
-   JavaScript: veinte zonas bastan para que se sienta continuo. */
-/* stroke:none es obligatorio, no cosmético: el <svg> declara
-   stroke="currentColor" y los rect lo heredan, así que la rejilla se dibuja. */
-.hot rect { fill: transparent; stroke: none; pointer-events: all; }
-.z1:hover ~ .art-dots .z1,
-.z2:hover ~ .art-dots .z2,
-.z3:hover ~ .art-dots .z3,
-.z4:hover ~ .art-dots .z4,
-.z5:hover ~ .art-dots .z5,
-.z6:hover ~ .art-dots .z6,
-.z7:hover ~ .art-dots .z7,
-.z8:hover ~ .art-dots .z8,
-.z9:hover ~ .art-dots .z9,
-.z10:hover ~ .art-dots .z10,
-.z11:hover ~ .art-dots .z11,
-.z12:hover ~ .art-dots .z12,
-.z13:hover ~ .art-dots .z13,
-.z14:hover ~ .art-dots .z14,
-.z15:hover ~ .art-dots .z15,
-.z16:hover ~ .art-dots .z16,
-.z17:hover ~ .art-dots .z17,
-.z18:hover ~ .art-dots .z18,
-.z19:hover ~ .art-dots .z19,
-.z20:hover ~ .art-dots .z20 {
-  animation-name: dot-flare;
-  animation-duration: 1.6s;
-}
-@keyframes dot-flare {
-  0%, 100% { opacity: 0.7; }
-  50%      { opacity: 1; }
+/* Partículas que dibuja assets/hero-stars.js alrededor del puntero. Cada una
+   nace, brilla y se borra sola; el JS le pasa la duración a cada una para que
+   no respiren todas al mismo ritmo. */
+.art-spark circle { animation: spark 2s ease-in-out forwards; }
+@keyframes spark {
+  0%   { opacity: 0; }
+  28%  { opacity: 0.85; }
+  100% { opacity: 0; }
 }
 
 @keyframes dot-blink-soft {
@@ -315,7 +290,6 @@ header:hover .tech-3 { transform: translate(5px, -2px); }
   .art-arcs, .art-dots circle { animation: none; }
   .art-arcs { opacity: 0.28; }
   .art-dots circle { opacity: 0.45; }
-  .hot { display: none; }
   .tech { transition: none; }
   header:hover .tech-1,
   header:hover .tech-2,
