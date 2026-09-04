@@ -260,13 +260,29 @@ section { padding: var(--rb-space-8) 0; }
   0%, 100% { opacity: 0.28; }
   50%      { opacity: 0.72; }
 }
-/* Partículas que dibuja assets/hero-stars.js alrededor del puntero. Cada una
-   nace, brilla y se borra sola; el JS le pasa la duración a cada una para que
-   no respiren todas al mismo ritmo. */
-.art-spark circle { animation: spark 2s ease-in-out forwards; }
+/* Partículas que dibuja assets/hero-stars.js sobre todo el fondo de la portada.
+   La capa va detrás del contenido y no recibe eventos, así que no interfiere con
+   los botones ni con el menú. */
+header { position: relative; overflow: hidden; }
+header > .wrap { position: relative; z-index: 1; }
+.hero-field {
+  position: absolute; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  color: var(--rb-bruma);
+}
+.hero-field circle { animation: spark 2.2s ease-in-out forwards; }
+/* Detrás del texto el brillo baja a 0.16: a pleno brillo, una estrella bajo una
+   letra deja la bajada en Bruma por debajo del mínimo AA. */
+.hero-field .dim { animation-name: spark-dim; }
 @keyframes spark {
   0%   { opacity: 0; }
   28%  { opacity: 0.85; }
+  100% { opacity: 0; }
+}
+@keyframes spark-dim {
+  0%   { opacity: 0; }
+  28%  { opacity: 0.16; }
   100% { opacity: 0; }
 }
 
