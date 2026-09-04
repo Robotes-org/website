@@ -90,13 +90,15 @@
             <path d="M82 280 H200 L246 234 H272"/>
           </g>
 
-          <!-- Los mismos tres trazados, recorridos por un pulso. pathLength="100"
-               normaliza el guion para que las tres pistas tarden lo mismo aunque
-               midan distinto. -->
+          <!-- Los mismos tres trazados pero recorridos al revés: el pulso nace en
+               la tecnología y llega a la escuela, no al contrario. La dirección
+               va escrita en el trazado y no en el CSS para que se lea acá.
+               pathLength="100" normaliza el guion para que las tres pistas
+               tarden lo mismo aunque midan distinto. -->
           <g stroke-width="2.6" stroke-linecap="round">
-            <path class="trace-pulse pulse-1" pathLength="100" d="M82 254 H96 L120 230 V170 H140"/>
-            <path class="trace-pulse pulse-2" pathLength="100" d="M82 266 H120 L182 204 H206"/>
-            <path class="trace-pulse pulse-3" pathLength="100" d="M82 280 H200 L246 234 H272"/>
+            <path class="trace-pulse pulse-1" pathLength="100" d="M140 170 H120 V230 L96 254 H82"/>
+            <path class="trace-pulse pulse-2" pathLength="100" d="M206 204 H182 L120 266 H82"/>
+            <path class="trace-pulse pulse-3" pathLength="100" d="M272 234 H246 L200 280 H82"/>
           </g>
 
           <!-- La escuela de origen: cuerpo, techo, puerta, ventana y bandera. -->
