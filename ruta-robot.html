@@ -27,6 +27,31 @@
   border: 1px solid var(--page-border);
   border-radius: var(--rb-radio);
 }
+/* Lead form. The field and the button sit on one line and stack when narrow. */
+.lead { margin-top: var(--rb-space-6); padding-top: var(--rb-space-4);
+        border-top: 1px solid var(--page-border); max-width: var(--rb-medida); }
+.lead h3 { margin-bottom: var(--rb-space-1); }
+.lead-row { display: flex; flex-wrap: wrap; gap: var(--rb-space-2);
+            margin-top: var(--rb-space-3); }
+.lead input[type="email"] {
+  flex: 1 1 15rem; min-width: 0; min-height: 48px;
+  padding: 0 var(--rb-space-2);
+  font: inherit; color: var(--page-text);
+  background: var(--page-bg);
+  border: 1px solid var(--page-border); border-radius: var(--rb-radio);
+}
+.lead .btn { flex: none; }
+.lead .form-note { font-size: var(--rb-text-xs); margin: var(--rb-space-2) 0 0; }
+/* Confirmación en línea que inserta assets/lead-form.js. */
+.lead-ok {
+  margin: var(--rb-space-3) 0 0;
+  font-family: var(--rb-font-titulo); font-weight: 600;
+  color: var(--rb-verde-bosque);
+}
+/* Off-screen rather than display:none, so a bot reading the DOM still fills it. */
+.lead-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.visually-hidden { position: absolute; left: -9999px; }
+
 .shots figcaption {
   margin-top: var(--rb-space-2);
   font-size: var(--rb-text-sm);
@@ -65,7 +90,12 @@
       <h1>Programar antes de saber escribir código</h1>
       <p class="lede">Ruta Robot es un juego de bloques para 3º y 4º básico. El niño arma instrucciones —avanzar, girar, repetir— y mueve un robot por un tablero hasta la bandera, recogiendo baterías en el camino.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="https://calendar.app.google/1uUaTF4TMnLypb5dA"
+        <!-- The game is free to try, so trying it beats booking a call. It takes the
+             single yellow this view is allowed (manual §3.3) and the demo steps back. -->
+        <a class="btn btn-primary" href="https://rovi.robotes.org"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Jugar ahora (se abre en una pestaña nueva)">Jugar ahora</a>
+        <a class="btn btn-secondary" href="https://calendar.app.google/1uUaTF4TMnLypb5dA"
            target="_blank" rel="noopener noreferrer"
            aria-label="Agendar una llamada (se abre en una pestaña nueva)">Agendar una demostración</a>
         <a class="btn btn-secondary" href="https://wa.me/56979526471?text=Hola%2C%20te%20escribo%20desde%20robotes.org"
@@ -165,6 +195,32 @@
       los tableros se pueden resolver. Es una herramienta del taller y la entregamos junto con
       él.
     </p>
+
+    <!-- El correo se pide a cambio de algo, no como peaje: el juego se juega sin dejar
+         nada. Form nativo, sin JavaScript, para que funcione igual con scripting off. -->
+    <form class="lead" method="post" action="https://script.google.com/macros/s/AKfycbzFY4VRbYipFJnLEn-q_ptdI_zymClUNhS7ieGWEx6kbkHDHLDdu8Gak7EafxmU0ITB/exec">
+      <h3>Te mandamos el material para la clase</h3>
+      <p class="muted">
+        Los objetivos de cada nivel y las soluciones mínimas, para que puedas llevar Ruta Robot
+        a tu sala. Déjanos tu correo y te lo enviamos.
+      </p>
+      <input type="hidden" name="origen" value="ruta-robot">
+      <div class="lead-row">
+        <label class="visually-hidden" for="email">Tu correo</label>
+        <input id="email" name="email" type="email" required autocomplete="email"
+               placeholder="nombre@escuela.cl">
+        <button class="btn btn-primary" type="submit">Quiero el material</button>
+      </div>
+      <!-- Trampa para bots: la rellenan y las personas no la ven. Sin JavaScript. -->
+      <p class="lead-trap" aria-hidden="true">
+        <label>Deja este campo vacío
+          <input name="website" tabindex="-1" autocomplete="off"></label>
+      </p>
+      <p class="muted form-note">
+        Lo usamos sólo para mandarte el material de Ruta Robot. Pídenos que te borremos cuando
+        quieras y lo hacemos.
+      </p>
+    </form>
   </div>
 </section>
 
@@ -210,6 +266,8 @@
     <p>Laboratorio de innovación educativa. Región de Los Ríos, Chile.</p>
   </div>
 </footer>
+
+<script src="assets/lead-form.js" defer></script>
 
 </body>
 </html>
