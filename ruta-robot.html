@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ruta Robot — robotes.org</title>
-<meta name="description" content="Juego de programación por bloques para 3º y 4º básico. Doce niveles, se abre con doble clic y funciona sin instalación, sin servidor y sin internet.">
+<meta name="description" content="Juego de programación por bloques para 3º y 4º básico. Doce niveles. Se abre en el navegador, sin instalación y sin cuentas.">
 <meta name="theme-color" content="#2c3742">
 <link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/tokens.css">
@@ -14,9 +14,26 @@
 <meta property="og:locale" content="es_CL">
 <meta property="og:site_name" content="robotes.org">
 <meta property="og:title" content="Ruta Robot">
-<meta property="og:description" content="Juego de programación por bloques para 3º y 4º básico. Doce niveles, se abre con doble clic y funciona sin instalación, sin servidor y sin internet.">
+<meta property="og:description" content="Juego de programación por bloques para 3º y 4º básico. Doce niveles. Se abre en el navegador, sin instalación y sin cuentas.">
 <meta property="og:image" content="assets/og.png">
 <meta name="twitter:card" content="summary_large_image">
+<style>
+/* Screenshots of the game, only on this page. One per row: these are wide UI
+   shots and two columns would make the blocks unreadable. */
+.shots { display: grid; gap: var(--rb-space-4); margin-top: var(--rb-space-4); }
+.shots figure { margin: 0; }
+.shots img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--page-border);
+  border-radius: var(--rb-radio);
+}
+.shots figcaption {
+  margin-top: var(--rb-space-2);
+  font-size: var(--rb-text-sm);
+  color: var(--page-text-soft);
+  max-width: var(--rb-medida);
+}
+</style>
 </head>
 <body>
 
@@ -37,27 +54,54 @@
       </a>
       <nav aria-label="Secciones">
         <ul class="nav">
-          <li><a href="index.html#work">Qué hacemos</a></li>
+          <li><a href="index.html#work">Productos</a></li>
           <li><a href="index.html#collaborate">Colaborar</a></li>
         </ul>
       </nav>
     </div>
 
     <div class="hero" id="main">
-      <p class="eyebrow"><a class="back" href="index.html#work">&#8592; Qué hacemos</a> &nbsp;·&nbsp; Producto en uso</p>
+      <p class="eyebrow"><a class="back" href="index.html#work">&#8592; Productos</a> &nbsp;·&nbsp; Producto en uso</p>
       <h1>Programar antes de saber escribir código</h1>
       <p class="lede">Ruta Robot es un juego de bloques para 3º y 4º básico. El niño arma instrucciones —avanzar, girar, repetir— y mueve un robot por un tablero hasta la bandera, recogiendo baterías en el camino.</p>
       <div class="actions">
         <a class="btn btn-primary" href="https://calendar.app.google/1uUaTF4TMnLypb5dA"
            target="_blank" rel="noopener noreferrer"
-           aria-label="Agendar una hora (se abre en una pestaña nueva)">Agendar una demostración</a>
-        <a class="btn btn-secondary" href="mailto:ricardo@robotes.org?subject=Hola%2C%20quiero%20conversar%20con%20robotes.org&amp;body=Hola%2C%0A%0AInstituci%C3%B3n%3A%20%0AComuna%3A%20%0ACargo%3A%20%0A%0AEn%20qu%C3%A9%20estamos%20pensando%3A%0A">Escribir un correo</a>
+           aria-label="Agendar una llamada (se abre en una pestaña nueva)">Agendar una demostración</a>
+        <a class="btn btn-secondary" href="https://wa.me/56979526471?text=Hola%2C%20te%20escribo%20desde%20robotes.org"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Hablar por WhatsApp (se abre en una pestaña nueva)">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          Hablar por WhatsApp</a>
       </div>
     </div>
   </div>
 </header>
 
 <main>
+
+<section id="pantallas">
+  <div class="wrap">
+    <h2>Así se ve</h2>
+    <div class="shots">
+      <figure>
+        <img src="assets/ruta-robot-nivel-1.webp" width="1000" height="614"
+             alt="Primer nivel de Ruta Robot. A la izquierda el bloque «avanzar», al centro un programa con cuatro «avanzar» encadenados, y a la derecha el tablero isométrico con el robot, las pilas y la bandera.">
+        <figcaption>El primer nivel trae un solo bloque. Cuatro «avanzar» y el robot llega a la bandera.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ruta-robot-repetir.webp" width="1000" height="614" loading="lazy"
+             alt="Sexto nivel. La paleta ya tiene avanzar, girar a la izquierda, girar a la derecha y repetir, y el programa combina tres bloques con un «repetir 4 veces» abierto para poner bloques dentro.">
+        <figcaption>Desde el sexto nivel aparece «repetir», y con él los ciclos.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ruta-robot-nivel-10.webp" width="1000" height="614" loading="lazy"
+             alt="Décimo nivel, «Pilas escondidas». El tablero tiene muros que tapan las pilas y obligan a planear el orden del recorrido.">
+        <figcaption>Los últimos tableros esconden las pilas detrás de muros.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
 
 <section id="como" class="band">
   <div class="wrap">
@@ -70,9 +114,7 @@
       </div></article>
       <article class="card"><div class="card-body">
         <h3>El tablero</h3>
-        <p class="muted">Una cuadrícula con muros, baterías y una bandera. El robot recorre
-          exactamente lo que el niño programó — ni más ni menos, que es justamente la
-          lección.</p>
+        <p class="muted">Una cuadrícula con muros, baterías y una bandera. El robot recorre exactamente lo que el niño programó, que es justamente la lección.</p>
       </div></article>
       <article class="card"><div class="card-body">
         <h3>Doce niveles</h3>
@@ -81,8 +123,8 @@
       </div></article>
       <article class="card"><div class="card-body">
         <h3>Sin respuesta única</h3>
-        <p class="muted">Cada nivel tiene una solución mínima conocida, pero el niño puede
-          llegar por otro camino. Lo que se corrige es que funcione, no que coincida.</p>
+        <p class="muted">Cada nivel tiene una solución mínima conocida, y el niño puede llegar por otro camino.
+        Se corrige que funcione.</p>
       </div></article>
     </div>
   </div>
@@ -92,21 +134,20 @@
   <div class="wrap prose">
     <h2>Por qué está hecho así</h2>
     <p class="lede muted">
-      Casi todas las plataformas para enseñar programación a niños necesitan cuentas,
-      instalación y una conexión estable. En una escuela rural eso es un muro, no un detalle.
+      Casi todas las plataformas para enseñar programación a niños necesitan cuentas e
+      instalación. En una escuela rural eso es un muro.
     </p>
     <ul class="checks">
-      <li><strong>Se abre con doble clic.</strong> No hay instalación ni permisos de
-        administrador que pedirle a nadie.</li>
-      <li><strong>No necesita servidor ni internet.</strong> Funciona copiado en un pendrive,
-        en el computador que la escuela ya tiene.</li>
-      <li><strong>No pide cuentas ni datos de los niños.</strong> No hay registro, no hay
-        contraseñas que se olviden en la clase siguiente.</li>
+      <li><strong>Se abre en el navegador.</strong> Sin instalación y sin permisos de
+      administrador que pedirle a nadie.</li>
+      <li><strong>Anda en el computador que la escuela ya tiene.</strong> Basta un navegador al
+      día.</li>
+      <li><strong>Sin cuentas ni datos de los niños.</strong> Nada que registrar y ninguna
+      contraseña que recordar.</li>
       <li><strong>Está en español,</strong> escrito para un niño de ocho años que lee solo.</li>
     </ul>
     <p class="muted footnote">
-      No son virtudes que nos propusimos: son las condiciones de la sala donde lo probamos
-      todas las semanas.
+      Son las condiciones de la sala donde lo probamos todas las semanas.
     </p>
   </div>
 </section>
@@ -115,14 +156,14 @@
   <div class="wrap prose">
     <h2>Para el profesor</h2>
     <p class="muted">
-      No hace falta saber programar para conducirlo. Los niveles están ordenados de menor a
-      mayor y cada uno introduce una sola idea, así que la clase avanza sola mientras el
-      profesor acompaña a quien se atasca.
+      Cualquier profesor puede conducirlo. Los niveles van de menor a mayor y cada uno introduce
+      una sola idea, así que la clase avanza sola mientras el profesor acompaña a quien lo
+      necesita.
     </p>
     <p class="muted">
-      Cada nivel está verificado: sabemos que tiene solución y en cuántos pasos, así que
-      ningún niño se queda pegado en un tablero imposible. Es una herramienta del taller y
-      la entregamos junto con él.
+      Cada nivel está verificado. Sabemos que tiene solución y en cuántos pasos, así que todos
+      los tableros se pueden resolver. Es una herramienta del taller y la entregamos junto con
+      él.
     </p>
   </div>
 </section>
@@ -134,18 +175,22 @@
     <p class="eyebrow">Conversemos</p>
     <h2>¿Quieres verlo funcionando en tu escuela?</h2>
     <p class="lede muted">
-      Agenda una hora o escríbenos. Contestamos todos los correos, y una conversación de
+      Agenda una llamada o escríbenos. Contestamos todos los mensajes, y una conversación de
       media hora alcanza para saber si esto tiene sentido en tu establecimiento.
     </p>
     <div class="actions">
       <a class="btn btn-primary" href="https://calendar.app.google/1uUaTF4TMnLypb5dA"
          target="_blank" rel="noopener noreferrer"
-         aria-label="Agendar una hora (se abre en una pestaña nueva)">Agendar una hora</a>
-      <a class="btn btn-secondary" href="mailto:ricardo@robotes.org?subject=Hola%2C%20quiero%20conversar%20con%20robotes.org&amp;body=Hola%2C%0A%0AInstituci%C3%B3n%3A%20%0AComuna%3A%20%0ACargo%3A%20%0A%0AEn%20qu%C3%A9%20estamos%20pensando%3A%0A">Escribir un correo</a>
+         aria-label="Agendar una llamada (se abre en una pestaña nueva)">Agendar una llamada</a>
+      <a class="btn btn-secondary" href="https://wa.me/56979526471?text=Hola%2C%20te%20escribo%20desde%20robotes.org"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Hablar por WhatsApp (se abre en una pestaña nueva)">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Hablar por WhatsApp</a>
     </div>
     <ul class="contact muted">
       <li>ricardo@robotes.org</li>
-      <li>Sur de Chile</li>
+      <li>Región de Los Ríos</li>
     </ul>
   </div>
 </section>
@@ -162,11 +207,7 @@
         </svg>
       <span>robotes<span class="tld">.org</span></span>
     </span>
-    <p>Laboratorio de innovación educativa. Escuelas rurales del sur de Chile.</p>
-    <p class="fine-print">
-      robotes.org es una empresa chilena de tecnología educativa. Reinvertimos nuestros
-      resultados en innovación e impacto educativo.
-    </p>
+    <p>Laboratorio de innovación educativa. Región de Los Ríos, Chile.</p>
   </div>
 </footer>
 

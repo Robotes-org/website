@@ -307,7 +307,12 @@ header > .wrap { position: relative; z-index: 1; }
   font-size: var(--rb-text-base);
   text-decoration: none;
   border: 2px solid transparent;
+  /* Only the WhatsApp button carries a glyph today. The icon sizes off the
+     label so it scales with the type, and it never sets the button's colour —
+     the palette does (manual §3.3). */
+  gap: 0.6em;
 }
+.btn svg { width: 1.15em; height: 1.15em; flex: none; }
 /* White on Azul Taller = 6.6:1, AA. */
 .btn-primary { background: var(--rb-azul-taller); color: var(--rb-blanco); }
 .btn-primary:hover { background: var(--rb-pizarra); }
@@ -320,6 +325,31 @@ header > .wrap { position: relative; z-index: 1; }
 .dark .btn-primary:hover { background: var(--rb-blanco); }
 
 .btn-secondary { border-color: currentColor; color: inherit; background: transparent; }
+
+/* ── CTA panel ──────────────────────────────────────────────────────────
+   Closes a light section with an invitation. A bare button hung off the last
+   paragraph with nothing under it and half the page empty beside it; the panel
+   gives it a surface and sets the line that earns the click next to it. Papel
+   on a white section, the same surface a card uses. */
+.cta-panel {
+  margin-top: var(--rb-space-4);
+  padding: var(--rb-space-3);
+  background: var(--page-bg-alt);
+  border: 1px solid var(--page-border);
+  border-radius: var(--rb-radio);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: var(--rb-space-3);
+}
+.cta-panel p {
+  margin: 0;
+  font-family: var(--rb-font-titulo);
+  font-weight: 600;
+  font-size: var(--rb-text-lg);
+  line-height: var(--rb-leading-titulo);
+  color: var(--page-text);
+  max-width: 30ch;
+}
+.cta-panel .btn { flex: none; }
 .dark .btn-secondary:hover { background: var(--rb-pizarra-alta); }
 
 /* ── Opening band ───────────────────────────────────────────────────── */
@@ -359,6 +389,11 @@ header > .wrap { position: relative; z-index: 1; }
   margin-top: var(--rb-space-4);
 }
 .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+/* .card sets display:flex, which beats the browser's own rule for [hidden], so
+   a card marked hidden would still show. The two «Pronto» products are hidden
+   in the markup rather than deleted while they are off the page. */
+[hidden] { display: none !important; }
+
 .card {
   background: var(--page-bg-alt);
   border: 1px solid var(--page-border);
