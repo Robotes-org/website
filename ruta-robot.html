@@ -56,14 +56,48 @@
 .lead .btn { flex: none; }
 .lead .form-note { font-size: var(--rb-text-xs); margin: var(--rb-space-2) 0 0; }
 /* Confirmación en línea que inserta assets/lead-form.js. */
-.lead-ok {
-  margin: var(--rb-space-3) 0 0;
+.lead-ok { margin: var(--rb-space-3) 0 0; }
+.lead-ok p {
+  margin: 0 0 var(--rb-space-2);
   font-family: var(--rb-font-titulo); font-weight: 600;
   color: var(--rb-verde-bosque);
 }
 /* Off-screen rather than display:none, so a bot reading the DOM still fills it. */
 .lead-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .visually-hidden { position: absolute; left: -9999px; }
+
+/* «Jugar ahora» chooser. assets/play-choice.js opens it; without scripting the
+   button is a plain link to the game and this never shows. */
+.play-choice {
+  width: min(100% - 2 * var(--rb-space-2), 34rem);
+  padding: var(--rb-space-4);
+  border: 0; border-radius: var(--rb-radio);
+  background: var(--page-bg); color: var(--page-text);
+}
+.play-choice::backdrop { background: color-mix(in srgb, var(--rb-pizarra) 70%, transparent); }
+.play-choice h2 { font-size: var(--rb-text-xl); margin-right: var(--rb-space-6); }
+.play-close {
+  position: absolute; top: var(--rb-space-2); right: var(--rb-space-2);
+  width: 44px; height: 44px; border: 0; border-radius: var(--rb-radio);
+  background: transparent; color: var(--page-text-soft);
+  font-size: 1.6rem; line-height: 1; cursor: pointer;
+}
+.play-close:hover { background: var(--page-bg-alt); }
+.play-options { display: grid; gap: var(--rb-space-2); margin-top: var(--rb-space-3); }
+.play-option {
+  display: block; width: 100%; text-align: left;
+  padding: var(--rb-space-2) var(--rb-space-3);
+  border: 1px solid var(--page-border); border-radius: var(--rb-radio);
+  background: var(--page-bg); color: var(--page-text);
+  font: inherit; text-decoration: none; cursor: pointer;
+}
+.play-option:hover, .play-option[aria-expanded="true"] {
+  border-color: var(--rb-azul-taller); background: var(--page-bg-alt);
+}
+.play-option strong { display: block; font-family: var(--rb-font-titulo); font-size: var(--rb-text-lg); }
+.play-option span { color: var(--page-text-soft); }
+.play-choice .lead { margin-top: var(--rb-space-3); padding-top: var(--rb-space-3); }
+.play-choice .lead-enter { margin-top: var(--rb-space-3); }
 
 .shots figcaption {
   margin-top: var(--rb-space-2);
@@ -101,11 +135,11 @@
     <div class="hero" id="main">
       <p class="eyebrow"><a class="back" href="index.html#work">&#8592; Productos</a> &nbsp;·&nbsp; Producto en uso</p>
       <h1>Programar antes de saber escribir código</h1>
-      <p class="lede">Ruta Robot es un juego de bloques para 3º y 4º básico. El niño arma instrucciones —avanzar, girar, repetir— y mueve un robot por un tablero hasta la bandera, recogiendo baterías en el camino.</p>
+      <p class="lede">Ruta Robot es un juego de bloques para 3º y 4º básico. El niño arma instrucciones y mueve un robot por un tablero hasta la bandera, recogiendo baterías en el camino.</p>
       <div class="actions">
         <!-- The game is free to try, so trying it beats booking a call. It takes the
              single yellow this view is allowed (manual §3.3) and the demo steps back. -->
-        <a class="btn btn-primary" href="https://rovi.robotes.org"
+        <a class="btn btn-primary" href="https://rovi.robotes.org" data-play-choice
            target="_blank" rel="noopener noreferrer"
            aria-label="Jugar ahora (se abre en una pestaña nueva)">Jugar ahora</a>
         <a class="btn btn-secondary" href="https://calendar.app.google/1uUaTF4TMnLypb5dA"
@@ -211,18 +245,18 @@
 
     <!-- El correo se pide a cambio de algo, no como peaje: el juego se juega sin dejar
          nada. Form nativo, sin JavaScript, para que funcione igual con scripting off. -->
-    <form class="lead" method="post" action="https://script.google.com/macros/s/AKfycbzFY4VRbYipFJnLEn-q_ptdI_zymClUNhS7ieGWEx6kbkHDHLDdu8Gak7EafxmU0ITB/exec">
-      <h3>Te mandamos el material para la clase</h3>
+    <form class="lead" method="post" data-download="https://rovi.robotes.org/GUIA-PROFESOR.pdf" action="https://script.google.com/macros/s/AKfycbzFY4VRbYipFJnLEn-q_ptdI_zymClUNhS7ieGWEx6kbkHDHLDdu8Gak7EafxmU0ITB/exec">
+      <h3>Descarga la guía para la clase</h3>
       <p class="muted">
-        Los objetivos de cada nivel y las soluciones mínimas, para que puedas llevar Ruta Robot
-        a tu sala. Déjanos tu correo y te lo enviamos.
+        Un plan de sesión, los objetivos de aprendizaje que cubre y las soluciones de cada
+        nivel, para llevar Ruta Robot a tu sala. Déjanos tu correo y la descargas al tiro.
       </p>
       <input type="hidden" name="origen" value="ruta-robot">
       <div class="lead-row">
         <label class="visually-hidden" for="email">Tu correo</label>
         <input id="email" name="email" type="email" required autocomplete="email"
                placeholder="nombre@escuela.cl">
-        <button class="btn btn-primary" type="submit">Quiero el material</button>
+        <button class="btn btn-primary" type="submit">Descargar la guía</button>
       </div>
       <!-- Trampa para bots: la rellenan y las personas no la ven. Sin JavaScript. -->
       <p class="lead-trap" aria-hidden="true">
@@ -230,7 +264,7 @@
           <input name="website" tabindex="-1" autocomplete="off"></label>
       </p>
       <p class="muted form-note">
-        Lo usamos sólo para mandarte el material de Ruta Robot. Pídenos que te borremos cuando
+        Lo usamos sólo para escribirte sobre Ruta Robot. Pídenos que te borremos cuando
         quieras y lo hacemos.
       </p>
     </form>
@@ -238,6 +272,52 @@
 </section>
 
 </main>
+
+<!-- «Jugar ahora» asks who is playing. Nothing here gates the game: the teacher
+     is offered the instructions and can still walk straight in (see CLAUDE.md,
+     «The teacher form»). -->
+<dialog class="play-choice" id="play-choice" aria-labelledby="play-choice-title">
+  <button class="play-close" type="button" aria-label="Cerrar">&times;</button>
+  <h2 id="play-choice-title">¿Quién va a jugar?</h2>
+  <div class="play-options">
+    <a class="play-option" href="https://rovi.robotes.org" target="_blank" rel="noopener noreferrer"
+       data-close aria-label="Soy estudiante, entrar al juego (se abre en una pestaña nueva)">
+      <strong>Soy estudiante</strong>
+      <span>Entra directo al juego.</span>
+    </a>
+    <button class="play-option" type="button" aria-expanded="false" aria-controls="play-teacher">
+      <strong>Soy profesor</strong>
+      <span>Descarga la guía del juego para tu clase.</span>
+    </button>
+  </div>
+
+  <form class="lead" id="play-teacher" method="post" hidden
+        data-download="https://rovi.robotes.org/GUIA-PROFESOR.pdf"
+        action="https://script.google.com/macros/s/AKfycbzFY4VRbYipFJnLEn-q_ptdI_zymClUNhS7ieGWEx6kbkHDHLDdu8Gak7EafxmU0ITB/exec">
+    <p class="muted">
+      Un plan de sesión, los objetivos de aprendizaje y las soluciones de cada nivel. Déjanos
+      tu correo y la descargas al tiro.
+    </p>
+    <input type="hidden" name="origen" value="ruta-robot-jugar">
+    <div class="lead-row">
+      <label class="visually-hidden" for="play-email">Tu correo</label>
+      <input id="play-email" name="email" type="email" required autocomplete="email"
+             placeholder="nombre@escuela.cl">
+      <button class="btn btn-primary" type="submit">Descargar la guía</button>
+    </div>
+    <p class="lead-trap" aria-hidden="true">
+      <label>Deja este campo vacío
+        <input name="website" tabindex="-1" autocomplete="off"></label>
+    </p>
+    <p class="muted form-note">
+      Lo usamos sólo para escribirte sobre Ruta Robot. Pídenos que te borremos cuando
+      quieras y lo hacemos.
+    </p>
+    <a class="btn btn-secondary lead-enter" href="https://rovi.robotes.org"
+       target="_blank" rel="noopener noreferrer" data-close
+       aria-label="Entrar al juego (se abre en una pestaña nueva)">Entrar al juego</a>
+  </form>
+</dialog>
 
 <section id="contact" class="dark closing">
   <div class="wrap">
@@ -281,6 +361,7 @@
 </footer>
 
 <script src="assets/lead-form.js" defer></script>
+<script src="assets/play-choice.js" defer></script>
 
 </body>
 </html>
