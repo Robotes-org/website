@@ -10,7 +10,7 @@
    prefers-color-scheme, which would repaint every section in Pizarra for any
    visitor whose system is in dark mode. Manual §3.6 keeps dark mode for
    projected screens, not for sites like this. Same reasoning as
-   presentacion-pokemon, which pins itself dark for the opposite reason. */
+   presentacion, which pins itself dark for the opposite reason. */
 
 :root {
   --page-bg: var(--rb-blanco);
