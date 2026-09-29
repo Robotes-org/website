@@ -18,6 +18,20 @@
     dialog.showModal();
   });
 
+  /* The video on the page ends on «Juega aquí», so when it finishes the same
+     question opens. A fullscreen video is left first, or the dialog would open
+     behind it. */
+  var video = document.querySelector('.video video');
+  if (video) {
+    video.addEventListener('ended', function () {
+      var exit = document.fullscreenElement && document.exitFullscreen
+        ? document.exitFullscreen() : null;
+      Promise.resolve(exit).catch(function () {}).then(function () {
+        if (!dialog.open) dialog.showModal();
+      });
+    });
+  }
+
   teacherToggle.addEventListener('click', function () {
     var open = teacherForm.hidden;
     teacherForm.hidden = !open;
