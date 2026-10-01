@@ -25,7 +25,7 @@
     var email = form.querySelector('input[type="email"]');
 
     form.addEventListener('submit', function (e) {
-      if (!email.checkValidity()) return;   // el navegador muestra su propio aviso
+      if (!form.checkValidity()) return;   // el navegador muestra su propio aviso
       e.preventDefault();
 
       fetch(action, {

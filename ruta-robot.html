@@ -60,7 +60,7 @@
 .lead h3 { margin-bottom: var(--rb-space-1); }
 .lead-row { display: flex; flex-wrap: wrap; gap: var(--rb-space-2);
             margin-top: var(--rb-space-3); }
-.lead input[type="email"] {
+.lead input[type="email"], .lead input[name="nombre"] {
   flex: 1 1 15rem; min-width: 0; min-height: 48px;
   padding: 0 var(--rb-space-2);
   font: inherit; color: var(--page-text);
@@ -284,6 +284,10 @@
       </p>
       <input type="hidden" name="origen" value="ruta-robot">
       <div class="lead-row">
+        <!-- Optional and free text: a first name, a full name, a nickname, anything. -->
+        <label class="visually-hidden" for="name">Tu nombre (opcional)</label>
+        <input id="name" name="nombre" type="text" autocomplete="name" maxlength="120"
+               placeholder="Tu nombre (opcional)">
         <label class="visually-hidden" for="email">Tu correo</label>
         <input id="email" name="email" type="email" required autocomplete="email"
                placeholder="nombre@escuela.cl">
@@ -331,6 +335,9 @@
     </p>
     <input type="hidden" name="origen" value="ruta-robot-jugar">
     <div class="lead-row">
+      <label class="visually-hidden" for="play-name">Tu nombre (opcional)</label>
+      <input id="play-name" name="nombre" type="text" autocomplete="name" maxlength="120"
+             placeholder="Tu nombre (opcional)">
       <label class="visually-hidden" for="play-email">Tu correo</label>
       <input id="play-email" name="email" type="email" required autocomplete="email"
              placeholder="nombre@escuela.cl">
@@ -391,7 +398,7 @@
   </div>
 </footer>
 
-<script src="assets/lead-form.js?v=2" defer></script>
+<script src="assets/lead-form.js?v=3" defer></script>
 <script src="assets/play-choice.js?v=2" defer></script>
 
 </body>

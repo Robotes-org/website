@@ -1,7 +1,11 @@
 /* Endpoint del formulario de Ruta Robot.
  *
- * Recibe el correo que deja un profesor en ruta-robot.html, lo guarda en la
- * planilla y devuelve al visitante a robotes.org/gracias.html.
+ * Recibe el correo y, si lo escribe, el nombre que deja un profesor en
+ * ruta-robot.html, los guarda en la planilla y devuelve al visitante a
+ * robotes.org/gracias.html.
+ *
+ * El nombre va en la cuarta columna y no en la segunda para que las filas que
+ * ya estaban en la planilla, que no lo tienen, sigan calzando con sus títulos.
  *
  * Cómo se instala:
  *   1. Crear una planilla nueva en Google Sheets.
@@ -31,16 +35,24 @@ function doPost(e) {
     return redirect(REDIRECT + '?estado=revisa');
   }
 
+  /* Optativo y de texto libre: se guarda tal como viene, recortado. */
+  var name = String(p.nombre || '').trim().slice(0, 120);
+
   var sheet = sheetFor(SHEET_NAME);
 
-  /* Un profesor que manda el formulario dos veces no debe aparecer dos veces. */
+  /* Un profesor que manda el formulario dos veces no debe aparecer dos veces.
+     Si la segunda vez trae un nombre y la primera no, se completa esa fila. */
   var seen = sheet.getLastRow() > 1
     ? sheet.getRange(2, 2, sheet.getLastRow() - 1, 1).getValues().map(function (r) {
         return String(r[0]).trim().toLowerCase();
       })
     : [];
-  if (seen.indexOf(email) === -1) {
-    sheet.appendRow([new Date(), email, String(p.origen || '')]);
+  var at = seen.indexOf(email);
+  if (at === -1) {
+    sheet.appendRow([new Date(), email, String(p.origen || ''), name]);
+  } else if (name) {
+    var cell = sheet.getRange(at + 2, 4);
+    if (!String(cell.getValue()).trim()) cell.setValue(name);
   }
 
   return redirect(REDIRECT);
@@ -55,8 +67,11 @@ function sheetFor(name) {
   var ss = SpreadsheetApp.getActive();
   var sheet = ss.getSheetByName(name) || ss.insertSheet(name);
   if (sheet.getLastRow() === 0) {
-    sheet.appendRow(['fecha', 'correo', 'origen']);
+    sheet.appendRow(['fecha', 'correo', 'origen', 'nombre']);
     sheet.setFrozenRows(1);
+  } else if (!String(sheet.getRange(1, 4).getValue()).trim()) {
+    // Planillas creadas antes de que existiera el nombre: se agrega el título.
+    sheet.getRange(1, 4).setValue('nombre');
   }
   return sheet;
 }
